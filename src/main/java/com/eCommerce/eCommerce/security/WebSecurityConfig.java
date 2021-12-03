@@ -15,12 +15,20 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final PasswordEncoder passwordEncoder;
+    @Autowired
+    public WebSecurityConfig(PasswordEncoder passwordEncoder){
+        this.passwordEncoder=passwordEncoder;
+    }
+    
+    
     /*@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
 		authenticationMgr.inMemoryAuthentication()
@@ -29,14 +37,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.withUser("admin").password("password").authorities("ADMIN");
 	}*/
         
+   /* @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
+    auth
+            .inMemoryAuthentication()
+            .withUser("user").password("password").roles("USER")
+            .and()
+            .withUser("admin").password("password").roles("ADMIN");
+    }*/
+    
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
+                //.antMatchers("/", "/login").permitAll()
                 .antMatchers("/userPage").access("hasRole('USER')")
                 .antMatchers("/adminPage").access("hasRole('ADMIN')")
-                //.anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
                 .usernameParameter("username").passwordParameter("password")
@@ -55,20 +72,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();*/
     }
 
-    @Bean
+   @Bean
     @Override
     public UserDetailsService userDetailsService() {
-        UserDetails user
-                = User.withDefaultPasswordEncoder()
+        UserDetails user=User.builder()
+               // = User.withDefaultPasswordEncoder()
                         .username("user")
-                        .password("password")
+                        .password(passwordEncoder.encode("password"))
                         .roles("USER")
                         .build();
 
-        UserDetails admin
-                = User.withDefaultPasswordEncoder()
+        UserDetails admin=User.builder()
+                //= User.withDefaultPasswordEncoder()
                         .username("admin")
-                        .password("password")
+                        .password(passwordEncoder.encode("password"))
                         .roles("ADMIN")
                         .build();
         return new InMemoryUserDetailsManager(user, admin);
