@@ -6,16 +6,13 @@
 package com.eCommerce.eCommerce.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -27,51 +24,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder=passwordEncoder;
     }
     
+    @Autowired
+	AuthenticationSuccessHandler successHandler;
     
-    /*@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder authenticationMgr) throws Exception {
+    @Override
+	public void configure(AuthenticationManagerBuilder authenticationMgr) throws Exception {
 		authenticationMgr.inMemoryAuthentication()
-			.withUser("user").password("password").authorities("USER")
+			.withUser("user").password(passwordEncoder.encode("password")).roles("USER")
 			.and()
-			.withUser("admin").password("password").authorities("ADMIN");
-	}*/
-        
-   /* @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-    auth
-            .inMemoryAuthentication()
-            .withUser("user").password("password").roles("USER")
-            .and()
-            .withUser("admin").password("password").roles("ADMIN");
-    }*/
+			.withUser("admin").password(passwordEncoder.encode("password")).roles("ADMIN");
+	}
     
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
                 //.antMatchers("/", "/login").permitAll()
-                .antMatchers("/userPage").access("hasRole('USER')")
-                .antMatchers("/adminPage").access("hasRole('ADMIN')")
+                .antMatchers("/userPage").hasAnyRole("USER")
+                .antMatchers("/adminPage").hasAnyRole("ADMIN")
                 .and()
                 .formLogin().loginPage("/login")
-                .usernameParameter("username").passwordParameter("password")
+                
+                //.usernameParameter("username").passwordParameter("password")
+                .successHandler(successHandler).permitAll()
+                
                 .and()
-                .logout().permitAll();//logoutSuccessUrl("/home");
-        
-        
-        
-        /*.anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();*/
+                .logout().permitAll()
+                .logoutSuccessUrl("/home");
+       
     }
 
-   @Bean
+   /*  @Bean
     @Override
     public UserDetailsService userDetailsService() {
         UserDetails user=User.builder()
@@ -88,5 +73,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .roles("ADMIN")
                         .build();
         return new InMemoryUserDetailsManager(user, admin);
-    }
+    }*/
 }

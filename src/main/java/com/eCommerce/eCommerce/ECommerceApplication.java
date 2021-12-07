@@ -9,8 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 @SpringBootApplication
 public class ECommerceApplication{// implements CommandLineRunner{
 
-   /*@Autowired
-    private JdbcTemplate jdbcTemplate;*/
+   @Autowired
+    private JdbcTemplate jdbcTemplate;
     
 	public static void main(String[] args) {
 		SpringApplication.run(ECommerceApplication.class, args);
