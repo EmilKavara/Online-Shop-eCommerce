@@ -49,7 +49,7 @@ public class ProductOrder implements Serializable {
     private BigDecimal total;
     @JoinColumn(name = "order_id", referencedColumnName = "idorder")
     @ManyToOne(optional = false)
-    private Order1 orderId;
+    private Order orderId;
     @JoinColumn(name = "product_id", referencedColumnName = "idproduct")
     @ManyToOne(optional = false)
     private Product productId;
@@ -91,11 +91,11 @@ public class ProductOrder implements Serializable {
         this.total = total;
     }
 
-    public Order1 getOrderId() {
+    public Order getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Order1 orderId) {
+    public void setOrderId(Order orderId) {
         this.orderId = orderId;
     }
 
