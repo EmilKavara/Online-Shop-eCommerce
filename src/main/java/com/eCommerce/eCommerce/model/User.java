@@ -92,7 +92,7 @@ public class User implements Serializable {
     @ManyToOne(optional = false)
     private Privilege privilege;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-    private List<Order1> order1List;
+    private List<Order> orderList;
 
     public User() {
     }
@@ -219,12 +219,12 @@ public class User implements Serializable {
     }
 
     @XmlTransient
-    public List<Order1> getOrder1List() {
-        return order1List;
+    public List<Order> getOrderList() {
+        return orderList;
     }
 
-    public void setOrder1List(List<Order1> order1List) {
-        this.order1List = order1List;
+    public void setOrderList(List<Order> orderList) {
+        this.orderList = orderList;
     }
 
     @Override

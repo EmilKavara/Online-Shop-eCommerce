@@ -34,12 +34,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "order")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Order1.findAll", query = "SELECT o FROM Order1 o"),
-    @NamedQuery(name = "Order1.findByIdorder", query = "SELECT o FROM Order1 o WHERE o.idorder = :idorder"),
-    @NamedQuery(name = "Order1.findByAmount", query = "SELECT o FROM Order1 o WHERE o.amount = :amount"),
-    @NamedQuery(name = "Order1.findByShippingAddress", query = "SELECT o FROM Order1 o WHERE o.shippingAddress = :shippingAddress"),
-    @NamedQuery(name = "Order1.findByOrderDate", query = "SELECT o FROM Order1 o WHERE o.orderDate = :orderDate")})
-public class Order1 implements Serializable {
+    @NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o"),
+    @NamedQuery(name = "Order.findByIdorder", query = "SELECT o FROM Order o WHERE o.idorder = :idorder"),
+    @NamedQuery(name = "Order.findByAmount", query = "SELECT o FROM Order o WHERE o.amount = :amount"),
+    @NamedQuery(name = "Order.findByShippingAddress", query = "SELECT o FROM Order o WHERE o.shippingAddress = :shippingAddress"),
+    @NamedQuery(name = "Order.findByOrderDate", query = "SELECT o FROM Order o WHERE o.orderDate = :orderDate")})
+public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -63,14 +63,14 @@ public class Order1 implements Serializable {
     @ManyToOne(optional = false)
     private User userId;
 
-    public Order1() {
+    public Order() {
     }
 
-    public Order1(Integer idorder) {
+    public Order(Integer idorder) {
         this.idorder = idorder;
     }
 
-    public Order1(Integer idorder, int amount, String shippingAddress, Date orderDate) {
+    public Order(Integer idorder, int amount, String shippingAddress, Date orderDate) {
         this.idorder = idorder;
         this.amount = amount;
         this.shippingAddress = shippingAddress;
@@ -136,10 +136,10 @@ public class Order1 implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Order1)) {
+        if (!(object instanceof Order)) {
             return false;
         }
-        Order1 other = (Order1) object;
+        Order other = (Order) object;
         if ((this.idorder == null && other.idorder != null) || (this.idorder != null && !this.idorder.equals(other.idorder))) {
             return false;
         }
@@ -148,7 +148,7 @@ public class Order1 implements Serializable {
 
     @Override
     public String toString() {
-        return "com.eCommerce.eCommerce.model.Order1[ idorder=" + idorder + " ]";
+        return "com.eCommerce.eCommerce.model.Order[ idorder=" + idorder + " ]";
     }
     
 }
