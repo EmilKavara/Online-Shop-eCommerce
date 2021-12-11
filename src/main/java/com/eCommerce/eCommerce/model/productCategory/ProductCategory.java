@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.eCommerce.eCommerce.model;
+package com.eCommerce.eCommerce.model.productCategory;
 
+import com.eCommerce.eCommerce.model.Product;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -116,7 +117,7 @@ public class ProductCategory implements Serializable {
 
     @Override
     public String toString() {
-        return "com.eCommerce.eCommerce.model.ProductCategory[ idproductCategory=" + idproductCategory + " ]";
+        return "Id product:" + idproductCategory + ", name product:" + name + ", description: " + description + " ]";
     }
     
 }

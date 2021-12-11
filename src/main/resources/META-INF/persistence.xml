@@ -5,12 +5,12 @@
     <class>com.eCommerce.eCommerce.model.ProductOrder</class>
     <class>com.eCommerce.eCommerce.model.Discount</class>
     <class>com.eCommerce.eCommerce.model.Privilege</class>
-    <class>com.eCommerce.eCommerce.model.ProductCategory</class>
     <class>com.eCommerce.eCommerce.model.City</class>
     <class>com.eCommerce.eCommerce.model.Product</class>
     <class>com.eCommerce.eCommerce.model.User</class>
     <class>com.eCommerce.eCommerce.model.Address</class>
     <class>com.eCommerce.eCommerce.model.Order</class>
+    <class>com.eCommerce.eCommerce.model.productCategory.ProductCategory</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/ecommerce"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

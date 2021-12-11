@@ -5,6 +5,7 @@
  */
 package com.eCommerce.eCommerce.model;
 
+import com.eCommerce.eCommerce.model.productCategory.ProductCategory;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;

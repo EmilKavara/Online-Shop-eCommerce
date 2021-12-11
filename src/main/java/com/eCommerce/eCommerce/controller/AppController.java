@@ -33,4 +33,9 @@ public class AppController {
         return new ModelAndView("aboutUs");
     }
     
+    @RequestMapping("/productCategory")
+    public ModelAndView productCategory(){
+        return new ModelAndView("productCategory");
+    }
+    
 }
