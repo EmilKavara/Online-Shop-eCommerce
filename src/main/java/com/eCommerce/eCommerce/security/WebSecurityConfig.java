@@ -11,11 +11,8 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
-import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -31,24 +28,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     AuthenticationSuccessHandler successHandler;
 
-    @Autowired
-    DataSource dataSource;
-
     @Override
     public void configure(AuthenticationManagerBuilder authenticationMgr) throws Exception {
-        authenticationMgr.jdbcAuthentication()/*inMemoryAuthentication()
+        authenticationMgr.inMemoryAuthentication()
                 .withUser("user").password(passwordEncoder.encode("password")).roles("USER")
                 .and()
-                .withUser("admin").password(passwordEncoder.encode("password")).roles("ADMIN");*/
-                .dataSource(dataSource)
-                .passwordEncoder(new BCryptPasswordEncoder())
-                .usersByUsernameQuery("select username, password, active "
-                        + "from user "
-                        + "where username = ?")
-                .authoritiesByUsernameQuery("select username, iduser "
-                        + "from user "
-                        + "where username = ?");
-
+                .withUser("admin").password(passwordEncoder.encode("password")).roles("ADMIN");
     }
 
     @Override
@@ -57,8 +42,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
-                .antMatchers("/userPage").hasAnyRole("user")
-                .antMatchers("/adminPage").hasAnyRole("admin")
+                .antMatchers("/userPage").hasAnyRole("USER")
+                .antMatchers("/adminPage").hasAnyRole("ADMIN")
                 .and()
                 .formLogin().loginPage("/login")
                 .successHandler(successHandler).permitAll()

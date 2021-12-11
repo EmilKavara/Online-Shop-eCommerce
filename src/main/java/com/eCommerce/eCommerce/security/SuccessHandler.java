@@ -27,11 +27,11 @@ public class SuccessHandler implements AuthenticationSuccessHandler{
 
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (GrantedAuthority grantedAuthority : authorities) {
-			System.out.println("privilege " + grantedAuthority.getAuthority());
-			if (grantedAuthority.getAuthority().equals("user")) {
+			System.out.println("role " + grantedAuthority.getAuthority());
+			if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
 				redirectUrl = "/userPage";
 				break;
-               } else if (grantedAuthority.getAuthority().equals("admin")) {
+               } else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
 				redirectUrl = "/adminPage";
 				break;
 			}
