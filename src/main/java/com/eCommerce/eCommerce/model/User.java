@@ -101,8 +101,8 @@ public class User implements Serializable {
         this.iduser = iduser;
     }
 
-    public User(Integer iduser, String firstName, String lastName, String gender, String username, String password, String email, String phone, Date dateCreated, short active) {
-        this.iduser = iduser;
+    public User(String firstName, String lastName, String gender, String username, String password, String email, String phone, Date dateCreated, short active) {
+        
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
