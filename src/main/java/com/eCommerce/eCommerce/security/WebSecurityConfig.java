@@ -14,11 +14,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
+import javax.sql.DataSource;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    DataSource dataSource;
 
     @Autowired
     public WebSecurityConfig(PasswordEncoder passwordEncoder) {
@@ -29,11 +34,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     AuthenticationSuccessHandler successHandler;
 
     @Override
-    public void configure(AuthenticationManagerBuilder authenticationMgr) throws Exception {
-        authenticationMgr.inMemoryAuthentication()
-                .withUser("user").password(passwordEncoder.encode("password")).roles("USER")
-                .and()
-                .withUser("admin").password(passwordEncoder.encode("password")).roles("ADMIN");
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .passwordEncoder(passwordEncoder)
+                .usersByUsernameQuery("select username, password, active"
+                        + " from user where username=?")
+                .authoritiesByUsernameQuery("select username, iduser"
+                        + " from user where username=?");
     }
 
     @Override
