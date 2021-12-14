@@ -6,12 +6,42 @@
 package com.eCommerce.eCommerce.service;
 
 import com.eCommerce.eCommerce.model.User;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import java.util.ArrayList;  
+import java.util.List;  
+import org.springframework.beans.factory.annotation.Autowired;  
+import org.springframework.stereotype.Service;   
+import com.eCommerce.eCommerce.dao.UserRepository;
+ 
+@Service  
+public class UserService   
+{  
+@Autowired  
+UserRepository userRepository;  
+  
+public List<User> getAllUsers()   
+{  
+List<User> user = new ArrayList<User>();  
+userRepository.findAll().forEach(user1 -> user.add(user1));  
+return user;  
+}  
+  
+public User getUserById(int id)   
+{  
+return userRepository.findById(id).get();  
+}  
+  
+public void saveOrUpdate(User user)   
+{  
+userRepository.save(user);  
+}  
 
-/**
- *
- * @author bnc
- */
-public interface UserService extends UserDetailsService{
-    User save (User user);
-}
+public void delete(int id)   
+{  
+userRepository.deleteById(id);  
+}  
+ 
+public void update(User user, int iduser)   
+{  
+userRepository.save(user);  
+}  
+} 
