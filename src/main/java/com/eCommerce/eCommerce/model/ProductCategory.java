@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.eCommerce.eCommerce.model.productCategory;
+package com.eCommerce.eCommerce.model;
 
 import com.eCommerce.eCommerce.model.Product;
 import java.io.Serializable;
