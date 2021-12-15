@@ -12,13 +12,37 @@
                     <title>Registration Page</title>
 
                     <link rel="stylesheet" href="/css/eCommerce.css" type="text/css"/>
+                    <script type="text/javascript">
+                        
+                        // Example starter JavaScript for disabling form submissions if there are invalid fields
+(function () {
+  'use strict'
+
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  var forms = document.querySelectorAll('.needs-validation')
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms)
+    .forEach(function (form) {
+      form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+
+        form.classList.add('was-validated')
+      }, false)
+    })
+})()
+                    </script>
+                    
                     </head>
                     <body>
                         <h1 class="text-center" >Welcome to our registration Page</h1>
                         <h3 class="text-center">Please fill in the form to create account</h3>
 
                         <section class="h-100 h-custom gradient-custom-2">
-                            <form th:action="@{/user/add}" method="post" th:object="${user}" novalidate>
+                            <form th:action="@{/user/add}" method="post" th:object="${user}" class="needs-validation" novalidate>
                                 
                                     <div class="container py-5 h-100">
                                         <div class="row d-flex justify-content-center align-items-center h-100">

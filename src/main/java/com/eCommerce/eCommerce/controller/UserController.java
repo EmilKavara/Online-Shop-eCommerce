@@ -13,6 +13,7 @@ import com.eCommerce.eCommerce.service.UserService;
 import java.sql.Date;
 import java.util.List;  
 import org.springframework.beans.factory.annotation.Autowired;  
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;  
 import org.springframework.web.bind.annotation.GetMapping;  
 import org.springframework.web.bind.annotation.PathVariable;  
@@ -29,7 +30,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path="/user")
 public class UserController   
 {  
-    
+    private final PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public UserController(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
   
 @Autowired  
 UserService userService;  
@@ -64,7 +70,7 @@ userService.delete(iduser);
     n.setLastName(lastName);
     n.setGender("male");
     n.setUsername(username);
-    n.setPassword(password);
+    n.setPassword(passwordEncoder.encode(password));
     //String str="2015-03-01"; 
     //Date date=Date.valueOf(str);
     n.setDateOfBirth(dateOfBirth);
@@ -83,13 +89,13 @@ userService.delete(iduser);
     n.setActive(num);
     
     Address addressId=new Address();
-    //addressId.setId(1);
+    addressId.setId(1);//dok se ne napravi crud
     addressId.setNumber(number);
     addressId.setStreet(street);
     
     
     City city=new City();
-    //city.setIdcity(2);
+    city.setIdcity(2);//dok se ne napravi crud
     city.setName(name);
     city.setPostalNumber(postalNumber);
     
