@@ -5,11 +5,15 @@
  */
 package com.eCommerce.eCommerce.dao;
 
-import com.eCommerce.eCommerce.model.Product;
+import com.eCommerce.eCommerce.model.City;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ *
+ * @author bnc
+ */
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer>{
+public interface CityRepository extends JpaRepository<City, Integer>{
     
 }

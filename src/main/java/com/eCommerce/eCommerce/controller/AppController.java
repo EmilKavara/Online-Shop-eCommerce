@@ -33,6 +33,16 @@ public class AppController {
         return new ModelAndView("registration");
     }
     
+    @RequestMapping("/product")
+    public ModelAndView product(){
+        return new ModelAndView("product");
+    }
+    
+    @RequestMapping("/product/add")
+    public ModelAndView addProduct(){
+        return new ModelAndView("product");
+    }
+    
     @RequestMapping("/user/getusers")
     public ModelAndView user(){
         return new ModelAndView("user");

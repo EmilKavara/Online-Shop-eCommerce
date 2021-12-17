@@ -14,34 +14,30 @@ import com.eCommerce.eCommerce.dao.UserRepository;
  
 @Service  
 public class UserService   
-{  
-@Autowired  
-UserRepository userRepository;  
-  
-public List<User> getAllUsers()   
-{  
-List<User> user = new ArrayList<User>();  
-userRepository.findAll().forEach(user1 -> user.add(user1));  
-return user;  
-}  
-  
-public User getUserById(int id)   
-{  
-return userRepository.findById(id).get();  
-}  
-  
-public void saveOrUpdate(User user)   
-{  
-userRepository.save(user);  
-}  
+{
 
-public void delete(int id)   
-{  
-userRepository.deleteById(id);  
-}  
- 
-public void update(User user, int iduser)   
-{  
-userRepository.save(user);  
-}  
-} 
+    @Autowired
+    UserRepository userRepository;
+
+    public List<User> getAllUsers() {
+        List<User> user = new ArrayList<User>();
+        userRepository.findAll().forEach(user1 -> user.add(user1));
+        return user;
+    }
+
+    public User getUserById(int id) {
+        return userRepository.findById(id).get();
+    }
+
+    public void saveOrUpdate(User user) {
+        userRepository.save(user);
+    }
+
+    public void delete(int id) {
+        userRepository.deleteById(id);
+    }
+
+    public void update(User user, int iduser) {
+        userRepository.save(user);
+    }
+}

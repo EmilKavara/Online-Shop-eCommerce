@@ -16,14 +16,18 @@ import org.springframework.stereotype.Service;
 public class ProductService {
     
     @Autowired
-    ProductRepository productRepository;
+    private ProductRepository productRepository;
     
-    public List<Product> getAllProducts()   
+    public List<Product> getAllProducts(){
+     return productRepository.findAll();
+    }
+    
+   /* public List<Product> getAllProducts()   
 {  
 List<Product> product = new ArrayList<>();  
 productRepository.findAll().forEach(product1 -> product.add(product1));  
 return product;  
-}  
+}  */
   
 public Product getProductById(int id)   
 {  

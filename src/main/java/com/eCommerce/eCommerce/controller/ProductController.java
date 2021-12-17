@@ -12,6 +12,8 @@ import com.eCommerce.eCommerce.service.ProductService;
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,13 +25,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+//@RestController
 @RequestMapping(path = "/product")
+@Controller
 public class ProductController {
 
     @Autowired
-    ProductService productService;
+    private ProductService productService;
 
+    @GetMapping("/products")
+    public String getAllProducts(Model model) {
+        List<Product> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+        return "testTable";
+    }
+    
     @GetMapping("/getproduct")
     private List<Product> getAllProducts() {
         return productService.getAllProducts();
@@ -46,7 +56,8 @@ public class ProductController {
     }
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addNewProduct(@RequestParam String name, @RequestParam String description, 
+    public @ResponseBody String addNewProduct(
+            String name, @RequestParam String description, 
             @RequestParam BigDecimal price, @RequestParam int quantity) {
 
         Product product = new Product();
@@ -55,13 +66,15 @@ public class ProductController {
         product.setPrice(price);
         product.setQuantity(quantity);
 
-        Short num = (short) 2;
+        Short num = (short) 1;
         product.setActive(num);
 
         Discount discount = new Discount();
+        discount.setIddiscount(1);
         product.setDiscountId(discount);
         
         ProductCategory category = new ProductCategory();
+        category.setIdproductCategory(1);
         product.setCategoryId(category);
 
         productService.saveOrUpdate(product);

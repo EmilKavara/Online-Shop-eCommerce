@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" 
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="_layout">
+    <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div layout:fragment="content">
+
+            <!--Content of the page-->
+
+
+            <div class="container">
+                <h2>Striped Rows</h2>
+                <p>The .table-striped class adds zebra-stripes to a table:</p>            
+                <table class="table table-striped">
+                    <!--<thead>
+                        <tr>
+                            <th>City id</th>
+                            <th>Name</th>
+                            <th>Postal number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="city:${cities}">
+                            <td th:text="${city.idcity}"></td>
+                            <td th:text="${city.name}"></td>
+                            <td th:text="${city.postalNumber}"></td>
+                        </tr>
+                        
+                    </tbody>-->
+                    <thead>
+                        <tr>
+                            <th>Product id</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="product:${products}">
+                            <td th:text="${product.idproduct}"></td>
+                            <td th:text="${product.name}"></td>
+                            <td th:text="${product.description}"></td>
+                            <td th:text="${product.price}"></td>
+                            <td th:text="${product.quantity}"></td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>

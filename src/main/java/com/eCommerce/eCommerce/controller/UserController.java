@@ -9,13 +9,17 @@ import com.eCommerce.eCommerce.model.Address;
 import com.eCommerce.eCommerce.model.City;
 import com.eCommerce.eCommerce.model.Privilege;
 import com.eCommerce.eCommerce.model.User;
+import com.eCommerce.eCommerce.service.CityService;
 import com.eCommerce.eCommerce.service.UserService;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;  
 import org.springframework.beans.factory.annotation.Autowired;  
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;  
 import org.springframework.web.bind.annotation.GetMapping;  
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;  
 import org.springframework.web.bind.annotation.PostMapping;  
 import org.springframework.web.bind.annotation.PutMapping;  
@@ -38,8 +42,11 @@ public class UserController
     }
   
 @Autowired  
-UserService userService;  
-  
+UserService userService; 
+
+@Autowired
+CityService cityService;
+
 @GetMapping("/getuser")  
 private List<User> getAllUsers()   
 {  
@@ -58,9 +65,17 @@ private void deleteUser(@PathVariable("iduser") int iduser)
 userService.delete(iduser);  
 }  
 
+@GetMapping(path = "/add")
+public String add (Model model){
+ List<City> cities = cityService.getAllCities();
+ model.addAttribute("listcity", cities);
+ model.addAttribute("city", new City());
+ return "add"; 
+}
+
 @PostMapping(path="/add") 
   public @ResponseBody String addNewUser (@RequestParam String firstName,@RequestParam String lastName,
-          @RequestParam String username,@RequestParam String password,@RequestParam Date dateOfBirth,
+          @RequestParam String gender, @RequestParam String username,@RequestParam String password,@RequestParam Date dateOfBirth,
           @RequestParam String street, @RequestParam int number, @RequestParam String name, @RequestParam int postalNumber,
           @RequestParam String phone, @RequestParam String email) 
         {
@@ -68,7 +83,12 @@ userService.delete(iduser);
     User n = new User();
     n.setFirstName(firstName);
     n.setLastName(lastName);
-    n.setGender("male");
+    
+            if (gender=="1") {
+                n.setGender("male");
+            }else
+                n.setGender("female");
+    
     n.setUsername(username);
     n.setPassword(passwordEncoder.encode(password));
     //String str="2015-03-01"; 
