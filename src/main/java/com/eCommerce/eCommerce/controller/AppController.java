@@ -28,4 +28,18 @@ public class AppController {
         return new ModelAndView("login");
     }
     
+    @RequestMapping("/registration")
+    public ModelAndView registration(){
+        return new ModelAndView("registration");
+    }
+    
+    @RequestMapping("/user/getusers")
+    public ModelAndView user(){
+        return new ModelAndView("user");
+    }
+    
+    @RequestMapping("/user/add")
+    public ModelAndView add(){
+        return new ModelAndView("user");
+    }
 }
