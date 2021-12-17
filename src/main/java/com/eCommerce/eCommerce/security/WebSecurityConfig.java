@@ -8,6 +8,7 @@ package com.eCommerce.eCommerce.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -39,8 +40,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(passwordEncoder)
                 .usersByUsernameQuery("select username, password, active"
                         + " from user where username=?")
-                .authoritiesByUsernameQuery("select username, iduser"
-                        + " from user where username=?");
+                .authoritiesByUsernameQuery("select u.username, p.name"
+                        + " from user u join privilege p on u.privilege= p.idprivilege where username=?");
+
+
     }
 
     @Override
@@ -49,8 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
-                .antMatchers("/userPage").hasAnyRole("USER")
-                .antMatchers("/adminPage").hasAnyRole("ADMIN")
+                .antMatchers("/userPage").hasAuthority("user")
+                .antMatchers("/adminPage").hasAuthority("admin")
                 .and()
                 .formLogin().loginPage("/login")
                 .successHandler(successHandler).permitAll()

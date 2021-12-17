@@ -1,10 +1,10 @@
-package com.eCommerce.eCommerce.repository;
+package com.eCommerce.eCommerce.service;
 
 import com.eCommerce.eCommerce.model.Order;
 
 import java.util.List;
 
-public interface OrderRepository {
+public interface OrderService {
     int save(Order order);
 
     int update(Order order);

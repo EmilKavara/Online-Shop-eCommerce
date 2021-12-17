@@ -1,4 +1,4 @@
-package com.eCommerce.eCommerce.repository;
+package com.eCommerce.eCommerce.service;
 
 import com.eCommerce.eCommerce.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class JdbcOrderRepository implements OrderRepository {
+public class JdbcOrderService implements OrderService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
