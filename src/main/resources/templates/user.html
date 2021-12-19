@@ -5,33 +5,41 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 <html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css" rel="stylesheet">
-        <script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
-    </head>
-    <body>
-        
+<head>
+    <title>Users</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+</head>
+<body>
+
 
 
 
 <table
-  id="table"
-  data-toggle="table"
-  data-url="http://localhost:8080/user/add">
-  <thead>
+        id="user"
+        data-toggle="table"
+        data-url="http://localhost:8080/user/getuser">
+    <thead>
     <tr>
-      <th data-field="id">ID</th>
-      <th data-field="name">First Name</th>
-      <th data-field="price">Last Name</th>
-      <th data-field="name">Username</th>
-      <th data-field="price">Email</th>
-      <th data-field="name">Gender</th>
-      <th data-field="price">Phone</th>
+        <th data-field="iduser">ID</th>
+        <th data-field="firstName">First Name</th>
+        <th data-field="lastName">Last Name</th>
+        <th data-field="username">Username</th>
+        <th data-field="password">Password</th>
+        <th data-field="email">Email</th>
+        <th data-field="phone">Phone</th>
     </tr>
-  </thead>
+    </thead>
 </table>
-    </body>
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+</body>
+
+
+
 </html>

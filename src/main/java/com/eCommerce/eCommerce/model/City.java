@@ -5,6 +5,8 @@
  */
 package com.eCommerce.eCommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -47,8 +49,9 @@ public class City implements Serializable {
     @Basic(optional = false)
     @Column(name = "postal_number")
     private int postalNumber;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCity")
-    private List<Address> addressList;
+    //@JsonIgnore
+    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "idCity")
+    //private List<Address> addressList;
 
     public City() {
     }
@@ -87,14 +90,14 @@ public class City implements Serializable {
         this.postalNumber = postalNumber;
     }
 
-    @XmlTransient
-    public List<Address> getAddressList() {
-        return addressList;
-    }
+    //@XmlTransient
+    //public List<Address> getAddressList() {
+      //  return addressList;
+    //}
 
-    public void setAddressList(List<Address> addressList) {
-        this.addressList = addressList;
-    }
+    //public void setAddressList(List<Address> addressList) {
+        //this.addressList = addressList;
+    //}
 
     @Override
     public int hashCode() {

@@ -5,6 +5,8 @@
  */
 package com.eCommerce.eCommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -85,12 +87,15 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "active")
     private short active;
+    @JsonIgnore
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Address addressId;
+    @JsonIgnore
     @JoinColumn(name = "privilege", referencedColumnName = "idprivilege")
     @ManyToOne(optional = false)
     private Privilege privilege;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private List<Orders> orderList;
 
