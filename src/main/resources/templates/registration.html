@@ -126,18 +126,19 @@
                                                                     </div>-->
                                                                     <div class="col-md-9 mb-4 pb-2">
                                                                         <div class="form-outline form-white">
-                                                                            <select class="form-control form-control-lg" name="name" data-live-search="true">
-                                                                                <option th:each="city:${listcity}"  
-                                                                                        th:value="${city.id}"
+                                                                            <select class="form-control form-control-lg" name="cityname" data-live-search="true">
+                                                                                <option>Please select your City</option>
+                                                                                <option th:each="city:${cities}"  
+                                                                                        th:value="${city.idcity}"
                                                                                         th:text="${city.name}">
                                                                                 </option>
                                                                             </select>
-                                                                            <label class="form-label" for="form3Examplea10">City</label>
+                                                                            <label class="form-label" for="form3Examplea9">City</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-9 mb-4 pb-2">
                                                                         <div class="form-outline form-white">
-                                                                            <select class="form-control form-control-lg" name="name" data-live-search="true">
+                                                                            <select class="form-control form-control-lg" name="countryname" data-live-search="true">
                                                                                 <option selected>Please select your country</option>
                                                                                 <option value="1">Bosnia & Herzegovina</option>
                                                                             </select>

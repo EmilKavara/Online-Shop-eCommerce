@@ -7,7 +7,6 @@ package com.eCommerce.eCommerce.service;
 
 import com.eCommerce.eCommerce.dao.ProductRepository;
 import com.eCommerce.eCommerce.model.Product;
-import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

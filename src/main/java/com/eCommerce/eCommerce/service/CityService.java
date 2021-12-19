@@ -17,7 +17,19 @@ public class CityService {
     @Autowired
     private CityRepository cityRepository;
 
-    public List<City> getAllCities(){
-     return cityRepository.findAll();
-    }  
+    public List<City> getAllCities() {
+        return cityRepository.findAll();
+    }
+
+    public City findById(int idcity) {
+        return cityRepository.getById(idcity);
+    }
+
+    public void deleteCity(int id) {
+        cityRepository.deleteById(id);
+    }
+
+    public void saveCity(City city, int idcity) {
+        cityRepository.save(city);
+    }
 }

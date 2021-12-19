@@ -12,19 +12,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class CityController {
 
     @Autowired
     private CityService cityService;
+    
+    /*public Model addModelAttribute(Model model){
+        model.addAttribute("cities", cityService.getAllCities());
+        return model;
+    }
+    
+    @GetMapping("/cities")
+    public String GetAllCities(Model model){
+        addModelAttribute(model);
+        return "registration";
+    }*/
 
     @GetMapping("/cities")
     public String getAllCities(Model model) {
         List<City> cities = cityService.getAllCities();
         model.addAttribute("cities", cities);
-        return "testTable";
+        return "registration";
     }
 
 }

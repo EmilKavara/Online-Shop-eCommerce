@@ -7,6 +7,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link href="cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" rel="stylesheet" type="text/css" /> 
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/fontawesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/regular.min.css" rel="stylesheet" type="text/css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
@@ -20,7 +23,7 @@
                 <h2>Striped Rows</h2>
                 <p>The .table-striped class adds zebra-stripes to a table:</p>            
                 <table class="table table-striped">
-                    <!--<thead>
+                    <thead>
                         <tr>
                             <th>City id</th>
                             <th>Name</th>
@@ -34,7 +37,7 @@
                             <td th:text="${city.postalNumber}"></td>
                         </tr>
                         
-                    </tbody>-->
+                    </tbody>
                     <thead>
                         <tr>
                             <th>Product id</th>
@@ -42,6 +45,7 @@
                             <th>Description</th>
                             <th>Price</th>
                             <th>Quantity</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,8 +55,15 @@
                             <td th:text="${product.description}"></td>
                             <td th:text="${product.price}"></td>
                             <td th:text="${product.quantity}"></td>
+                            <td>
+
+                                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
+                                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
+                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+
+                            </td>
                         </tr>
-                        
+
                     </tbody>
                 </table>
             </div>
