@@ -42,7 +42,7 @@
                         <h3 class="text-center">Please fill in the form to create account</h3>
 
                         <section class="h-100 h-custom gradient-custom-2">
-                            <form th:action="@{/user/add}" method="post" th:object="${user}" class="needs-validation" novalidate>
+                            <form th:action="@{/user/add}" method="post" th:object="${user}" class="was-validated">
 
                                 <div class="container py-5 h-100">
                                     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -55,8 +55,8 @@
                                                                 <h3 class="fw-normal mb-5" style="color: #4835d4;">General Information</h3>
                                                                 <div class="mb-4 pb-2">
                                                                     <label>
-                                                                        <select class="select" name="gender">
-                                                                            <option selected>Title</option>
+                                                                        <select class="select form-control form-control-lg" name="gender" required>
+                                                                            <option selected disabled value="">Title</option>
                                                                             <option value="1">Mr.</option>
                                                                             <option value="2">Ms.</option>
                                                                         </select>
@@ -65,25 +65,27 @@
                                                                 <div class="row">
                                                                     <div class="col-md-6 mb-4 pb-2">
                                                                         <div class="form-outline" >
-                                                                            <input type="text" name="firstName" id="form3Examplev2" class="form-control form-control-lg" />
+                                                                            <input type="text" name="firstName" id="form3Examplev2" class="form-control form-control-lg" required />
+                                                                            <div class="valid-feedback">Valid.</div>
+                                                                            <div class="invalid-feedback">Please fill out this field.</div>
                                                                             <label class="form-label" for="form3Examplev2">First name</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6 mb-4 pb-2">
                                                                         <div class="form-outline">
-                                                                            <input type="text" name="lastName" id="form3Examplev3" class="form-control form-control-lg"  />
+                                                                            <input type="text" name="lastName" id="form3Examplev3" class="form-control form-control-lg" required/>
                                                                             <label class="form-label" for="form3Examplev3">Last name</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6 mb-4 pb-2">
                                                                         <div class="form-outline">
-                                                                            <input type="text" name="username" id="form3Examplev4" class="form-control form-control-lg" />
+                                                                            <input type="text" name="username" id="form3Examplev4" class="form-control form-control-lg" required/>
                                                                             <label class="form-label" for="form3Examplev4">Username</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6 mb-4 pb-2">
                                                                         <div class="form-outline">
-                                                                            <input type="password" name="password" id="form3Examplev5" class="form-control form-control-lg"  />
+                                                                            <input type="password" name="password" id="form3Examplev5" class="form-control form-control-lg" required />
                                                                             <label class="form-label" for="form3Examplev5">Password</label>
                                                                         </div>
                                                                     </div>
@@ -102,20 +104,20 @@
                                                                 <div class="row">
                                                                     <div class="col-md-9 mb-4 pb-2">
                                                                         <div class="form-outline form-white">
-                                                                            <input type="text" name="street" id="form3Examplea7" class="form-control form-control-lg" />
+                                                                            <input type="text" name="street" id="form3Examplea7" class="form-control form-control-lg" required/>
                                                                             <label class="form-label" for="form3Examplea7">Street</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-3 mb-4 pb-2">
                                                                         <div class="form-outline form-white">
-                                                                            <input type="text" name="number" id="form3Examplea8" class="form-control form-control-lg" />
+                                                                            <input type="text" name="number" id="form3Examplea8" class="form-control form-control-lg" required/>
                                                                             <label class="form-label" for="form3Examplea8">No.</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="mb-4 pb-2">
                                                                         <div class="form-outline form-white">
-                                                                            <select class="form-control form-control-lg" name="countryname" data-live-search="true">
-                                                                                <option selected>Please select your country</option>
+                                                                            <select class="form-control form-control-lg" name="countryname" data-live-search="true" required>
+                                                                                <option selected disabled value="">Please select your country</option>
                                                                                 <option value="1">Bosnia & Herzegovina</option>
                                                                             </select>
                                                                             <label class="form-label" for="form3Examplea10">Country</label>
@@ -123,8 +125,8 @@
                                                                     </div>
                                                                     <div class="mb-4 pb-2">
                                                                         <div class="form-outline form-white">
-                                                                            <select class="form-control form-control-lg" name="cityname" data-live-search="true">
-                                                                                <option>Please select your City</option>
+                                                                            <select class="form-control form-control-lg" name="cityname" data-live-search="true" required>
+                                                                                <option selected disabled value="">Please select your City</option>
                                                                                 <option th:each="city:${cities}"  
                                                                                         th:value="${city.idcity}"
                                                                                         th:text="${city.name}">
@@ -136,23 +138,19 @@
                                                                 </div>
                                                                 <div class="mb-4">
                                                                     <div class="form-outline form-white">
-                                                                        <input type="text" name="phone" id="form3Examplea12" class="form-control form-control-lg" />
+                                                                        <input type="text" name="phone" id="form3Examplea12" class="form-control form-control-lg" required/>
                                                                         <label class="form-label" for="form3Examplea12">Phone Number</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="mb-4">
                                                                     <div class="form-outline form-white">
-                                                                        <input type="email" name="email" id="form3Examplea13" class="form-control form-control-lg" />
+                                                                        <input type="email" name="email" id="form3Examplea13" class="form-control form-control-lg" required/>
                                                                         <label class="form-label" for="form3Examplea13">Your Email</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-check d-flex justify-content-start mb-4 pb-3">
-                                                                    <label for="form2Example3c"></label><input
-                                                                        class="form-check-input me-3"
-                                                                        type="checkbox"
-                                                                        value=""
-                                                                        id="form2Example3c"
-                                                                        />
+                                                                    <label for="form2Example3c"></label>
+                                                                    <input class="form-check-input me-3" type="checkbox" value="" id="form2Example3c" required/>
                                                                     <label class="form-check-label text-white">
                                                                         I do accept the <a href="#" class="text-white"><u>Terms and Conditions</u></a> of your site.
                                                                     </label>
