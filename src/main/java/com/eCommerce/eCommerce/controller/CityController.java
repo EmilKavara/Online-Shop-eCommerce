@@ -30,7 +30,7 @@ public class CityController {
         return "registration";
     }*/
 
-    @GetMapping("/cities")
+    @GetMapping("/registration")
     public String getAllCities(Model model) {
         List<City> cities = cityService.getAllCities();
         model.addAttribute("cities", cities);

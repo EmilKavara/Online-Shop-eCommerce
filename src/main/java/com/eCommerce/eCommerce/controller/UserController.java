@@ -38,10 +38,9 @@ public class UserController {
     public UserController(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
-
+    
     @Autowired
     private UserService userService;
-
     @Autowired
     private CityService cityService;
     @Autowired
@@ -60,15 +59,6 @@ public class UserController {
     @DeleteMapping("/user/{iduser}")
     private void deleteUser(@PathVariable("iduser") int iduser) {
         userService.delete(iduser);
-    }
-
-    //Trying to get this to work. It works fine in the Citycontroller but cant get it to work here
-    @GetMapping(path = "/registration")
-    public String cities(Model model) {
-        List<City> cities = cityService.getAllCities();
-        model.addAttribute("cities", cities);
-        model.addAttribute("city", new City());
-        return "registration";
     }
     
     @PostMapping(path = "/add")
