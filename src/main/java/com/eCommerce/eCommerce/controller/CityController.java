@@ -11,7 +11,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class CityController {
@@ -19,7 +21,7 @@ public class CityController {
     @Autowired
     private CityService cityService;
     
-    /*public Model addModelAttribute(Model model){
+    public Model addModelAttribute(Model model){
         model.addAttribute("cities", cityService.getAllCities());
         return model;
     }
@@ -27,14 +29,24 @@ public class CityController {
     @GetMapping("/cities")
     public String GetAllCities(Model model){
         addModelAttribute(model);
-        return "registration";
-    }*/
+        return "testTable";
+    }
 
     @GetMapping("/registration")
     public String getAllCities(Model model) {
         List<City> cities = cityService.getAllCities();
         model.addAttribute("cities", cities);
         return "registration";
+    }
+    
+    @GetMapping("/getcity/{idcity}")
+    private City getCity(@PathVariable("idcity") int idcity) {
+        return cityService.getCityById(idcity);
+    }
+
+    @DeleteMapping("/city/{idcity}")
+    private void deleteCity(@PathVariable("idcity") int idcity) {
+        cityService.deleteCity(idcity);
     }
 
 }

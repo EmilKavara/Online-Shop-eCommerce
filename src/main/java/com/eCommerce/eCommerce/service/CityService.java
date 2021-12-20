@@ -21,8 +21,8 @@ public class CityService {
         return cityRepository.findAll();
     }
 
-    public City findById(int idcity) {
-        return cityRepository.getById(idcity);
+    public City getCityById(int idcity) {
+        return cityRepository.findById(idcity).get();
     }
 
     public void deleteCity(int id) {
