@@ -29,7 +29,11 @@ public class CityService {
         cityRepository.deleteById(id);
     }
 
-    public void saveCity(City city, int idcity) {
+    public void updateCity(City city, int idcity) {
+        cityRepository.save(city);
+    }
+
+    public void save(City city) {
         cityRepository.save(city);
     }
 }

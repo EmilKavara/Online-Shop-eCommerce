@@ -12,38 +12,13 @@
                     <title>Registration Page</title>
 
                     <link rel="stylesheet" href="/css/eCommerce.css" type="text/css"/>
-                    <script type="text/javascript">
-
-                        // Example starter JavaScript for disabling form submissions if there are invalid fields
-                        (function () {
-                            'use strict'
-
-                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
-                            var forms = document.querySelectorAll('.needs-validation')
-
-                            // Loop over them and prevent submission
-                            Array.prototype.slice.call(forms)
-                                    .forEach(function (form) {
-                                        form.addEventListener('submit', function (event) {
-                                            if (!form.checkValidity()) {
-                                                event.preventDefault()
-                                                event.stopPropagation()
-                                            }
-
-                                            form.classList.add('was-validated')
-                                        }, false)
-                                    })
-                        })()
-                    </script>
-
                     </head>
                     <body>
                         <h1 class="text-center" >Welcome to our registration Page</h1>
                         <h3 class="text-center">Please fill in the form to create account</h3>
 
                         <section class="h-100 h-custom gradient-custom-2">
-                            <form th:action="@{/user/add}" method="post" th:object="${user}" class="was-validated">
-
+                            <form th:action="@{/user/add}" method="post" th:object="${user}" class="needs-validation" novalidate>
                                 <div class="container py-5 h-100">
                                     <div class="row d-flex justify-content-center align-items-center h-100">
                                         <div class="col-12">
@@ -59,39 +34,45 @@
                                                                             <option selected disabled value="">Title</option>
                                                                             <option value="1">Mr.</option>
                                                                             <option value="2">Ms.</option>
+                                                                             <div class="invalid-feedback">Please select your title</div>
                                                                         </select>
                                                                     </label>
                                                                 </div>
                                                                 <div class="row">
                                                                     <div class="col-md-6 mb-4 pb-2">
                                                                         <div class="form-outline" >
-                                                                            <input type="text" name="firstName" id="form3Examplev2" class="form-control form-control-lg" required />
-                                                                            <div class="valid-feedback">Valid.</div>
-                                                                            <div class="invalid-feedback">Please fill out this field.</div>
+                                                                            <input type="text" name="firstName" id="form3Examplev2" class="form-control form-control-lg" 
+                                                                                   required pattern="[A-Z][a-z šđčćž]+"/>
+                                                                            <div class="invalid-feedback">Field should only be alphabetical and start with capital letter</div>
                                                                             <label class="form-label" for="form3Examplev2">First name</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6 mb-4 pb-2">
                                                                         <div class="form-outline">
-                                                                            <input type="text" name="lastName" id="form3Examplev3" class="form-control form-control-lg" required/>
+                                                                            <input type="text" name="lastName" id="form3Examplev3" class="form-control form-control-lg" 
+                                                                                   required pattern="[A-Z][a-z šđčćž]+"/>
+                                                                             <div class="invalid-feedback">Field should only be alphabetical and start with capital letter</div>
                                                                             <label class="form-label" for="form3Examplev3">Last name</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6 mb-4 pb-2">
                                                                         <div class="form-outline">
                                                                             <input type="text" name="username" id="form3Examplev4" class="form-control form-control-lg" required/>
+                                                                             <div class="invalid-feedback">Please enter your username</div>
                                                                             <label class="form-label" for="form3Examplev4">Username</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6 mb-4 pb-2">
                                                                         <div class="form-outline">
                                                                             <input type="password" name="password" id="form3Examplev5" class="form-control form-control-lg" required />
+                                                                             <div class="invalid-feedback">Please enter your password</div>
                                                                             <label class="form-label" for="form3Examplev5">Password</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-6 mb-4 pb-2">
                                                                         <div class="form-outline">
-                                                                            <input type="date" name="dateOfBirth" id="form3Examplev6" class="form-control form-control-lg"  />
+                                                                            <input type="date" name="dateOfBirth" id="form3Examplev6" class="form-control form-control-lg" required/>
+                                                                             <div class="invalid-feedback">Please select your date of birth</div>
                                                                             <label class="form-label" for="form3Examplev6">Date of Birth</label>
                                                                         </div>
                                                                     </div>
@@ -104,13 +85,16 @@
                                                                 <div class="row">
                                                                     <div class="col-md-9 mb-4 pb-2">
                                                                         <div class="form-outline form-white">
-                                                                            <input type="text" name="street" id="form3Examplea7" class="form-control form-control-lg" required/>
+                                                                            <input type="text" name="street" id="form3Examplea7" class="form-control form-control-lg" 
+                                                                                   required pattern="[A-Z][a-z A-ZŠĐČĆŽšđčćž]+"/>
+                                                                             <div class="invalid-feedback">Field should only be alphabetical and start with capital letter</div>
                                                                             <label class="form-label" for="form3Examplea7">Street</label>
                                                                         </div>
                                                                     </div>
                                                                     <div class="col-md-3 mb-4 pb-2">
                                                                         <div class="form-outline form-white">
-                                                                            <input type="text" name="number" id="form3Examplea8" class="form-control form-control-lg" required/>
+                                                                            <input type="number" name="number" id="form3Examplea8" class="form-control form-control-lg" required/>
+                                                                             <div class="invalid-feedback">Please fill out this field.</div>
                                                                             <label class="form-label" for="form3Examplea8">No.</label>
                                                                         </div>
                                                                     </div>
@@ -138,19 +122,23 @@
                                                                 </div>
                                                                 <div class="mb-4">
                                                                     <div class="form-outline form-white">
-                                                                        <input type="text" name="phone" id="form3Examplea12" class="form-control form-control-lg" required/>
+                                                                        <input type="text" name="phone" id="form3Examplea12" class="form-control form-control-lg" 
+                                                                               required pattern="[+][0-9]{11,15}"/>
+                                                                         <div class="invalid-feedback">Please enter valid phone number. Format ex. +38733456789</div>
                                                                         <label class="form-label" for="form3Examplea12">Phone Number</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="mb-4">
                                                                     <div class="form-outline form-white">
                                                                         <input type="email" name="email" id="form3Examplea13" class="form-control form-control-lg" required/>
+                                                                         <div class="invalid-feedback">Please enter valid e-mail address</div>
                                                                         <label class="form-label" for="form3Examplea13">Your Email</label>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-check d-flex justify-content-start mb-4 pb-3">
                                                                     <label for="form2Example3c"></label>
                                                                     <input class="form-check-input me-3" type="checkbox" value="" id="form2Example3c" required/>
+                                                                     <div class="invalid-feedback">You have to agree in order to register</div>
                                                                     <label class="form-check-label text-white">
                                                                         I do accept the <a href="#" class="text-white"><u>Terms and Conditions</u></a> of your site.
                                                                     </label>
@@ -167,5 +155,28 @@
                                 </div>
                             </form>
                         </section>
+                        <script type="text/javascript">
+
+                        // Example starter JavaScript for disabling form submissions if there are invalid fields
+                        (function () {
+                            'use strict'
+
+                            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                            var forms = document.querySelectorAll('.needs-validation')
+
+                            // Loop over them and prevent submission
+                            Array.prototype.slice.call(forms)
+                                    .forEach(function (form) {
+                                        form.addEventListener('submit', function (event) {
+                                            if (!form.checkValidity()) {
+                                                event.preventDefault()
+                                                event.stopPropagation()
+                                            }
+
+                                            form.classList.add('was-validated')
+                                        }, false)
+                                    })
+                        })()
+                    </script>
                     </body>
                     </html>

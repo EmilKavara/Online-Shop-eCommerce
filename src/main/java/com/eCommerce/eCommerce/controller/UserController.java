@@ -100,18 +100,19 @@ public @ResponseBody
         Short num = (short) 2;
         n.setActive(num);
 
-        Address addressId = new Address();
-        addressId.setNumber(number);
-        addressId.setStreet(street);
+        Address address = new Address();
+        address.setNumber(number);
+        address.setStreet(street);
 
         City city = new City();
-        city.getIdcity();//dok se ne napravi crud
-        city.setName(cityname);
+        //city.getIdcity();//dok se ne napravi crud
+        //city.setName(cityname);
+        city.setIdcity(Integer.valueOf(cityname));
 
-        addressId.setIdCity(city);
-        n.setAddressId(addressId);
+        address.setIdCity(city);
+        addressService.saveOrUpdate(address);
+        n.setAddressId(address);
 
-        addressService.saveOrUpdate(addressId);
         userService.saveOrUpdate(n);
         return "Saved";
     }

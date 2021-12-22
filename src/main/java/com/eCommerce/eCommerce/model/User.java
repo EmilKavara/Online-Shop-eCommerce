@@ -41,6 +41,7 @@ public class User implements Serializable {
     private Integer iduser;
     @Basic(optional = false)
     @Column(name = "first_name")
+    
     private String firstName;
     @Basic(optional = false)
     @Column(name = "last_name")
