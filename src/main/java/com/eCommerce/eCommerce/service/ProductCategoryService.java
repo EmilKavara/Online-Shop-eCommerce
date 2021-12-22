@@ -5,6 +5,7 @@ import java.util.List;
 
 public interface ProductCategoryService {
     
+    
     public List<ProductCategory> getAllProductCategory();
     public ProductCategory getProductCategoryById(int idproductCategory);
     public ProductCategory addOrUpdateProductCategory( ProductCategory category);

@@ -42,3 +42,161 @@ body,
 /* Footer color for sake of consistency with Navbar */
 /*.page-footer {
   background-color: #929FBA; }*/
+
+body{
+    background-color:#e6e6e6;
+}
+.page{
+    display:flex;
+    position: relative;
+}
+.page.sidebar{
+    height:100vh;
+    width:250px;
+    background-color:#4527A0;
+    top:0;
+    left:0;
+    position:fixed;
+    padding: 30px 0px;
+    
+    overflow-x:hidden;
+    overflow-y: auto;
+    transition: all 1s ease;
+}
+
+.page.content{
+    margin-left:250px;
+    position: fixed;
+       transition: all 1s ease;
+}
+body.active .page .sidebar{ 
+    left: -250px;
+    width:100%;
+}
+
+body.active .page .content{
+    margin-left: 0;
+   
+}
+.sidebar-header{
+    padding: 10px 15px;
+}
+
+.sidebar-logo-container{
+    background-color: #3F51B5;
+    display:flex;
+}
+.logo-container{
+    max-width: 40px;
+    background-color:#3F51B5;
+    border-radius: 8px;
+    margin:8px;
+    padding:6px 8px;
+}
+.logo-sidebar{
+    width: 100%;
+    height: auto;
+}
+.brand-name-container{
+    padding: 0;
+    margin: 9px 10px 0px 2px;
+}
+
+.brand-name{
+    color: #ccccff;
+    margin: 0px;
+}
+.brand-subname{
+    color: #f0ad4e;
+   
+    
+}
+.navigation-list{
+    list-style-type: none;
+    padding: 0px 20px;
+    margin-top:30px;
+}
+.navigation-list-item{
+    background-color: #3F51B5;
+    padding: 10px 18px 10px 18px;
+    border-radius: 8px;
+    margin: 15px 0px;
+}
+.navigation-list-item:hover{
+    background-color: #ccccff;
+    box-shadow: 0 0 0 0.4em rgb(255,255,255,0.1);
+    cursor: pointer;
+}
+.navigation-list-item.active{
+    background-color: #ccccff;
+        box-shadow: 0 0 0.4em rgb(255,255,255,0.1);
+}
+.navigation-link{
+    color:#f0ad4e;
+    letter-spacing: 0.5px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    text-decoration: none;
+}
+.navigation-list-item:hover.navigation-link{
+    color:#ccccff;
+}
+.navigation-list-item:hover.navigation-link{
+    color:#ccccff;
+    font-weight: 500;
+    
+}
+.navigation-link i{
+    font-size: 18px;
+}
+.contacts-list{
+   
+    padding-left: 30px;
+    list-style-type: none;
+}
+.contacts-list-container.title{
+    
+    letter-spacing: 0.5px;
+}
+
+.navigationBar{
+    background-color:#4527A0;
+    margin-right: auto;
+    height: 30px;
+    padding: 28px 0px;
+    display: flex;
+    align-items:center;
+   
+}
+.sidebarToggle{
+    font-size: 16px;
+    background-color: #ccccff;
+    color: #4527A0;
+    margin-left:-10px;
+    z-index: 999;
+    border-radius: 50px;
+    outline: none!important;
+    transition: all 1s ease;
+    
+}
+.sidebarToggle.active{
+    margin-left: 10px;
+}
+.social-media{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    
+}
+.social-media{
+    display: block;
+    width: 40px;
+    text-align: center;
+}
+
+.sidebar-body ul li a:home{
+    color:white;
+}

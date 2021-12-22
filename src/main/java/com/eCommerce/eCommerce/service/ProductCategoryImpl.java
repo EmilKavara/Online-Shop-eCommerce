@@ -12,6 +12,9 @@ public class ProductCategoryImpl implements ProductCategoryService{
     @Autowired
     private ProductCategoryRepository productCategoryRepository;
 
+    
+    
+     
     @Override
     public List<ProductCategory> getAllProductCategory() {
         return (List<ProductCategory>) productCategoryRepository.findAll();
