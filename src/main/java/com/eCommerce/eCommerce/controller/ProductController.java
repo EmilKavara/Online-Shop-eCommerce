@@ -27,23 +27,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 //@RestController
+@RestController
 @RequestMapping(path = "/product")
-@Controller
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
-    @GetMapping("/products")
+/*    @GetMapping("/products")
     public String getAllProducts(Model model) {
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
         return "testTable";
-    }
+    }*/
 
     @GetMapping("/getproduct")
     private List<Product> getAllProducts() {
-        return productService.getAllProducts();
+        List<Product> products =  productService.getAllProducts();
+        return products;
     }
 
     @GetMapping("/getproduct/{idproduct}")
@@ -51,7 +52,7 @@ public class ProductController {
         return productService.getProductById(idproduct);
     }
 
-    @RequestMapping(value = "/products/delete/{idproduct}", method = {RequestMethod.GET, RequestMethod.DELETE})
+    @RequestMapping(value = "/products/delete/{idproduct}", method = {RequestMethod.DELETE})
     public String delete(@PathVariable int idproduct) {
         productService.delete(idproduct);
         return "redirect:/product/products";

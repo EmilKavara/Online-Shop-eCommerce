@@ -52,4 +52,9 @@ public class AppController {
     public ModelAndView add(){
         return new ModelAndView("user");
     }
+
+    @RequestMapping("/testTable")
+    public ModelAndView testTable(){
+        return new ModelAndView("testTable");
+    }
 }
