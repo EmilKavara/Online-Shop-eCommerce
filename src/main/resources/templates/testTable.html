@@ -20,10 +20,11 @@
 
 
             <div class="container">
-                <h2>Striped Rows</h2>
-                <p>The .table-striped class adds zebra-stripes to a table:</p>            
+                <h2>Products</h2>
+                
                 <table class="table table-striped">
-                    <thead>
+                    
+                    <!--<thead>
                         <tr>
                             <th>City id</th>
                             <th>Name</th>
@@ -37,7 +38,8 @@
                             <td th:text="${city.postalNumber}"></td>
                         </tr>
                         
-                    </tbody>
+                    </tbody>-->
+                    
                     <thead>
                         <tr>
                             <th>Product id</th>
@@ -45,22 +47,31 @@
                             <th>Description</th>
                             <th>Price</th>
                             <th>Quantity</th>
+                            <th>Category</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="product:${products}">
+                        <tr th:each="product:${products}"><!--check for product in list products (model:${list}-->
                             <td th:text="${product.idproduct}"></td>
                             <td th:text="${product.name}"></td>
                             <td th:text="${product.description}"></td>
                             <td th:text="${product.price}"></td>
                             <td th:text="${product.quantity}"></td>
+                            
                             <td>
-
-                                <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                                <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                                <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-
+                                <div class="btn-group">
+                                
+                                <a class="btn btn-success"
+                                   >
+                                    <i class="far fa-eye"></i></a>
+                                <a class="btn btn-danger"
+                                   onclick="return confirm('Are you sure you want to delete this record?')"
+                                   th:href="@{'products/delete/'+${product.idproduct}}">
+                                    <i class="far fa-trash-alt"></i>
+                                </a>
+                            </div>
+                                
                             </td>
                         </tr>
 
