@@ -2,11 +2,12 @@ package com.eCommerce.eCommerce.service;
 
 import com.eCommerce.eCommerce.model.ProductCategory;
 import com.eCommerce.eCommerce.repository.ProductCategoryRepository;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+/*@Service
 public class ProductCategoryImpl implements ProductCategoryService{
     
     @Autowired
@@ -48,13 +49,11 @@ public class ProductCategoryImpl implements ProductCategoryService{
         return deletedProductCategory;
     }
     
-}
+}*/
 
 
-/*package com.eCommerce.eCommerce.model.productCategory.productCategoryService;
 
-import com.eCommerce.eCommerce.model.productCategory.ProductCategory;
-import com.eCommerce.eCommerce.model.productCategory.productCategoryRepository.ProductCategoryRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,30 +67,35 @@ public class ProductCategoryImpl implements ProductCategoryService{
 
     @Override
     public List<ProductCategory> getAllProductCategory() {
-        
-        List<ProductCategory> cat=new ArrayList<ProductCategory>();
-        productCategoryRepository.findAll().forEach(category->cat.add(category));
-        return cat;
+       
+    List<ProductCategory> productCategory = new ArrayList<ProductCategory>();  
+productCategoryRepository.findAll().forEach(cat1 -> productCategory.add(cat1));  
+return productCategory;
     }
 
     @Override
     public ProductCategory getProductCategoryById(int idproductCategory) {
-        return productCategoryRepository.findById(idproductCategory).get();
+     return productCategoryRepository.findById(idproductCategory).get(); 
     }
 
     @Override
     public void addOrUpdateProductCategory(ProductCategory category) {
-        productCategoryRepository.save(category);
+    productCategoryRepository.save(category); 
     }
 
     @Override
-    public void deleteProductCategory(int idproductCategory) throws Exception {
-        productCategoryRepository.deleteById(idproductCategory);
+    public void deleteProductCategory(int idproductCategory){
+    productCategoryRepository.deleteById(idproductCategory); 
+       
+    }
+
+    @Override
+    public void update(ProductCategory productCategory, int idproductCategory) {
+    productCategoryRepository.save(productCategory); 
     }
 
     
-    
 
     
     
-}*/
+}

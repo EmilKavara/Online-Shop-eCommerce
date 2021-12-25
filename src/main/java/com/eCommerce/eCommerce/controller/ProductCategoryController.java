@@ -10,18 +10,52 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/productCategory")
+@RequestMapping(path="/productCategory")
 public class ProductCategoryController {
     
     @Autowired
-    private ProductCategoryService productCategoryService;
+    ProductCategoryService productCategoryService;
+
+    @GetMapping("/getproductCategory")
+    private List<ProductCategory> getAllProductCategory(){
+        return productCategoryService.getAllProductCategory();
+    }
+
+    @GetMapping("/getproductCategory/{idproductCategory}")
+    private ProductCategory getProductCategory(@PathVariable("idproductCategory") int idproductCategory){
+        return productCategoryService.getProductCategoryById(idproductCategory);
+    }
     
-    @GetMapping("/allProductCategory")
+    @DeleteMapping("/delete/{idproductCategory}")
+    private void deleteProductCategory(@PathVariable("idproductCategory") int idproductCategory) throws Exception{
+        productCategoryService.deleteProductCategory(idproductCategory);
+    }
+    
+    @PostMapping(path="/add")
+    public @ResponseBody String addNewProductCategory(@RequestParam String name,@RequestParam String description){
+        ProductCategory pc = new ProductCategory();
+        pc.setName(name);
+        pc.setDescription(description);
+        productCategoryService.addOrUpdateProductCategory(pc);
+        return "Saved";
+    }
+    
+    @PutMapping("/update")
+    private ProductCategory update(@RequestBody ProductCategory productCategory){
+        productCategoryService.addOrUpdateProductCategory(productCategory);
+        return productCategory;
+    }
+}
+    
+   /* @GetMapping("/allProductCategory")
     public ResponseEntity<List<ProductCategory>> getAllProductCategory(){
         List<ProductCategory> productCategory=null;
         try{
@@ -73,7 +107,7 @@ public class ProductCategoryController {
         return new ResponseEntity<ProductCategory>(productCategory, HttpStatus.OK);
     }
     
-}
+}*/
 
 
 
@@ -105,35 +139,25 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductCategoryController {
 
     @Autowired
-    private ProductCategoryService productCategoryService;
+    private ProductCategoryService productCategoryService;*/
 
-    @GetMapping("/getAllProductCategory")
+   /* @GetMapping("/getAllProductCategory")
     private List<ProductCategory> getAllProductCategory() {
         return productCategoryService.getAllProductCategory();
     }
 
-    @GetMapping("/getById/{id}")
+    @GetMapping("/getAllProductCategory/{idproductCategory}")
     private ProductCategory getProductCategory(@PathVariable("id") int idproductCategory) {
         return productCategoryService.getProductCategoryById(idproductCategory);
     }
 
-    @PostMapping("/addOrUpdate")
+    @PostMapping(path="/add")
     
-    public ResponseEntity<ProductCategory> addOrUpdate(@RequestBody ProductCategory productCat) {
-        ProductCategory productCategory = null;
-        try {
-            productCategory = productCategoryService.addOrUpdateProductCategory(productCat);
+  }
 
-        } catch (Exception ex) {
-            ex.getMessage();
-        }
-
-        return new ResponseEntity<ProductCategory>(productCategory, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    private void deleteProductCategory(@PathVariable("id") int idproductCategory) throws Exception {
-        productCategoryService.deleteProductCategory(idproductCategory);
+    @DeleteMapping("/productCategory/{idproductCategory}")
+    private void deleteProductCategory(@PathVariable("idproductCategory") int idproductCategory){
+        productCategoryService.delete(idproductCategory);
     }
 
 }*/

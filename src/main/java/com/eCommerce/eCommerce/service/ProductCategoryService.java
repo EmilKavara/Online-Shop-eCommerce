@@ -8,8 +8,9 @@ public interface ProductCategoryService {
     
     public List<ProductCategory> getAllProductCategory();
     public ProductCategory getProductCategoryById(int idproductCategory);
-    public ProductCategory addOrUpdateProductCategory( ProductCategory category);
-    public ProductCategory deleteProductCategory(int idproductCategory) throws Exception;
+    public void addOrUpdateProductCategory( ProductCategory category);
+    public void deleteProductCategory(int idproductCategory) throws Exception;
+    public void update(ProductCategory productCategory,int idproductCategory);
 }
 
 

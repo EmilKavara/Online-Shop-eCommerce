@@ -15,164 +15,300 @@
                     <script src="eCommerce.js" type="text/javascript"></script>
                     </head>
                     <body>
-                        <div class="page">
-                            <div class="sidebar" style="background-color:#4527A0">
-                                <div class="sidebar-header"style="background-color:#4527A0">
-                                    <div class="sidebar-logo-container"style="background-color:#4527A0">
-                                        <div class="logo-container"style="background-color:#4527A0">
-                                            <img class="logo-sidebar center" src="/images/logoo.png" alt="" width="30" height="30"/>
-                                        </div>
-                                        <div class="brand-name-container center" style="background-color:#4527A0">
-                                            <p class="brand-name">
-                                                click<span class="brand-subname" style="text-warning">SHOP</span>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="sidebar-body"style="background-color:#4527A0">
-                                    <ul class="navigation-list">
-                                        <li class="navigation-list-item">
-                                            <a class="navigation-link" href="#" >
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <i class="fas fa-home"></i>
-                                                    </div>
 
-                                                    <div class="col-10">
-                                                        HOME
-                                                    </div> 
-                                                </div>   
-                                            </a>
+                        <nav class="navbar navbar-expand-lg navbar-dark " style="background-color:#4527A0;" >
+
+                            <div class="container">
+                                <a class="navbar-brand" href="/">
+                                    <img src="/images/logoo.png" alt="" width="30" height="30">
+                                </a>
+                                <a href="/" class="navbar-brand"> click<span class="text-warning">SHOP</span> </a>
+
+                                <button type="button" class="navbar-toggler btn-outline" aria-controls="bdNavbar" data-bs-toggle="collapse" data-bs-target="#navmenu"> 
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                            </div>
+                        </nav>
+
+                        <div class="row">
+                            <!--Sidebar-->
+                            <div class="col-1" style="background-color:#4527A0; width: 250px;" >
+                                <nav id="sidebar" class="col sidebar" style="text-align: center">
+                                    <ul class="nav flex-column vertical-nav">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" aria-current="page" href="/home">
+                                                <i class="fas fa-home"></i>Home</a>
                                         </li>
-                                        <li class="navigation-list-item">
-                                            <a class="navigation-link" href="/">
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <i class="fas fa-user"></i>
-                                                    </div>
-
-                                                    <div class="col-10">
-                                                        Profile
-                                                    </div> 
-                                                </div>   
-                                            </a>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"><i class="fas fa-user"></i>Profile</a>
                                         </li>
-                                        <li class="navigation-list-item">
-                                            <a class="navigation-link" href="/user">
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <i class="fas fa-users"></i>
-                                                    </div>
-
-                                                    <div class="col-10">
-                                                        Users
-                                                    </div> 
-                                                </div>   
-                                            </a>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#"><i class="fas fa-users"></i>Users</a>
                                         </li>
-                                        <li class="navigation-list-item">
-                                            <a class="navigation-link" href="/products">
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <i class="fab fa-product-hunt"></i>
-                                                    </div>
-
-                                                    <div class="col-10">
-                                                        Products
-                                                    </div> 
-                                                </div>   
-                                            </a>
+                                        <li class="nav-item">
+                                            <a class="nav-link " href="#" ><i class="fab fa-product-hunt"></i>Products</a>
                                         </li>
-                                        <li class="navigation-list-item">
-                                            <a class="navigation-link" href="/productCategory">
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <i class="fas fa-columns"></i>
-                                                    </div>
-
-                                                    <div class="col-10">
-                                                        Categories
-                                                    </div> 
-                                                </div>   
-                                            </a>
+                                        <li class="nav-item">
+                                            <a class="nav-link " href="/productCategory" ><i class="fas fa-columns"></i>Categories</a>
                                         </li>
-                                        <li class="navigation-list-item">
-                                            <a class="navigation-link" href="/orders">
-                                                <div class="row">
-                                                    <div class="col-2">
-                                                        <i class="far fa-list-alt"></i>
-                                                    </div>
-
-                                                    <div class="col-10">
-                                                        Orders
-                                                    </div> 
-                                                </div>   
-                                            </a>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="#" ><i class="far fa-list-alt"></i>Orders</a>
                                         </li>
                                     </ul>
                                     <hr style="margin-top:30px; color:#f0ad4e">
-                                        <div class="contacts-list">
-                                            <div class="contacts-list-container">
-                                               
-                                                    <div class="title" style="color:#f0ad4e; font-size: 12px; text-align: center;">
-                                                        Contacts and Location</div>
+                                                                           <div class="contacts-list">
+                                                                               <div class="contacts-list-container">
+                                                                                  
+                                                                                       <div class="title" style="color:#f0ad4e; font-size: 12px; text-align: center;">
+                                                                                           Contacts and Location</div>
+                                            
+                                                                                           <p class="cont-location-container" style=" font-size: 10px; color:#ccccff;">
+                                                                                               Address: Zmaja od Bosne 16<br>
+                                                                                                   Sarajevo 71000<br>
+                                                                                                       Bosnia and Herzegovina<br>
+                                                                                                           <a href="mailto: clickSHOP@clickshop.com" style="color:#ccccff;" >E-mail: clickSHOP@clickshop.com;</a> <br>
+                                                                                                               Contact: +38761666444
+                                                                                                               </p> 
+                                            
+                                                                                                               </div>
+                                                                           </div>
+<hr class="d-md-none text-warning"style="margin-top:30px;  color:#f0ad4e"/>     
+                                                                    <ul class="navbar-nav flex-row flex-wrap ms-md-auto" >
+                                                                        <li class="nav-item col-6 col-md-auto nav-item-dark" >
+                                                                            <a class="nav-link p-2" href="https://facebook.com" target="_blank" rel="noopener">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                                                                    <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                                                                                </svg><small class="d-md-none ms-2">Facebook</small>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li class="nav-item col-6 col-md-auto nav-item-dark">
+                                                                            <a class="nav-link p-2" href="https://instagram.com" target="_blank" rel="noopener">
+                                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                                                                                    <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                                                                                </svg>
+                                                                                <small class="d-md-none ms-2">Instagram</small>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                    
+                                        
+                                                                    </div>
+                            
+                                         
+                                        </div>
+                                     <!--Sidebar End-->
+                                                                    <div class="main col-11">
+                                                                        <div class="row firt-row">
+                                                                            <div class="col-4">
+                                                                                <section >
 
-                                                        <p class="cont-location-container" style=" font-size: 10px; color:#ccccff;">
-                                                            Address: Zmaja od Bosne 16<br>
-                                                                Sarajevo 71000<br>
-                                                                    Bosnia and Herzegovina<br>
-                                                                        <a href="mailto: clickSHOP@clickshop.com" style="color:#ccccff;" >E-mail: clickSHOP@clickshop.com;</a> <br>
-                                                                            Contact: +38761666444
-                                                                            </p> 
-
+                                                                                </section>
                                                                             </div>
+                                                                        </div>
 
-                                                                            </div>
-                                         <hr class="d-md-none text-warning"/>                                                                                                               </div>
-                                        <ul class="navbar-nav flex-row flex-wrap ms-md-auto" >
-                                                <li class="nav-item col-6 col-md-auto nav-item-dark" >
-                                                    <a class="nav-link p-2" href="https://facebook.com" target="_blank" rel="noopener">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                                                            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
-                                                        </svg><small class="d-md-none ms-2">Facebook</small>
-                                                    </a>
-                                                </li>
-                                                <li class="nav-item col-6 col-md-auto nav-item-dark">
-                                                    <a class="nav-link p-2" href="https://instagram.com" target="_blank" rel="noopener">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
-                                                            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                                                        </svg>
-                                                        <small class="d-md-none ms-2">Instagram</small>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                            </div>
-                                                                            
-
-                                                                            <div class="content">
-                                                                               
-                               
-                                                                         <div class="navigationBar">
-                                                                                    <button id="sidebarToggle" class="btn sidebarToggle">
-                                                                                        <i class="fas fa-bars"></i>
-                                                                                    </button>                                                                                    
-                                                                                </div>
+                                                                    </div>
+                                                                    </div>
+                                                                    <!--    <div class="page">
+                                                                            <div class="sidebar" style="background-color:#4527A0">
+                                                                                <div class="sidebar-header"style="background-color:#4527A0">
+                                                                                    <div class="sidebar-logo-container"style="background-color:#4527A0">
+                                                                                        <div class="logo-container"style="background-color:#4527A0">
+                                                                                            <img class="logo-sidebar center" src="/images/logoo.png" alt="" width="30" height="30"/>
+                                                                                        </div>
+                                                                                        <div class="brand-name-container center" style="background-color:#4527A0">
+                                                                                            <p class="brand-name">
+                                                                                                click<span class="brand-subname" style="text-warning">SHOP</span>
+                                                                                            </p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div> 
                                                                                 
-                                                                                </div>
-                                                                           </div> 
-                           </div>
-                                                                            
+                                                                               <div class="sidebar-body"style="background-color:#4527A0"> 
+                                                                                <div class="d-flex align-items-start">
+                                                  <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                                   
+                                                      <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</button>
+                                                      <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</button>
+                                                      <button class="nav-link" id="v-pills-users-tab" data-bs-toggle="pill" data-bs-target="#v-pills-users" type="button" role="tab" aria-controls="v-pills-users" aria-selected="false">Users</button>
+                                                      <button class="nav-link" id="v-pills-products-tab" data-bs-toggle="pill" data-bs-target="#v-pills-products" type="button" role="tab" aria-controls="v-pills-products" aria-selected="false">Products</button>
+                                                      <button class="nav-link" id="v-pills-categories-tab" data-bs-toggle="pill" data-bs-target="#v-pills-categories" type="button" role="tab" aria-controls="v-pills-categories" aria-selected="false"><a href="/productCategory">Categories</a></button>
+                                                      <button class="nav-link" id="v-pills-orders-tab" data-bs-toggle="pill" data-bs-target="#v-pills-orders" type="button" role="tab" aria-controls="v-pills-orders" aria-selected="false">Orders</button>
+                                                  </div>
+                                                 
+                                                                                
+                                                                    <!--  <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                            
+                                                                      <ul class="nav nav-tabs">
+                                                                          <li class="nav-item">
+                                                                              <a class="nav-link" href="#" >
+                                                                                  <div class="row">
+                                                                                      <div class="col-2">
+                                                                                          <i class="fas fa-home"></i>
+                                                                                      </div>
+                                            
+                                                                                      <div class="col-10">
+                                                                                          HOME
+                                                                                      </div> 
+                                                                                  </div>   
+                                                                              </a>
+                                                                          </li>
+                                                                         
+                                                                     <div class="d-flex align-items-start">     
+                                                                          <li class="nav-item">
+                                                                              <a class="nav-link" href="/">
+                                                                                  <div class="row">
+                                                                                      <div class="col-2">
+                                                                                          <i class="fas fa-user"></i>
+                                                                                      </div>
+                                            
+                                                                                      <div class="col-10">
+                                                                                          Profile
+                                                                                      </div> 
+                                                                                  </div>   
+                                                                              </a>
+                                                                          </li>
+                                                                          <li class="nav-item">
+                                                                              <a class="nav-link" href="/user">
+                                                                                  <div class="row">
+                                                                                      <div class="col-2">
+                                                                                          <i class="fas fa-users"></i>
+                                                                                      </div>
+                                            
+                                                                                      <div class="col-10">
+                                                                                          Users
+                                                                                      </div> 
+                                                                                  </div>   
+                                                                              </a>
+                                                                          </li>
+                                                                          <li class="nav-item">
+                                                                              <a class="nav-link" href="/products">
+                                                                                  <div class="row">
+                                                                                      <div class="col-2">
+                                                                                          <i class="fab fa-product-hunt"></i>
+                                                                                      </div>
+                                            
+                                                                                      <div class="col-10">
+                                                                                          Products
+                                                                                      </div> 
+                                                                                  </div>   
+                                                                              </a>
+                                                                          </li>
+                                                                          <li class="nav-item">
+                                                                              <a class="nav-link" href="/productCategory">
+                                                                                  <div class="row">
+                                                                                      <div class="col-2">
+                                                                                          <i class="fas fa-columns"></i>
+                                                                                      </div>
+                                            
+                                                                                      <div class="col-10">
+                                                                                          Categories
+                                                                                      </div> 
+                                                                                  </div>   
+                                                                              </a>
+                                                                          </li>
+                                                                          <li class="nav-item">
+                                                                              <a class="nav-link" href="/orders">
+                                                                                  <div class="row">
+                                                                                      <div class="col-2">
+                                                                                          <i class="far fa-list-alt"></i>
+                                                                                      </div>
+                                            
+                                                                                      <div class="col-10">
+                                                                                          Orders
+                                                                                      </div> 
+                                                                                  </div>   
+                                                                              </a>
+                                                                          </li>
+                                                                      </ul>-->
+                                                                    <!--<hr style="margin-top:30px; color:#f0ad4e">
+                                                                        <div class="contacts-list">
+                                                                            <div class="contacts-list-container">
+                                                                               
+                                                                                    <div class="title" style="color:#f0ad4e; font-size: 12px; text-align: center;">
+                                                                                        Contacts and Location</div>
+                                            
+                                                                                        <p class="cont-location-container" style=" font-size: 10px; color:#ccccff;">
+                                                                                            Address: Zmaja od Bosne 16<br>
+                                                                                                Sarajevo 71000<br>
+                                                                                                    Bosnia and Herzegovina<br>
+                                                                                                        <a href="mailto: clickSHOP@clickshop.com" style="color:#ccccff;" >E-mail: clickSHOP@clickshop.com;</a> <br>
+                                                                                                            Contact: +38761666444
+                                                                                                            </p> 
+                                            
+                                                                                                            </div>
+                                                                        </div>-->
+                                                                    </div>
+                                                                    <!--  <hr style="margin-top:30px; color:#f0ad4e">
+                                                                           <div class="contacts-list">
+                                                                               <div class="contacts-list-container">
+                                                                                  
+                                                                                       <div class="title" style="color:#f0ad4e; font-size: 12px; text-align: center;">
+                                                                                           Contacts and Location</div>
+                                            
+                                                                                           <p class="cont-location-container" style=" font-size: 10px; color:#ccccff;">
+                                                                                               Address: Zmaja od Bosne 16<br>
+                                                                                                   Sarajevo 71000<br>
+                                                                                                       Bosnia and Herzegovina<br>
+                                                                                                           <a href="mailto: clickSHOP@clickshop.com" style="color:#ccccff;" >E-mail: clickSHOP@clickshop.com;</a> <br>
+                                                                                                               Contact: +38761666444
+                                                                                                               </p> 
+                                            
+                                                                                                               </div>
+                                                                           </div>
+                                                                            <hr class="d-md-none text-warning"style="margin-top:30px; color:#f0ad4e"/>                                                                                                               </div>
+                                                                           <ul class="navbar-nav flex-row flex-wrap ms-md-auto" >
+                                                                                   <li class="nav-item col-6 col-md-auto nav-item-dark" >
+                                                                                       <a class="nav-link p-2" href="https://facebook.com" target="_blank" rel="noopener">
+                                                                                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                                                                               <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                                                                                           </svg><small class="d-md-none ms-2">Facebook</small>
+                                                                                       </a>
+                                                                                   </li>
+                                                                                   <li class="nav-item col-6 col-md-auto nav-item-dark">
+                                                                                       <a class="nav-link p-2" href="https://instagram.com" target="_blank" rel="noopener">
+                                                                                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                                                                                               <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+                                                                                           </svg>
+                                                                                           <small class="d-md-none ms-2">Instagram</small>
+                                                                                       </a>
+                                                                                   </li>
+                                                                               </ul>
+                                                               </div>
+                                                             
+                                                                                                               
+                                            
+                                                                                                               <div class="content">
+                                                                                                                  
+                                                                  
+                                                                                                           <div class="tab-content" id="v-pills-tabContent">
+                                                                                                               <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                                                                                                   
+                                            </div>
+                                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+                                            <div class="tab-pane fade" id="v-pills-users" role="tabpanel" aria-labelledby="v-pills-users-tab">...</div>
+                                            <div class="tab-pane fade" id="v-pills-products" role="tabpanel" aria-labelledby="v-pills-products-tab">...</div>
+                                            <div class="tab-pane fade" id="v-pills-categories" role="tabpanel" aria-labelledby="v-pills-categories-tab">
+                                             
+                                            </div>
+                                            <div class="tab-pane fade" id="v-pills-orders" role="tabpanel" aria-labelledby="v-pills-orders-tab">...</div>
+                                            </div>
+                                            </div>
+                                                                                                                   
+                                                                                                                   </div>
+                                                                                                              </div> 
+                                                              </div>-->
 
 
-                                                                            <!-- Optional JavaScript; choose one of the two! -->
-                                                                            
-                                                                            <!-- Option 1: Bootstrap Bundle with Popper -->
-                                                                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-                                                                            <!-- Option 2: Separate Popper and Bootstrap JS -->
-                                                                            <!--
-                                                                            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-                                                                            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-                                                                            -->
-                                                                            </body>
-                                                                            </html>
+                                                                    <!-- Optional JavaScript; choose one of the two! -->
+
+                                                                    <!-- Option 1: Bootstrap Bundle with Popper -->
+                                                                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+                                                                    <!-- Option 2: Separate Popper and Bootstrap JS -->
+                                                                    <!--
+                                                                    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+                                                                    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+                                                                    -->
+                                                                    </body>
+                                                                    </html>
