@@ -42,4 +42,10 @@ public class AppController {
     public ModelAndView add(){
         return new ModelAndView("user");
     }
+
+    @RequestMapping("/order")
+    public ModelAndView order(){
+        return new ModelAndView("order");
+    }
+
 }

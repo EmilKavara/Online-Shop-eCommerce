@@ -5,20 +5,28 @@ import com.eCommerce.eCommerce.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8080")
+
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/order")
 public class OrderController {
 
     @Autowired
     OrderService orderService;
 
-    @GetMapping("/order")
+    /*@GetMapping("/order")
+    public String getAllOrders(Model model) {
+        List<Order> orders = orderService.findAll();
+        model.addAttribute("order", orders);
+        return "order";
+    }*/
+
+    @GetMapping("/getorder")
     public ResponseEntity<List<Order>> getAllOrders(@RequestParam(required = false) String order) {
         try {
             List<Order> orders = new ArrayList<Order>();
@@ -36,7 +44,7 @@ public class OrderController {
         }
     }
 
-    @GetMapping("/order/{idorder}")
+    @GetMapping("/getorder/{idorder}")
     public ResponseEntity<Order> getOrderById(@PathVariable("idorder") long idorder) {
         Order order = orderService.findById(idorder);
 
@@ -47,7 +55,7 @@ public class OrderController {
         }
     }
 
-    @PostMapping("/order")
+    @PostMapping("/addorder")
     public ResponseEntity<String> createOrder(@RequestBody Order order) {
         try {
             orderService.save(new Order(order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate()));
@@ -57,7 +65,7 @@ public class OrderController {
         }
     }
 
-    @PutMapping("/order/{idorder}")
+    @PutMapping("/updateorder/{idorder}")
     public ResponseEntity<String> updateOrder(@PathVariable("idorder") long idorder, @RequestBody Order order) {
         Order _order = orderService.findById(idorder);
 
@@ -74,7 +82,7 @@ public class OrderController {
         }
     }
 
-    @DeleteMapping("/order/{idorder}")
+    @DeleteMapping("/deleteorder/{idorder}")
     public ResponseEntity<String> deleteOrder(@PathVariable("idorder") long idorder) {
         try {
             int result = orderService.deleteById(idorder);
@@ -87,7 +95,7 @@ public class OrderController {
         }
     }
 
-    @DeleteMapping("/order")
+    @DeleteMapping("/deleteallorders")
     public ResponseEntity<String> deleteAllOrders() {
         try {
             int numRows = orderService.deleteAll();
