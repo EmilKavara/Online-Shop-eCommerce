@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/order")
+@RequestMapping(path="/order")
 public class OrderController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class OrderController {
         return "order";
     }*/
 
-    @GetMapping("/getorder")
+    @GetMapping("/getallorders")
     public ResponseEntity<List<Order>> getAllOrders(@RequestParam(required = false) String order) {
         try {
             List<Order> orders = new ArrayList<Order>();

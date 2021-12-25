@@ -43,7 +43,7 @@ public class AppController {
         return new ModelAndView("user");
     }
 
-    @RequestMapping("/order")
+    @RequestMapping("/getorder")
     public ModelAndView order(){
         return new ModelAndView("order");
     }

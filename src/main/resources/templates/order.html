@@ -35,11 +35,12 @@
 <body style="background-color:#4835d4;">
 <h3 class="text-center" style="padding-top: 25px; color:white">Orders</h3>
 <div layout:fragment="content">
+
     <div class="container">
         <table class="table table-dark table-borderless"
                id="order"
                data-toggle="table"
-               data-url="http://localhost:8080/order/getorder">
+               data-url="http://localhost:8080/order/getallorders">
             <thead style="text-align: center;">
             <tr>
                 <th data-field="idorder">Order ID</th>
@@ -53,6 +54,7 @@
             </tr>
             </thead>
         </table>
+        <button type="button" class="btn btn-light btn-sm" onclick="window.location.href='adminPage.html'" style="padding: 5px">Dashboard</button>
     </div>
 </div>
 
