@@ -57,4 +57,9 @@ public class AppController {
     public ModelAndView testTable(){
         return new ModelAndView("testTable");
     }
+    
+    @RequestMapping("/product/deleteProduct")
+    public ModelAndView delete(){
+        return new ModelAndView("testTable");
+    }
 }

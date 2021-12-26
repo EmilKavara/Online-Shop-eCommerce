@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-//@RestController
+
 @RestController
 @RequestMapping(path = "/product")
 public class ProductController {
@@ -58,10 +58,10 @@ public class ProductController {
         return "redirect:/product/products";
     }
 
-    /*@DeleteMapping("/product/{idproduct}")
+    @DeleteMapping("/deleteProduct/{idproduct}")
     private void deleteProduct(@PathVariable("idproduct") int idproduct) {
         productService.delete(idproduct);
-    }*/
+    }
 
     @PostMapping(path = "/add")
     public @ResponseBody
