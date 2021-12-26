@@ -19,13 +19,6 @@ public class OrderController {
     @Autowired
     OrderService orderService;
 
-    /*@GetMapping("/order")
-    public String getAllOrders(Model model) {
-        List<Order> orders = orderService.findAll();
-        model.addAttribute("order", orders);
-        return "order";
-    }*/
-
     @GetMapping("/getallorders")
     public ResponseEntity<List<Order>> getAllOrders(@RequestParam(required = false) String order) {
         try {

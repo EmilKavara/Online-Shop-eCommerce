@@ -23,9 +23,9 @@ public class AppController {
         return new ModelAndView ("adminPage");
     }
     
-    @RequestMapping("/login")
+    @RequestMapping("/loginPage")
     public ModelAndView login(){
-        return new ModelAndView("login");
+        return new ModelAndView("loginPage");
     }
     
     @RequestMapping("/registration")
@@ -43,7 +43,7 @@ public class AppController {
         return new ModelAndView("user");
     }
 
-    @RequestMapping("/getorder")
+    @RequestMapping("/order/getallorders")
     public ModelAndView order(){
         return new ModelAndView("order");
     }
