@@ -49,9 +49,12 @@ public class ProductCategoryController {
     }
     
     @PutMapping("/update")
-    private ProductCategory update(@RequestBody ProductCategory productCategory){
-        productCategoryService.addOrUpdateProductCategory(productCategory);
-        return productCategory;
+    private ProductCategory update(@RequestParam String name,@RequestParam String description){
+        ProductCategory pc = new ProductCategory();
+        pc.setName(name);
+        pc.setDescription(description);
+        productCategoryService.addOrUpdateProductCategory(pc);
+        return pc;
     }
 }
     

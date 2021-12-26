@@ -39,33 +39,35 @@
                 <h5 class="modal-title" id="exampleModalLabel">Insert New Category</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form>
+            <form action="/productCategory/add" method="POST">
+                <div class="modal-body">
+
                     <div class="mb-3">
-                        <label for="InsertName" class="form-label">Enter Category Name: </label>
-                        <input type="text" class="form-control" id="InsertName" placeholder="Enter name">
+                        <label for="name" class="form-label">Enter Category Name: </label>
+                        <input type="text" name="name" class="form-control" id="name" placeholder="Enter name">
 
                     </div>
                     <div class="mb-3">
-                        <label for="InsertDescription" class="form-label">Enter Category Description: </label>
-                        <input type="text" class="form-control" id="InsertDescription" placeholder="Enter description">
+                        <label for="description" class="form-label">Enter Category Description: </label>
+                        <input type="text" name="description" class="form-control" id="description"
+                               placeholder="Enter description">
                     </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" value="Save" id="save_button" name="save_button">Save new
-                    category
-                </button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" value="Save" id="save_button" name="save_button">Save
+                        new
+                        category
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 
 <div class="p-2 container-add" id="toolbar">
-    <button id="add" class=" btn btn-warning float-right" data-bs-toggle="modal" data-bs-target="#add"
+    <button id="addModal" class=" btn btn-warning float-right" data-bs-toggle="modal" data-bs-target="#add"
             data-align="right">Add New Category
     </button>
 </div>
@@ -78,27 +80,22 @@
                 <h5 class="modal-title">Insert New Category</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <form action="{{url('update')}}" method="POST">
-
-                    <input type="text" name="cat_id" id="cat_id"/>
-
+            <form action="/productCategory/update" method="PUT">
+                <div class="modal-body">
                     <div class="mb-3">
-                        <label for="UpdateName" class="form-label">Edit Category Name: </label>
-                        <input type="text" class="form-control" id="UpdateName" placeholder="Edit name">
-
+                        <label for="editName" class="form-label">Edit Category Name: </label>
+                        <input type="text" name="name" class="form-control" id="editName" placeholder="Edit name">
                     </div>
                     <div class="mb-3">
-                        <label for="EditDescription" class="form-label">Edit Category Description: </label>
-                        <input type="text" class="form-control" id="EditDescription" placeholder="Edit description">
+                        <label for="editDescription" class="form-label">Edit Category Description: </label>
+                        <input type="text" name="description" class="form-control" id="editDescription" placeholder="Edit description">
                     </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" va>Save changes</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" va>Save changes</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -117,15 +114,6 @@
         </thead>
 
     </table>
-    <!-- <div id="form">
-         <form action="" method="post" name="registration" class="register">
-             <fieldset>
-                 <label for="name">Category name: </label>
-                 <input name="name"/>
-                 <label for="description">Description: </label>
-                 <input name="description"/>
-         </form>
-     </div>-->
 </div>
 
 <div class="card-footer text-muted" style="background-color:#4527A0;"></div>
@@ -162,10 +150,9 @@
             '<a  class="remove" href="javascript:void(0)" title="Remove">',
             '<i class="fa fa-trash"></i> ',
             '</a>',
-
-            '<a class="edit" title="Edit" href="javascript:void(1)">',
+            '<button id="addEditModal"  class="btn btn-warning edit" data-bs-toggle="modal" data-bs-target="#edit" title="Edit">',
             '<i class="far fa-edit" ></i> ',
-            '</a>'
+            '</button>'
 
         ].join('')
     }
@@ -187,8 +174,26 @@
                     }
                 });
             }
+        },
+        'click .edit': function (e, value, row) {
+            $.ajax({
+                type: "PUT",
+                url: "/productCategory/update",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                success: function (content) {
+                    $('#alert').html(content)
+                    $('#productCategory').bootstrapTable('refresh')
+                },
+                error: function (error) {
+                    console.log(error + " " + JSON.stringify(row));
+                }
+            });
         }
     }
+
+    $('#addEditModal').click(function (){
+
+    });
 
 </script>
 <!--<script>
