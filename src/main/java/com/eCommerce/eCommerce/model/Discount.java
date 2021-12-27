@@ -32,7 +32,7 @@ public class Discount implements Serializable {
     @Basic(optional = false)
     @Column(name = "iddiscount")
     private Integer iddiscount;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "name")
     private String name;
     @Column(name = "description")

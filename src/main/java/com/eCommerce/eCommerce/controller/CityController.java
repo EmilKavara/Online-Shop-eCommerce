@@ -48,5 +48,4 @@ public class CityController {
     private void deleteCity(@PathVariable("idcity") int idcity) {
         cityService.deleteCity(idcity);
     }
-
 }

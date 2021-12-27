@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @RequestMapping(path = "/product")
 public class ProductController {
@@ -34,16 +33,15 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-/*    @GetMapping("/products")
+    /*    @GetMapping("/products")
     public String getAllProducts(Model model) {
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
         return "testTable";
     }*/
-
     @GetMapping("/getproduct")
     private List<Product> getAllProducts() {
-        List<Product> products =  productService.getAllProducts();
+        List<Product> products = productService.getAllProducts();
         return products;
     }
 
@@ -63,10 +61,27 @@ public class ProductController {
         productService.delete(idproduct);
     }
 
-    @PostMapping(path = "/add")
-    public @ResponseBody
+    @PostMapping("/add")
+    public String addNewProduct(Product product) {
+        Short num = (short) 1;
+        product.setActive(num);
+
+        Discount discount = new Discount();
+        discount.setIddiscount(1);
+
+        product.setDiscountId(discount);
+
+        ProductCategory category = new ProductCategory();
+        category.setIdproductCategory(1);
+        product.setCategoryId(category);
+
+        productService.saveOrUpdate(product);
+        return "Saved";
+    }
+
+    /*public @ResponseBody
     String addNewProduct(
-            String name, @RequestParam String description,
+            @RequestParam String name, @RequestParam String description,
             @RequestParam BigDecimal price, @RequestParam int quantity) {
 
         Product product = new Product();
@@ -80,6 +95,7 @@ public class ProductController {
 
         Discount discount = new Discount();
         discount.setIddiscount(1);
+        
         product.setDiscountId(discount);
 
         ProductCategory category = new ProductCategory();
@@ -87,12 +103,48 @@ public class ProductController {
         product.setCategoryId(category);
 
         productService.saveOrUpdate(product);
-        return "Saved";
-    }
+        return product;
+    }*/
 
-    @PutMapping("/product")
-    private Product update(@RequestBody Product product) {
+    @PutMapping("/update")
+    public Product update(Product product) {
+
+        Discount discount = new Discount();
+        discount.setIddiscount(1);
+
+        product.setDiscountId(discount);
+
+        ProductCategory category = new ProductCategory();
+        category.setIdproductCategory(1);
+        product.setCategoryId(category);
+
         productService.saveOrUpdate(product);
         return product;
     }
+
+    /*private Product update(@RequestParam String name, @RequestParam String description,
+            @RequestParam BigDecimal price, @RequestParam int quantity, @RequestParam short active) {
+        
+        Product pr = new Product();
+        
+        pr.setName(name);
+        pr.setDescription(description);
+        pr.setPrice(price);
+        pr.setQuantity(quantity);
+
+        //Short num = (short) 1;
+        pr.setActive(active);
+
+        Discount discount = new Discount();
+        discount.setIddiscount(1);
+        pr.setDiscountId(discount);
+
+        ProductCategory category = new ProductCategory();
+        category.setIdproductCategory(1);
+        pr.setCategoryId(category);
+        
+        
+        productService.saveOrUpdate(pr);
+        return pr;
+    }*/
 }

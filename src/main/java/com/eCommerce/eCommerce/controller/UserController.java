@@ -9,19 +9,14 @@ import com.eCommerce.eCommerce.model.Address;
 import com.eCommerce.eCommerce.model.City;
 import com.eCommerce.eCommerce.model.Privilege;
 import com.eCommerce.eCommerce.model.User;
-import static com.eCommerce.eCommerce.model.User_.gender;
 import com.eCommerce.eCommerce.service.AddressService;
-import com.eCommerce.eCommerce.service.CityService;
 import com.eCommerce.eCommerce.service.UserService;
 import java.sql.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -44,8 +39,6 @@ public class UserController {
     
     @Autowired
     private UserService userService;
-    @Autowired
-    private CityService cityService;
     @Autowired
     private AddressService addressService;
 
