@@ -16,7 +16,7 @@ import java.util.List;
  * @author bnc
  */
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @XmlRootElement
 @NamedQueries({
         @NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o"),
