@@ -52,11 +52,11 @@ public class Product implements Serializable {
     @Basic(optional = false)
     @Column(name = "active")
     private short active;
-    @JsonIgnore
+    //@JsonIgnore
     @JoinColumn(name = "category_id", referencedColumnName = "idproduct_category")
     @ManyToOne(optional = false)
     private ProductCategory categoryId;
-    @JsonIgnore
+    //@JsonIgnore
     @JoinColumn(name = "discount_id", referencedColumnName = "iddiscount")
     @ManyToOne(optional = false)
     private Discount discountId;

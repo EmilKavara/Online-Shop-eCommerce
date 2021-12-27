@@ -5,6 +5,7 @@
  */
 package com.eCommerce.eCommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -42,6 +43,7 @@ public class Order implements Serializable {
     @Column(name = "order_date")
     @Temporal(TemporalType.DATE)
     private Date orderDate;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
     private List<ProductOrder> productOrderList;
     @JoinColumn(name = "user_id", referencedColumnName = "iduser")

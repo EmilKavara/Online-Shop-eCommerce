@@ -164,6 +164,7 @@
                     <th data-field="price" data-align="center">Price</th>
                     <th data-field="discount" data-align="center">Discount</th>
                     <th data-field="quantity" data-align="center">Quantity</th>
+                    <th data-field="category" data-align="center">Category</th>
                     <th data-field="active" data-align="center">Active</th>
                     <th data-field="custom" data-events="window.operateEvents" data-align="center" data-formatter="optionFormat">
                         Options
@@ -196,8 +197,6 @@
 
             ].join('')
         }
-
-
 
         window.operateEvents = {
             'click .remove': function (e, value, row) {
@@ -233,7 +232,7 @@
         }
 
         $('#addEditModal').click(function () {
-
+            
         });
 
         (function () {

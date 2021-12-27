@@ -57,4 +57,9 @@ public class AppController {
     public ModelAndView testTable(){
         return new ModelAndView("testTable");
     }
+    
+    @RequestMapping("product/update")
+    public ModelAndView update(){
+        return new ModelAndView("product");
+    }
 }
