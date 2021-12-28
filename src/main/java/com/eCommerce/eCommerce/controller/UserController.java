@@ -10,16 +10,8 @@ import java.sql.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @RestController
@@ -82,9 +74,36 @@ public class UserController {
         return "Saved";
     }
 
-    @PutMapping("/user/edit")
+    @PutMapping("/user")
     private User update(@RequestBody User user) {
         userService.saveOrUpdate(user);
         return user;
+    }
+
+    @PostMapping("/users/edit/{iduser}")
+    public @ResponseBody
+    ModelAndView update(@PathVariable("iduser") int iduser, @RequestParam(required = false) String firstName, @RequestParam(required = false) String lastName,
+                        @RequestParam(required = false) String email, @RequestParam(required = false) String phone, @RequestParam(required = false) String username) {
+        User user = userService.getUserById(iduser);
+        if (!firstName.isEmpty()) {
+            user.setFirstName(firstName);
+        }
+        if (!lastName.isEmpty()) {
+            user.setLastName(lastName);
+        }
+        if (!email.isEmpty()) {
+            user.setEmail(email);
+        }
+        if (!phone.isEmpty()) {
+            user.setPhone(phone);
+        }
+        if (!username.isEmpty()) {
+            user.setUsername(username);
+        }
+        userService.saveOrUpdate(user);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("user");
+        return modelAndView;
+
     }
 }  
