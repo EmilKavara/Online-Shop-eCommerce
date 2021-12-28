@@ -5,6 +5,8 @@
  */
 package com.eCommerce.eCommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -36,6 +38,7 @@ public class City implements Serializable {
     @Basic(optional = false)
     @Column(name = "postal_number")
     private int postalNumber;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCity")
     private List<Address> addressList;
 

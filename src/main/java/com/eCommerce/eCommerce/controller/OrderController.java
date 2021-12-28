@@ -13,7 +13,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path="/order")
+@RequestMapping(path="/orderPage")
 public class OrderController {
 
     @Autowired

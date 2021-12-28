@@ -5,6 +5,8 @@
  */
 package com.eCommerce.eCommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -76,6 +78,7 @@ public class User implements Serializable {
     @JoinColumn(name = "privilege", referencedColumnName = "idprivilege")
     @ManyToOne(optional = false)
     private Privilege privilege;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
     private List<Order> orderList;
 

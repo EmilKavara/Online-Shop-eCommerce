@@ -5,6 +5,8 @@
  */
 package com.eCommerce.eCommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -51,6 +53,7 @@ public class Address implements Serializable {
     @JoinColumn(name = "id_city", referencedColumnName = "idcity")
     @ManyToOne(optional = false)
     private City idCity;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressId")
     private List<User> userList;
 
