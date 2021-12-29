@@ -13,9 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping
 public class AppController {
     
-    @RequestMapping("/user")
+    @RequestMapping("/userPage")
     public ModelAndView userPage(){
-        return new ModelAndView("user");
+        return new ModelAndView("userPage");
     }
     
     @RequestMapping("/adminPage")
@@ -43,7 +43,7 @@ public class AppController {
         return new ModelAndView("user");
     }
 
-    @RequestMapping("/orderPage/getallorders")
+    @RequestMapping("/order/getallorders")
     public ModelAndView order(){
         return new ModelAndView("order");
     }

@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Login</title>
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link rel="stylesheet"  href="/static/loginPage.css" type="text/css"/>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">
+    <link href="/static/loginPage.css" rel="stylesheet" type="text/css"/>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
-<body>
+<body style="background-color:#212121">
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
@@ -20,23 +19,23 @@
 <div class="sidenav">
     <div class="login-main-text">
         <h1>Login</h1>
-        <p>Login or register from here to access.</p>
+        <p>Login or sign up to access.</p>
     </div>
 </div>
 <div class="main">
     <div class="col-md-6 col-sm-12">
         <div class="login-form">
-            <form th:action="@{/loginPage}" method="post">
+            <form method="POST" th:action="@{/loginPage}">
                 <div class="form-group">
                     <label>Username</label>
-                    <input type="text" class="form-control" placeholder="Username">
+                    <input class="form-control" placeholder="Username" type="text">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" class="form-control" placeholder="Password">
+                    <input class="form-control" placeholder="Password" type="password">
                 </div>
-                <button type="submit" class="btn btn-dark">Login</button>
-                <button type="submit" class="btn btn-outline-dark">Register</button>
+                <button class="btn btn-light" type="submit">Login</button>
+                <button class="btn btn-outline-light" type="submit">Sign up</button>
             </form>
         </div>
     </div>
