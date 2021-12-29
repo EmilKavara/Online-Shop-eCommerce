@@ -178,4 +178,8 @@ public class Product implements Serializable {
         return "com.eCommerce.eCommerce.model.Product[ idproduct=" + idproduct + " ]";
     }
 
+    public void setActive(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

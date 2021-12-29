@@ -8,6 +8,8 @@ package com.eCommerce.eCommerce.controller;
 import com.eCommerce.eCommerce.model.Discount;
 import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.model.ProductCategory;
+import com.eCommerce.eCommerce.model.Product_;
+import static com.eCommerce.eCommerce.model.Product_.active;
 import com.eCommerce.eCommerce.service.ProductService;
 import java.math.BigDecimal;
 import java.util.List;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping(path = "/product")
@@ -45,6 +48,15 @@ public class ProductController {
         return products;
     }
 
+    @GetMapping("/get/{idproduct}")
+    private ModelAndView getProductById(@PathVariable("idproduct") int idproduct) {
+        Product product = getProduct(idproduct);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("editProduct");
+        modelAndView.addObject("product",product);
+        return modelAndView;
+    }
+    
     @GetMapping("/getproduct/{idproduct}")
     private Product getProduct(@PathVariable("idproduct") int idproduct) {
         return productService.getProductById(idproduct);
@@ -78,7 +90,7 @@ public class ProductController {
         productService.saveOrUpdate(product);
         return "Saved";
     }
-
+    
     /*public @ResponseBody
     String addNewProduct(
             @RequestParam String name, @RequestParam String description,
@@ -106,7 +118,7 @@ public class ProductController {
         return product;
     }*/
 
-    @PutMapping("/update")
+    /*@PutMapping("/update")
     public Product update(Product product) {
 
         Discount discount = new Discount();
@@ -120,8 +132,44 @@ public class ProductController {
 
         productService.saveOrUpdate(product);
         return product;
+    }*/
+    
+     @PostMapping(value = "/product")
+    private Product update(@RequestBody Product product) {
+        productService.saveOrUpdate(product);
+        return product;
     }
 
+    @PostMapping("/products/edit/{idproduct}")
+    public @ResponseBody
+    ModelAndView update(@PathVariable("idproduct") int idproduct,@RequestParam String name, @RequestParam String description,
+            @RequestParam BigDecimal price, @RequestParam Integer quantity, @RequestParam Integer active) {
+        
+        Product product=productService.getProductById(idproduct);
+        
+        if (!name.isEmpty()) {
+            product.setName(name);
+        }
+        if (!description.isEmpty()) {
+            product.setDescription(description);
+        }
+        if (price!=null) {
+            product.setPrice(price);
+        }
+        if (quantity!=null) {
+            product.setQuantity(quantity);
+        }
+        if (active!=null) {
+            product.setActive(active);
+        } else {
+        }
+        productService.saveOrUpdate(product);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("product");
+        return modelAndView;
+
+    }
+    
     /*private Product update(@RequestParam String name, @RequestParam String description,
             @RequestParam BigDecimal price, @RequestParam int quantity, @RequestParam short active) {
         
