@@ -27,17 +27,27 @@ public class AppController {
     public ModelAndView login(){
         return new ModelAndView("loginPage");
     }
-
+    
     @RequestMapping("/registration")
     public ModelAndView registration(){
         return new ModelAndView("registration");
+    }
+
+    @RequestMapping("/product")
+    public ModelAndView product(){
+        return new ModelAndView("product");
+    }
+
+    @RequestMapping("/product/add")
+    public ModelAndView addProduct(){
+        return new ModelAndView("product");
     }
 
     @RequestMapping("/user/getusers")
     public ModelAndView user(){
         return new ModelAndView("user");
     }
-
+    
     @RequestMapping("/user/add")
     public ModelAndView add(){
         return new ModelAndView("user");
@@ -48,4 +58,14 @@ public class AppController {
         return new ModelAndView("order");
     }
 
+
+    @RequestMapping("/testTable")
+    public ModelAndView testTable(){
+        return new ModelAndView("testTable");
+    }
+
+    @RequestMapping("product/update")
+    public ModelAndView update(){
+        return new ModelAndView("product");
+    }
 }

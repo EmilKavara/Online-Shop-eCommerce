@@ -6,7 +6,6 @@
 package com.eCommerce.eCommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;

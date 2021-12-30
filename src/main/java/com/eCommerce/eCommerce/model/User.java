@@ -6,7 +6,6 @@
 package com.eCommerce.eCommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -43,6 +42,7 @@ public class User implements Serializable {
     private Integer iduser;
     @Basic(optional = false)
     @Column(name = "first_name")
+    
     private String firstName;
     @Basic(optional = false)
     @Column(name = "last_name")
