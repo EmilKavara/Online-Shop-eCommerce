@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Login</title>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">
+    <link href="/static/loginPage.css" rel="stylesheet" type="text/css"/>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<body style="background-color:#212121">
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have successfully logged out.
+</div>
+<div class="sidenav">
+    <div class="login-main-text">
+        <h1>Login</h1>
+        <p>Login or sign up to access.</p>
+    </div>
+</div>
+<div class="main">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+            <form method="POST" th:action="@{/loginPage}">
+                <div class="form-group">
+                    <label>Username</label>
+                    <input class="form-control" placeholder="Username" type="text">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input class="form-control" placeholder="Password" type="password">
+                </div>
+                <button class="btn btn-light" type="submit">Login</button>
+                <button class="btn btn-outline-light" type="submit">Sign up</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

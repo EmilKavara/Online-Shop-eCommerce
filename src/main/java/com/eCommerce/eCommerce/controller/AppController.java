@@ -14,24 +14,69 @@ import org.springframework.web.servlet.ModelAndView;
 public class AppController {
 
     @RequestMapping("/userPage")
-    public ModelAndView userPage() {
+    public ModelAndView userPage(){
         return new ModelAndView("userPage");
     }
 
     @RequestMapping("/adminPage")
-    public ModelAndView adminPage() {
-        return new ModelAndView("adminPage");
+    public ModelAndView adminPage(){
+        return new ModelAndView ("adminPage");
     }
 
-    @RequestMapping("/login")
-    public ModelAndView login() {
-        return new ModelAndView("login");
+    @RequestMapping("/loginPage")
+    public ModelAndView login(){
+        return new ModelAndView("loginPage");
+    }
+
+    @RequestMapping("/registration")
+    public ModelAndView registration(){
+        return new ModelAndView("registration");
+    }
+
+    @RequestMapping("/product")
+    public ModelAndView product(){
+        return new ModelAndView("product");
+    }
+
+    @RequestMapping("/product/add")
+    public ModelAndView addProduct(){
+        return new ModelAndView("product");
     }
 
     @RequestMapping("/user/getusers")
-    public ModelAndView user() {
+    public ModelAndView user(){
         return new ModelAndView("user");
     }
 
+    @RequestMapping("/user/add")
+    public ModelAndView add(){
+        return new ModelAndView("user");
+    }
+
+    @RequestMapping("/order/getallorders")
+    public ModelAndView order(){
+        return new ModelAndView("order");
+    }
+
+
+    @RequestMapping("/testTable")
+    public ModelAndView testTable(){
+        return new ModelAndView("testTable");
+    }
+
+    @RequestMapping("product/update")
+    public ModelAndView update(){
+        return new ModelAndView("product");
+    }
+
+    @RequestMapping("/aboutUs")
+    public ModelAndView aboutUs(){
+        return new ModelAndView("aboutUs");
+    }
+
+    @RequestMapping("/productCategory")
+    public ModelAndView productCategory(){
+        return new ModelAndView("productCategory");
+    }
 
 }
