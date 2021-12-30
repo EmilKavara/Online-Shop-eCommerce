@@ -6,10 +6,7 @@
 package com.eCommerce.eCommerce.controller;
 
 import org.springframework.context.annotation.Configuration;
-<<<<<<< HEAD
-=======
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
->>>>>>> main
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
