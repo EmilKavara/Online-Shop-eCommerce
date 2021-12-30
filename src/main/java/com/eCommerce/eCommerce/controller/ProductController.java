@@ -8,25 +8,16 @@ package com.eCommerce.eCommerce.controller;
 import com.eCommerce.eCommerce.model.Discount;
 import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.model.ProductCategory;
-import com.eCommerce.eCommerce.model.Product_;
-import static com.eCommerce.eCommerce.model.Product_.active;
+
 import com.eCommerce.eCommerce.service.ProductService;
+
 import java.math.BigDecimal;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
@@ -53,10 +44,10 @@ public class ProductController {
         Product product = getProduct(idproduct);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editProduct");
-        modelAndView.addObject("product",product);
+        modelAndView.addObject("product", product);
         return modelAndView;
     }
-    
+
     @GetMapping("/getproduct/{idproduct}")
     private Product getProduct(@PathVariable("idproduct") int idproduct) {
         return productService.getProductById(idproduct);
@@ -133,35 +124,38 @@ public class ProductController {
         productService.saveOrUpdate(product);
         return product;
     }*/
-    
-     @PostMapping(value = "/product")
-    private Product update(@RequestBody Product product) {
+
+
+    @PostMapping(path = "/product", consumes = "application/x-www-form-urlencoded")
+    public @ResponseBody
+    ModelAndView update(Product product) {
         productService.saveOrUpdate(product);
-        return product;
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("testTable");
+        return modelAndView;
     }
 
     @PostMapping("/products/edit/{idproduct}")
     public @ResponseBody
-    ModelAndView update(@PathVariable("idproduct") int idproduct,@RequestParam String name, @RequestParam String description,
-            @RequestParam BigDecimal price, @RequestParam Integer quantity, @RequestParam Integer active) {
-        
-        Product product=productService.getProductById(idproduct);
-        
+    ModelAndView update(@PathVariable("idproduct") int idproduct, @RequestParam String name, @RequestParam String description,
+                        @RequestParam BigDecimal price, @RequestParam Integer quantity, @RequestParam Integer active) {
+
+        Product product = productService.getProductById(idproduct);
+
         if (!name.isEmpty()) {
             product.setName(name);
         }
         if (!description.isEmpty()) {
             product.setDescription(description);
         }
-        if (price!=null) {
+        if (price != null) {
             product.setPrice(price);
         }
-        if (quantity!=null) {
+        if (quantity != null) {
             product.setQuantity(quantity);
         }
-        if (active!=null) {
+        if (active != null) {
             product.setActive(active);
-        } else {
         }
         productService.saveOrUpdate(product);
         ModelAndView modelAndView = new ModelAndView();

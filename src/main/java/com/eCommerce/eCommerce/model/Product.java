@@ -58,7 +58,7 @@ public class Product implements Serializable {
     private ProductCategory categoryId;
     //@JsonIgnore
     @JoinColumn(name = "discount_id", referencedColumnName = "iddiscount")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Discount discountId;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
