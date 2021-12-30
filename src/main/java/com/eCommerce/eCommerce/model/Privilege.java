@@ -5,33 +5,23 @@
  */
 package com.eCommerce.eCommerce.model;
 
-import java.io.Serializable;
-import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import java.io.Serializable;
+import java.util.List;
 
 /**
- *
  * @author bnc
  */
 @Entity
 @Table(name = "privilege")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Privilege.findAll", query = "SELECT p FROM Privilege p"),
-    @NamedQuery(name = "Privilege.findByIdprivilege", query = "SELECT p FROM Privilege p WHERE p.idprivilege = :idprivilege"),
-    @NamedQuery(name = "Privilege.findByName", query = "SELECT p FROM Privilege p WHERE p.name = :name")})
+        @NamedQuery(name = "Privilege.findAll", query = "SELECT p FROM Privilege p"),
+        @NamedQuery(name = "Privilege.findByIdprivilege", query = "SELECT p FROM Privilege p WHERE p.idprivilege = :idprivilege"),
+        @NamedQuery(name = "Privilege.findByName", query = "SELECT p FROM Privilege p WHERE p.name = :name")})
 public class Privilege implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +33,7 @@ public class Privilege implements Serializable {
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "privilege")
     private List<User> userList;
 
@@ -107,5 +98,5 @@ public class Privilege implements Serializable {
     public String toString() {
         return "com.eCommerce.eCommerce.model.Privilege[ idprivilege=" + idprivilege + " ]";
     }
-    
+
 }
