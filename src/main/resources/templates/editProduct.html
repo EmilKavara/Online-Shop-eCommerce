@@ -14,8 +14,14 @@
             </div>
             <div class="mb-3">
                 <label for="editCategory" class="form-label">Edit Product category: </label>
-                <input th:field="*{product.categoryId.idproductCategory}" name="categoryId" class="form-control"
+                <input th:field="*{product.categoryId.name}" name="categoryId" class="form-control"
                        id="editCategory" placeholder="Edit category" th:value="${product.categoryId.idproductCategory}">
+            </div>
+            <div class="mb-3">
+                <label for="editDiscount" class="form-label">Edit Product discount: </label>
+                <input th:field="*{product.discountId.discountPercent}" name="discountId" class="form-control"
+                       id="editDiscount" placeholder="Edit discount" th:value="${product.discountId.iddiscount}">
+            <div class="invalid-feedback">Please select product discount</div>
             </div>
         </div>
         <div class="col-lg-6">

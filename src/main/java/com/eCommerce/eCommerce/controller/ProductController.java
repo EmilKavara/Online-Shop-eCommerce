@@ -10,13 +10,13 @@ import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.model.ProductCategory;
 
 import com.eCommerce.eCommerce.service.ProductService;
+import com.eCommerce.eCommerce.service.DiscountService;
+import com.eCommerce.eCommerce.service.ProductCategoryService;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,6 +26,8 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+    private DiscountService discountService;
+    private ProductCategoryService productCategoryService;
 
     /*    @GetMapping("/products")
     public String getAllProducts(Model model) {
@@ -82,54 +84,20 @@ public class ProductController {
         return "Saved";
     }
     
-    /*public @ResponseBody
-    String addNewProduct(
-            @RequestParam String name, @RequestParam String description,
-            @RequestParam BigDecimal price, @RequestParam int quantity) {
-
-        Product product = new Product();
-        product.setName(name);
-        product.setDescription(description);
-        product.setPrice(price);
-        product.setQuantity(quantity);
-
-        Short num = (short) 1;
-        product.setActive(num);
-
-        Discount discount = new Discount();
-        discount.setIddiscount(1);
-        
-        product.setDiscountId(discount);
-
-        ProductCategory category = new ProductCategory();
-        category.setIdproductCategory(1);
-        product.setCategoryId(category);
-
-        productService.saveOrUpdate(product);
-        return product;
-    }*/
-
-    /*@PutMapping("/update")
-    public Product update(Product product) {
-
-        Discount discount = new Discount();
-        discount.setIddiscount(1);
-
-        product.setDiscountId(discount);
-
-        ProductCategory category = new ProductCategory();
-        category.setIdproductCategory(1);
-        product.setCategoryId(category);
-
-        productService.saveOrUpdate(product);
-        return product;
-    }*/
-
-
     @PostMapping(path = "/product", consumes = "application/x-www-form-urlencoded")
     public @ResponseBody
     ModelAndView update(Product product) {
+        
+        Discount d=new Discount();
+        discountService.saveOrUpdate(d);
+        
+        ProductCategory pc = new ProductCategory();
+        productCategoryService.addOrUpdateProductCategory(pc);
+        
+        product.setDiscountId(d);
+        product.setCategoryId(pc);
         productService.saveOrUpdate(product);
+        
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("testTable");
         return modelAndView;
@@ -163,30 +131,4 @@ public class ProductController {
         return modelAndView;
 
     }
-    
-    /*private Product update(@RequestParam String name, @RequestParam String description,
-            @RequestParam BigDecimal price, @RequestParam int quantity, @RequestParam short active) {
-        
-        Product pr = new Product();
-        
-        pr.setName(name);
-        pr.setDescription(description);
-        pr.setPrice(price);
-        pr.setQuantity(quantity);
-
-        //Short num = (short) 1;
-        pr.setActive(active);
-
-        Discount discount = new Discount();
-        discount.setIddiscount(1);
-        pr.setDiscountId(discount);
-
-        ProductCategory category = new ProductCategory();
-        category.setIdproductCategory(1);
-        pr.setCategoryId(category);
-        
-        
-        productService.saveOrUpdate(pr);
-        return pr;
-    }*/
 }
