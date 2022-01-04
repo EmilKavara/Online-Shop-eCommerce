@@ -69,18 +69,21 @@ body{
 .brand-subname{
     color: #f0ad4e;   
 }
-.nav-list{
+#v-pills-tab{
     list-style-type: none;
     /*position:relative;*/
     padding: 0px 20px;
-   /* margin-top:30px;*/
+    margin-top:60px;
     background-color: #4527A0;
+    text-decoration: none;
+    margin-bottom: 60px;
 }
 .nav-item{
     background-color: #3F51B5;
     padding: 10px 18px 10px 18px;
     border-radius: 8px;
     margin: 5px ;
+    text-decoration: none;
 }
 .nav-item:hover{
     background-color: #ccccff;
@@ -160,3 +163,15 @@ body{
 /*.sidebar-body ul li a:home{
     color:white;
 }*/
+.nav-tabs{
+    background-color: #4527A0;
+    
+}
+
+h5{
+    color: #f0ad4e
+}
+.text1{
+    color: #4527A0
+}
+

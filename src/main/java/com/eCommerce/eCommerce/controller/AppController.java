@@ -28,13 +28,18 @@ public class AppController {
         return new ModelAndView("login");
     }
     
-    @RequestMapping("/aboutUs")
-    public ModelAndView aboutUs(){
-        return new ModelAndView("aboutUs");
+    @RequestMapping("/productCategory/update")
+    public ModelAndView update(){
+        return new ModelAndView("productCategory");
     }
     
     @RequestMapping("/productCategory")
     public ModelAndView productCategory(){
+        return new ModelAndView("productCategory");
+    }
+    
+     @RequestMapping("/productCategory/add")
+    public ModelAndView addProductCategory(){
         return new ModelAndView("productCategory");
     }
     

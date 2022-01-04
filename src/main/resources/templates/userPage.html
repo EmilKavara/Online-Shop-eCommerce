@@ -1,14 +1,160 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-    <head>
-        <title>Hello User!</title>
-    </head>
-    <body>
-        <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
-        </form>
-    </body>
-</html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+
+                <!-- Bootstrap CSS -->
+                <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+                    <link rel="stylesheet" href="/css/eCommerce.css" type="text/css"/>
+                    <title>User dashboard</title>
+
+                    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+                    <script src="eCommerce.js" type="text/javascript"></script>
+                    </head>
+                    <body>
+
+                        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#4527A0;" >
+
+                            <div class="container">
+                                <a class="navbar-brand" href="/">
+                                    <img src="/resources/static/css/logoo.png" alt="" width="30" height="30">
+                                </a>
+                                <a href="/" class="navbar-brand"> click<span class="text-warning">SHOP</span> </a>
+                                <div class="collapse navbar-collapse" id="navmenu" style="color:#f0ad4e;">                              
+                                    User Dashboard
+                                </div>
+                        </nav>
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <button class="nav-link active" id="nav-food-tab" data-bs-toggle="tab" data-bs-target="#nav-food" type="button" role="tab" aria-controls="nav-food" aria-selected="true">Food</button>
+                                <button class="nav-link" id="nav-drinks-tab" data-bs-toggle="tab" data-bs-target="#nav-drinks" type="button" role="tab" aria-controls="nav-drinks" aria-selected="false">Drinks</button>
+                                <button class="nav-link" id="nav-clothing-tab" data-bs-toggle="tab" data-bs-target="#nav-clothing" type="button" role="tab" aria-controls="nav-clothing" aria-selected="false">Clothing</button>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-food" role="tabpanel" aria-labelledby="nav-food-tab">
+                                <div class="container mb-5 mt-5">
+                                    <div class="row">
+                                        
+                                        <!--card1 -->
+                                        <div class="col-md-4">
+                                            <div class="card mt-3">
+                                                <div class="product-1 align-items-center p-2 text-center">
+                                                    <img src="images/pizza.jpg" alt="" class="rounded" width="160">
+                                                        <h5>Pizza</h5>
+                                                        <!--card info-->
+                                                        <div class="mt-3 info">
+                                                            <span class="text1 d-block">Lorem ipsum dolor sit amet.</span>
+                                                            <span class="text1">Lorem, ipsum dolor.</span>
+                                                        </div>
+                                                        
+                                                      <div class="cost mt-3 text-dark">
+                                                            <span>$8</span>
+                                                            <div class="star mt-3 align-items-center" style="color: #f0ad4e">
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                            </div>
+                                                        </div>
+                                                        <!--card info ends-->
+                                               </div>
+                                                
+                                                <!--button for cards-->
+                                                <div class="p-3 pizza text-center cursor" style="color:#4527A0">
+                                                    <span class="text-uppercase">Add to cart</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                         <!--card 2 -->
+                                       <div class="col-md-4">
+                                            <div class="card mt-3">
+                                                <div class="product-1 align-items-center p-2 text-center">
+                                                    <img src="images/pasta.jpg" alt="" class="rounded" width="160">
+                                                        <h5>Pasta</h5>
+                                                        
+                                                        <div class="mt-3 info">
+                                                            <span class="text1 d-block">Lorem ipsum dolor sit amet.</span>
+                                                            <span class="text1">Lorem, ipsum dolor.</span>
+                                                        </div>
+                                                        
+                                                       <div class="cost mt-3 text-dark">
+                                                            <span>$9,5</span>
+                                                            <div class="star mt-3 align-items-center"style="color: #f0ad4e">
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                            </div>
+                                                        </div>
+                                                       
+                                                </div>
+                                                
+                                                
+                                                <div class="p-3 pasta text-center cursor" style="color:#4527A0">
+                                                    <span class="text">Add to cart</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <!--card 2 end -->
+                                        
+                                         <!--card 3 -->
+                                       <div class="col-md-4">
+                                            <div class="card mt-3">
+                                                <div class="product-1 align-items-center p-2 text-center">
+                                                    <img src="images/pancake.jpg" alt="" class="rounded" width="160">
+                                                        <h5>Pancake</h5>
+                                                        
+                                                        <div class="mt-3 info">
+                                                            <span class="text1 d-block">Lorem ipsum dolor sit amet.</span>
+                                                            <span class="text1">Lorem, ipsum dolor.</span>
+                                                        </div>
+                                                        
+                                                        <div class="cost mt-3 text-dark">
+                                                            <span>$7,5</span>
+                                                           <div class="star mt-3 align-items-center"style="color:#f0ad4e">
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                                <i class="fa fa-star"></i>
+                                                            </div>
+                                                        </div>
+                                                       
+                                                </div>
+                                                
+                                            
+                                                <div class="p-3 pancake text-center cursor" style="color:#4527A0">
+                                                    <span class="text-uppercase">Add to cart</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                         <!--card 3 end -->
+                                         
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="nav-drinks" role="tabpanel" aria-labelledby="nav-drinks-tab">...</div>
+                            <div class="tab-pane fade" id="nav-clothing" role="tabpanel" aria-labelledby="nav-clothing-tab">...</div>
+                        </div>
+
+
+
+                        <!-- Optional JavaScript; choose one of the two! -->
+
+                        <!-- Option 1: Bootstrap Bundle with Popper -->
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+                        <!-- Option 2: Separate Popper and Bootstrap JS -->
+                        <!--
+                        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+                        -->
+                    </body>
+                    </html>

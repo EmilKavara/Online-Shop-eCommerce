@@ -6,6 +6,7 @@
 package com.eCommerce.eCommerce.model;
 
 import com.eCommerce.eCommerce.model.Product;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -47,6 +48,7 @@ public class ProductCategory implements Serializable {
     private String name;
     @Column(name = "description")
     private String description;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoryId")
     private List<Product> productList;
 
