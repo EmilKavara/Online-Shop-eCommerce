@@ -84,7 +84,7 @@ public class ProductController {
         productService.saveOrUpdate(product);
         
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("testTable");
+        modelAndView.setViewName("products");
         return modelAndView;
     }
     
@@ -96,7 +96,7 @@ public class ProductController {
         productService.saveOrUpdate(product);
         
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("testTable");
+        modelAndView.setViewName("products");
         return modelAndView;
     }
 }
