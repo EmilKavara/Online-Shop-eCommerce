@@ -65,12 +65,12 @@
                         <div class="invalid-feedback">Field should only contain numbers</div>
                     </div>
                     <div class="mb-3">
-                        <label for="category" class="form-label">Select category:</label>
-                        <select id="category" class="form-control form-control-lg" name="category"
+                        <label for="productCategory" class="form-label">Select category:</label>
+                        <select id="productCategory" class="form-control form-control-lg" name="productCategory"
                                 data-live-search="true">
-                            <option th:each="category:${categories}"
-                                    th:value="${category.idproductCategory}"
-                                    th:text="${category.name}">
+                            <option th:each="productCategory:${categories}"
+                                    th:value="${productCategory.idproductCategory}"
+                                    th:text="${productCategory.name}">
                             </option>
                         </select>
                         <div class="invalid-feedback">Please select product category</div>
