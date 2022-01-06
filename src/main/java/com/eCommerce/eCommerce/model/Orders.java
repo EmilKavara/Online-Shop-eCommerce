@@ -5,28 +5,41 @@
  */
 package com.eCommerce.eCommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ *
  * @author bnc
  */
 @Entity
 @Table(name = "orders")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "Order.findAll", query = "SELECT o FROM Order o"),
-        @NamedQuery(name = "Order.findByIdorder", query = "SELECT o FROM Order o WHERE o.idorder = :idorder"),
-        @NamedQuery(name = "Order.findByAmount", query = "SELECT o FROM Order o WHERE o.amount = :amount"),
-        @NamedQuery(name = "Order.findByShippingAddress", query = "SELECT o FROM Order o WHERE o.shippingAddress = :shippingAddress"),
-        @NamedQuery(name = "Order.findByOrderDate", query = "SELECT o FROM Order o WHERE o.orderDate = :orderDate")})
-public class Order implements Serializable {
+    @NamedQuery(name = "Orders.findAll", query = "SELECT o FROM Orders o"),
+    @NamedQuery(name = "Orders.findByIdorder", query = "SELECT o FROM Orders o WHERE o.idorder = :idorder"),
+    @NamedQuery(name = "Orders.findByAmount", query = "SELECT o FROM Orders o WHERE o.amount = :amount"),
+    @NamedQuery(name = "Orders.findByShippingAddress", query = "SELECT o FROM Orders o WHERE o.shippingAddress = :shippingAddress"),
+    @NamedQuery(name = "Orders.findByOrderDate", query = "SELECT o FROM Orders o WHERE o.orderDate = :orderDate")})
+public class Orders implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -44,21 +57,20 @@ public class Order implements Serializable {
     @Column(name = "order_date")
     @Temporal(TemporalType.DATE)
     private Date orderDate;
-    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
     private List<ProductOrder> productOrderList;
     @JoinColumn(name = "user_id", referencedColumnName = "iduser")
     @ManyToOne(optional = false)
     private User userId;
 
-    public Order() {
+    public Orders() {
     }
 
-    public Order(Integer idorder) {
+    public Orders(Integer idorder) {
         this.idorder = idorder;
     }
 
-    public Order(Integer idorder, int amount, String shippingAddress, Date orderDate) {
+    public Orders(Integer idorder, int amount, String shippingAddress, Date orderDate) {
         this.idorder = idorder;
         this.amount = amount;
         this.shippingAddress = shippingAddress;
@@ -124,10 +136,10 @@ public class Order implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Order)) {
+        if (!(object instanceof Orders)) {
             return false;
         }
-        Order other = (Order) object;
+        Orders other = (Orders) object;
         if ((this.idorder == null && other.idorder != null) || (this.idorder != null && !this.idorder.equals(other.idorder))) {
             return false;
         }
@@ -138,6 +150,5 @@ public class Order implements Serializable {
     public String toString() {
         return "com.eCommerce.eCommerce.model.Order[ idorder=" + idorder + " ]";
     }
-
-
+    
 }

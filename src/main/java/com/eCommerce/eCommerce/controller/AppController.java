@@ -23,9 +23,9 @@ public class AppController {
         return new ModelAndView ("adminPage");
     }
     
-    @RequestMapping("/login")
-    public ModelAndView login(){
-        return new ModelAndView("login");
+    @RequestMapping("/loginPage")
+    public ModelAndView loginPage(){
+        return new ModelAndView("loginPage");
     }
     
     @RequestMapping("/productCategory/update")
@@ -36,6 +36,47 @@ public class AppController {
     @RequestMapping("/productCategory")
     public ModelAndView productCategory(){
         return new ModelAndView("productCategory");
+    }
+    
+     @RequestMapping("/registration")
+    public ModelAndView registration(){
+        return new ModelAndView("registration");
+    }
+
+    @RequestMapping("/product")
+    public ModelAndView product(){
+        return new ModelAndView("product");
+    }
+
+    @RequestMapping("/product/add")
+    public ModelAndView addProduct(){
+        return new ModelAndView("product");
+    }
+
+    @RequestMapping("/user")
+    public ModelAndView user(){
+        return new ModelAndView("user");
+    }
+
+    @RequestMapping("/user/add")
+    public ModelAndView add(){
+        return new ModelAndView("user");
+    }
+
+    @RequestMapping("/order/getallorders")
+    public ModelAndView order(){
+        return new ModelAndView("order");
+    }
+
+
+    @RequestMapping("/products")
+    public ModelAndView products(){
+        return new ModelAndView("products");
+    }
+
+    @RequestMapping("product/update")
+    public ModelAndView updateP(){
+        return new ModelAndView("product");
     }
     
      @RequestMapping("/productCategory/add")

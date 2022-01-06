@@ -5,6 +5,7 @@
  */
 package com.eCommerce.eCommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -24,17 +25,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
- *
  * @author bnc
  */
 @Entity
 @Table(name = "address")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a"),
-    @NamedQuery(name = "Address.findById", query = "SELECT a FROM Address a WHERE a.id = :id"),
-    @NamedQuery(name = "Address.findByStreet", query = "SELECT a FROM Address a WHERE a.street = :street"),
-    @NamedQuery(name = "Address.findByNumber", query = "SELECT a FROM Address a WHERE a.number = :number")})
+        @NamedQuery(name = "Address.findAll", query = "SELECT a FROM Address a"),
+        @NamedQuery(name = "Address.findById", query = "SELECT a FROM Address a WHERE a.id = :id"),
+        @NamedQuery(name = "Address.findByStreet", query = "SELECT a FROM Address a WHERE a.street = :street"),
+        @NamedQuery(name = "Address.findByNumber", query = "SELECT a FROM Address a WHERE a.number = :number")})
 public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,6 +52,7 @@ public class Address implements Serializable {
     @JoinColumn(name = "id_city", referencedColumnName = "idcity")
     @ManyToOne(optional = false)
     private City idCity;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "addressId")
     private List<User> userList;
 
@@ -133,5 +134,5 @@ public class Address implements Serializable {
     public String toString() {
         return "com.eCommerce.eCommerce.model.Address[ id=" + id + " ]";
     }
-    
+
 }

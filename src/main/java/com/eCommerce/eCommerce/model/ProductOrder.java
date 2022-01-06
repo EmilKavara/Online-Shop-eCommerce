@@ -5,33 +5,22 @@
  */
 package com.eCommerce.eCommerce.model;
 
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
  * @author bnc
  */
 @Entity
 @Table(name = "product_order")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "ProductOrder.findAll", query = "SELECT p FROM ProductOrder p"),
-    @NamedQuery(name = "ProductOrder.findByIdproductOrder", query = "SELECT p FROM ProductOrder p WHERE p.idproductOrder = :idproductOrder"),
-    @NamedQuery(name = "ProductOrder.findByQuantity", query = "SELECT p FROM ProductOrder p WHERE p.quantity = :quantity"),
-    @NamedQuery(name = "ProductOrder.findByTotal", query = "SELECT p FROM ProductOrder p WHERE p.total = :total")})
+        @NamedQuery(name = "ProductOrder.findAll", query = "SELECT p FROM ProductOrder p"),
+        @NamedQuery(name = "ProductOrder.findByIdproductOrder", query = "SELECT p FROM ProductOrder p WHERE p.idproductOrder = :idproductOrder"),
+        @NamedQuery(name = "ProductOrder.findByQuantity", query = "SELECT p FROM ProductOrder p WHERE p.quantity = :quantity"),
+        @NamedQuery(name = "ProductOrder.findByTotal", query = "SELECT p FROM ProductOrder p WHERE p.total = :total")})
 public class ProductOrder implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,7 +38,7 @@ public class ProductOrder implements Serializable {
     private BigDecimal total;
     @JoinColumn(name = "order_id", referencedColumnName = "idorder")
     @ManyToOne(optional = false)
-    private Order orderId;
+    private Orders orderId;
     @JoinColumn(name = "product_id", referencedColumnName = "idproduct")
     @ManyToOne(optional = false)
     private Product productId;
@@ -91,11 +80,11 @@ public class ProductOrder implements Serializable {
         this.total = total;
     }
 
-    public Order getOrderId() {
+    public Orders getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Order orderId) {
+    public void setOrderId(Orders orderId) {
         this.orderId = orderId;
     }
 
@@ -131,5 +120,5 @@ public class ProductOrder implements Serializable {
     public String toString() {
         return "com.eCommerce.eCommerce.model.ProductOrder[ idproductOrder=" + idproductOrder + " ]";
     }
-    
+
 }

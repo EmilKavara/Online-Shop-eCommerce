@@ -5,40 +5,30 @@
  */
 package com.eCommerce.eCommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-import javax.persistence.Basic;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.metamodel.SingularAttribute;
 
 /**
- *
  * @author bnc
  */
 @Entity
 @Table(name = "product")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
-    @NamedQuery(name = "Product.findByIdproduct", query = "SELECT p FROM Product p WHERE p.idproduct = :idproduct"),
-    @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
-    @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM Product p WHERE p.description = :description"),
-    @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price"),
-    @NamedQuery(name = "Product.findByQuantity", query = "SELECT p FROM Product p WHERE p.quantity = :quantity"),
-    @NamedQuery(name = "Product.findByActive", query = "SELECT p FROM Product p WHERE p.active = :active")})
+        @NamedQuery(name = "Product.findAll", query = "SELECT p FROM Product p"),
+        @NamedQuery(name = "Product.findByIdproduct", query = "SELECT p FROM Product p WHERE p.idproduct = :idproduct"),
+        @NamedQuery(name = "Product.findByName", query = "SELECT p FROM Product p WHERE p.name = :name"),
+        @NamedQuery(name = "Product.findByDescription", query = "SELECT p FROM Product p WHERE p.description = :description"),
+        @NamedQuery(name = "Product.findByPrice", query = "SELECT p FROM Product p WHERE p.price = :price"),
+        @NamedQuery(name = "Product.findByQuantity", query = "SELECT p FROM Product p WHERE p.quantity = :quantity"),
+        @NamedQuery(name = "Product.findByActive", query = "SELECT p FROM Product p WHERE p.active = :active")})
 public class Product implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,12 +52,15 @@ public class Product implements Serializable {
     @Basic(optional = false)
     @Column(name = "active")
     private short active;
+    //@JsonIgnore
     @JoinColumn(name = "category_id", referencedColumnName = "idproduct_category")
     @ManyToOne(optional = false)
     private ProductCategory categoryId;
+    //@JsonIgnore
     @JoinColumn(name = "discount_id", referencedColumnName = "iddiscount")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Discount discountId;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productId")
     private List<ProductOrder> productOrderList;
 
@@ -78,9 +71,10 @@ public class Product implements Serializable {
         this.idproduct = idproduct;
     }
 
-    public Product(Integer idproduct, String name, BigDecimal price, int quantity, short active) {
+    public Product(Integer idproduct, String name, String description, BigDecimal price, int quantity, short active) {
         this.idproduct = idproduct;
         this.name = name;
+        this.description=description;
         this.price = price;
         this.quantity = quantity;
         this.active = active;
@@ -183,5 +177,9 @@ public class Product implements Serializable {
     public String toString() {
         return "com.eCommerce.eCommerce.model.Product[ idproduct=" + idproduct + " ]";
     }
-    
+
+    public void setActive(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

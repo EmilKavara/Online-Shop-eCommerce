@@ -4,7 +4,8 @@ import com.eCommerce.eCommerce.model.ProductCategory;
 import com.eCommerce.eCommerce.service.ProductCategoryService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,11 +27,21 @@ public class ProductCategoryController {
 
     @GetMapping("/getproductCategory")
     private List<ProductCategory> getAllProductCategory(){
-        return productCategoryService.getAllProductCategory();
+        List<ProductCategory> productCategories=productCategoryService.getAllProductCategory();
+        return productCategories;
     }
 
+     @GetMapping("/get/{idproductCategory}")
+    private ModelAndView getProductCategoryById(@PathVariable("idproductCategory") int idproductCategory) {
+        ProductCategory productCategory = getProductCategory(idproductCategory);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("editProductCategory");
+        modelAndView.addObject("productCategory", productCategory);
+        return modelAndView;
+    }
+    
     @GetMapping("/getproductCategory/{idproductCategory}")
-    private ProductCategory getProductCategoryById(@PathVariable("idproductCategory") int idproductCategory){
+    private ProductCategory getProductCategory(@PathVariable("idproductCategory") int idproductCategory){
         return productCategoryService.getProductCategoryById(idproductCategory);
     }
     
@@ -48,27 +59,39 @@ public class ProductCategoryController {
         return new ModelAndView("productCategory");
     }
     
-    @PutMapping("/productCategory")
-    private ProductCategory update(@RequestBody ProductCategory productCategory){
-       
+    @PostMapping(path = "/productCategory", consumes = "application/x-www-form-urlencoded")
+    public @ResponseBody ModelAndView update(ProductCategory productCategory) {
         productCategoryService.addOrUpdateProductCategory(productCategory);
-        return productCategory;
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("testTable");
+        return modelAndView;
     }
     
-    @PostMapping("/productCategories/edit/{idproductCategory}")
-     public @ResponseBody
-    ModelAndView update(@PathVariable("idproductCategory") int idproductCategory, @RequestParam(required = false) String name, @RequestParam(required = false) String description) {
-        ProductCategory pc = productCategoryService.getProductCategoryById(idproductCategory);
+   /* @PutMapping("/update")
+    private ProductCategory update(@RequestParam String name,@RequestParam String description){
+        ProductCategory pc = new ProductCategory();
+        pc.setName(name);
+        pc.setDescription(description);
+        productCategoryService.addOrUpdateProductCategory(pc);
+        return pc;
+    }*/
+    
+     @PostMapping("/productCategory/edit/{idproductCategory}")
+    public @ResponseBody ModelAndView update(@PathVariable("idproductCategory") int idproductCategory, @RequestParam String name, @RequestParam String description) {
+
+        ProductCategory productCategory = productCategoryService.getProductCategoryById(idproductCategory);
+
         if (!name.isEmpty()) {
-            pc.setName(name);
+            productCategory.setName(name);
         }
         if (!description.isEmpty()) {
-            pc.setDescription(description);
+            productCategory.setDescription(description);
         }
-        productCategoryService.addOrUpdateProductCategory(pc);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("pc");
-        return modelAndView;
+        productCategoryService.addOrUpdateProductCategory(productCategory);
+        //ModelAndView modelAndView = new ModelAndView();
+        //modelAndView.setViewName("productCategory");
+        return new ModelAndView("productCategory");
 
     }
- }  
+}
+ 

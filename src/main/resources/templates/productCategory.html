@@ -70,31 +70,19 @@
         <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
+                    <div class="col-lg-12">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Insert New Category</h5>
+                        <h5 class="modal-title" >Insert New Category</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form action="/productCategory/update/" method="put">
-                        <div class="modal-body">
+                     <div class="modal-body">
 
-
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Edit Category Name: </label>
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Edit name">
-
-                            </div>
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Edit Category Description: </label>
-                                <input type="text" name="description" class="form-control" id="description" placeholder="Edit description">
-                            </div>
-
-
-                        </div>
-                        <div class="modal-footer">
+                     </div>
+                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary" onclick="load();" >Save changes</button>
+                            <button type="submit" class="btn btn-primary editSubmit" >Save changes</button>
                         </div>
-                    </form>
+                   </div>
                 </div>
             </div>
         </div>      
@@ -104,7 +92,9 @@
                    data-toggle="table"
                    data-url="http://localhost:8080/productCategory/getproductCategory"
                    data-editable-url="http://localhost:8080/productCategory/productCategory/edit"
-                   data-id-field="productCategories">
+                   data-id-field="productCategories"
+                   data-pagination="true"
+                   >
 
                 <thead>
                     <tr>
@@ -116,15 +106,7 @@
                 </thead>
 
             </table>
-            <!-- <div id="form">
-                 <form action="" method="post" name="registration" class="register">
-                     <fieldset>
-                         <label for="name">Category name: </label>
-                         <input name="name"/>
-                         <label for="description">Description: </label>
-                         <input name="description"/>
-                 </form>
-             </div>-->
+           
         </div>
 
         <div class="card-footer text-muted"style="background-color:#4527A0;"></div>
@@ -159,7 +141,7 @@
                             '<i class="fa fa-trash"></i> ',
                             '</a>',
 
-                            '<button id="addEditModal" title="Edit" class="btn edit" data-bs-toggle="modal" data-bs-target="#edit" data-align="right">',
+                            '<button id="addEditModal" title="Edit" class="btn edit" data-bs-id="' + row.idproductCategory + '" data-bs-toggle="modal" data-bs-target="#edit" data-align="right">',
                             '<i class="far fa-edit" ></i> ',
                             '</button>'
 
@@ -169,7 +151,7 @@
 
                     window.operateEvents = {
                         'click .remove': function (e, value, row) {
-
+ if (confirm('Are you sure you want to delete this?')) {
                             $.ajax({
                                 type: "DELETE",
                                 url: "/productCategory/delete/" + row.idproductCategory,
@@ -182,29 +164,34 @@
                                     console.log(error + " " + JSON.stringify(row));
                                 }
                             });
-
+                            }
                         },
 
                         'click .edit': function (e, value, row) {
                             $.ajax({
-                                type: "put",
-                                url: "/productCategory/update/",
+                                type: "get",
+                                url: "/productCategory/get/" + row.idproductCategory,
                                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                                 success: function (content) {
-                                    $('#alert').html(content)
-                                    $('#productCategory').bootstrapTable('refresh')
-                                },
+                                    $('#edit .modal-body').html(content)
+                                   },
                                 error: function (error) {
                                     console.log(error + " " + JSON.stringify(row));
                                 }
                             });
                         }
+                    };
+                    $('.editSubmit').click(function(){
+                        $('#editForm').submit();
 
-
-                    }
-                    $('#addEditModal').click(function () {
-
-                    })
+                    });
+                        
+                    //Should return discount and category to the table
+    function responseHandler(res) {
+        var str = JSON.stringify(res, undefined, 2);
+        $(document.body).append(str); //this print the whole json data to your page body
+        alert(res[0].idproductCategory); //this is however a single value of the jason data.
+    }; 
 
 
         </script>
