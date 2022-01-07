@@ -1,6 +1,7 @@
 package com.eCommerce.eCommerce.service;
 
 import com.eCommerce.eCommerce.model.Order;
+import com.eCommerce.eCommerce.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -17,23 +18,22 @@ public class JdbcOrderService implements OrderService {
 
     @Override
     public int save(Order order) {
-        return jdbcTemplate.update("INSERT INTO tutorials (idorder, amount, shippingAddress, orderDate) VALUES(?,?,?,?)",
-                new Object[] { order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate()});
+        return jdbcTemplate.update("INSERT INTO tutorials (idorder, amount, shipping_address, order_date) VALUES(?,?,?,?)",
+                new Object[]{order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate()});
     }
 
     @Override
     public int update(Order order) {
-        return jdbcTemplate.update("UPDATE order SET idorder=?, amount=?, shippingAddress=?, orderDate=? WHERE idorder=?",
-                new Object[] { order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate()});
+        return jdbcTemplate.update("UPDATE orders SET idorder=?, amount=?, shipping_address=?, order_date=? WHERE idorder=?",
+                new Object[]{order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate(),order.getIdorder()});
     }
 
     @Override
     public Order findById(Long id) {
         try {
-            Order order = jdbcTemplate.queryForObject("SELECT * FROM order WHERE id=?",
+            return jdbcTemplate.queryForObject(
+                    "SELECT * FROM orders JOIN users ON users.iduser = orders.user_id WHERE idorder=?",
                     BeanPropertyRowMapper.newInstance(Order.class), id);
-
-            return order;
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;
         }
@@ -41,17 +41,17 @@ public class JdbcOrderService implements OrderService {
 
     @Override
     public int deleteById(Long id) {
-        return jdbcTemplate.update("DELETE FROM order WHERE id=?", id);
+        return jdbcTemplate.update("DELETE FROM orders WHERE idorder=?", id);
     }
 
     @Override
     public List<Order> findAll() {
-        return jdbcTemplate.query("SELECT * from order", BeanPropertyRowMapper.newInstance(Order.class));
+        return jdbcTemplate.query("SELECT * from orders", BeanPropertyRowMapper.newInstance(Order.class));
 
     }
 
     @Override
     public int deleteAll() {
-        return jdbcTemplate.update("DELETE from order");
+        return jdbcTemplate.update("DELETE from orders");
     }
 }
