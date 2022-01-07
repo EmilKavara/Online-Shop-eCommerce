@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import com.eCommerce.eCommerce.dao.UserRepository;
 
@@ -13,6 +14,9 @@ import com.eCommerce.eCommerce.dao.UserRepository;
 public class UserService {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
     public List<User> getAllUsers() {
         List<User> user = new ArrayList<User>();
@@ -32,7 +36,9 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public void update(User user, int iduser) {
-        userRepository.save(user);
+    public int update(User user) {
+
+        return jdbcTemplate.update("UPDATE users SET iduser=?, first_name=?, last_name=?, username=?, email=?,phone=? WHERE iduser=?",
+                new Object[]{user.getIduser(), user.getFirstName(), user.getLastName(), user.getUsername(),user.getEmail(),user.getPhone(),user.getIduser()});
     }
 }  
