@@ -10,6 +10,7 @@ import com.eCommerce.eCommerce.service.ProductService;
 import com.eCommerce.eCommerce.service.UserService;
 import com.eCommerce.eCommerce.model.User;
 import com.eCommerce.eCommerce.model.Orders;
+import com.eCommerce.eCommerce.model.ProductOrder;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,34 +33,43 @@ public class ProductOrderController {
     private UserService userService;
 
     @GetMapping("/cart")
+    public String showShoppingCart(Model model, @AuthenticationPrincipal User userSession) {
+        User userFromDB = userService.getUserById(userSession.getIduser());
+        List<Orders> order = productOrderService.getOrder(userFromDB);
+        
+        model.addAttribute("order", order);
+        
+        return "shopingCart";
+    }
+
+    /*@GetMapping("/cart")
     public ModelAndView shoppingCart() {
         ModelAndView modelAndView = new ModelAndView("/shoppingCart");
         modelAndView.addObject("products", productOrderService.getAllOrders());
 
         return modelAndView;
-    }
-    
+    }*/
     /**
-     * Returns customer shopping cart.
-     * URL request {"/cart"}, method GET.
+     * Returns customer shopping cart. URL request {"/cart"}, method GET.
      *
      * @param userSession requested Authenticated customer.
-     * @param model       class object {@link Model}.
+     * @param model class object {@link Model}.
      * @return cart page with model attributes.
      */
-    @GetMapping("/cart")
+    @GetMapping("/cart1")
     public String getCart(@AuthenticationPrincipal User userSession, Model model) {
         User userFromDB = userService.getUserById(userSession.getIduser());
         model.addAttribute("products", userFromDB.getOrderList());
 
         return "cart";
     }
-    
+
     /**
-     * Adds a product to the customer shopping cart and redirects it to "/cart".URL request {"/cart/add"}, method POST.
+     * Adds a product to the customer shopping cart and redirects it to
+     * "/cart".URL request {"/cart/add"}, method POST.
      *
      * @param order
-     * @param product     the product to add to the cart.
+     * @param product the product to add to the cart.
      * @param userSession request Authenticated customer.
      * @return redirect to cart page.
      */
@@ -74,12 +84,12 @@ public class ProductOrderController {
 
         return "redirect:/cart";
     }
-    
+
     /**
      * Remove product from customer shopping cart and redirects it to "/cart".
      * URL request {"/cart/remove"}, method POST.
      *
-     * @param order     the product to be removed from the customer shopping cart.
+     * @param order the product to be removed from the customer shopping cart.
      * @param userSession request Authenticated customer.
      * @return redirect to cart page.
      */
@@ -89,17 +99,17 @@ public class ProductOrderController {
             @AuthenticationPrincipal User userSession
     ) {
         User user = userService.getUserById(userSession.getIduser());
-                
+
         if (order != null) {
             user.getOrderList().remove(order);
-                    
+
         }
 
         userService.saveOrUpdate(user);
 
         return "redirect:/cart";
     }
-    
+
 
     /*@GetMapping("/cart/addProduct/{idproduct}")
     public ModelAndView addProductToCart(@PathVariable("idproduct") int idproduct) {

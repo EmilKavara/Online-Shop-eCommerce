@@ -6,7 +6,10 @@
 package com.eCommerce.eCommerce.service;
 
 import com.eCommerce.eCommerce.dao.ProductOrderRepository;
+import com.eCommerce.eCommerce.dao.OrderRepository;
+import com.eCommerce.eCommerce.model.Orders;
 import com.eCommerce.eCommerce.model.ProductOrder;
+import com.eCommerce.eCommerce.model.User;
 
 import java.util.List;
 
@@ -18,7 +21,13 @@ public class ProductOrderService {
 
     @Autowired
     private ProductOrderRepository productOrderRepository;
+    @Autowired
+    private OrderRepository orderRepository;
 
+    public List<Orders> getOrder(User user){
+        return orderRepository.findByUser(user);
+    }
+    
     public List<ProductOrder> getAllOrders() {
         return productOrderRepository.findAll();
     }

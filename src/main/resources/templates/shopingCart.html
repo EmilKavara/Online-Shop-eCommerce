@@ -27,7 +27,7 @@
                 </div>
             </div>
         </nav>
-        <table id="productOrder"
+        <table id="orders"
                class="table table-striped"
                data-toggle="table"
                data-id-field="orders"
@@ -51,12 +51,31 @@
                 </tr>
             </thead>
         </table>
+        
+        <!--Pokusaj aktvne stranice sa 2 colone-->
         <div class="row">
             <div class="col">
-                <th:block th:each="item, status : ${products}">
-                    <div class="row border rounded">
+                <th:block th:each="item, status : ${order}">
+                    <div class="row border rounded" th:with="product=${item.product}">
                         <div class="col">
+                            <div>[[${status.count}]]</div>
+                            <div><a class="fas fa-trash" th:href="@{/}"></a>
+                                    </div>
+                        </div>
+                        <div>
+                            <a>
+                                <b>[[{product.name}]]</b>
+                            </a>
+                        </div>
+                        <div><input type="number" th:value="${item.quantity}" class=form-control/></div>
+                        <div>
+                            <span>x</span>
+                            <span>[[${product.price}]]</span>
                             
+                        </div>
+                        <div>
+                            <span>= </span>
+                            <span class="h4">[Subtotal]</span>
                         </div>
                     </div>       
                 </th:block>
