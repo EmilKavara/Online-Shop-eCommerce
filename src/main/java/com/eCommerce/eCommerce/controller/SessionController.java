@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class GreetingController {
+public class SessionController {
 
     @GetMapping("/")
     public @ResponseBody ResponseEntity<List> getMessage(Model model, HttpSession session) {
