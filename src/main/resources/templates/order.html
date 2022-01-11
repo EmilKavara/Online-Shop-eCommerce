@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:layout="http://www.w3.org/1999/xhtml">
 <head>
@@ -12,7 +12,13 @@
 <h3 class="text-center" style="padding-top: 25px; color:white">Orders</h3>
 <div layout:fragment="content">
     <div class="container">
-        <table class="table table-dark table-borderless"
+        <button class="btn btn-light btn-sm" onclick="refreshFunction()" style="margin: 5px" type="button"><i
+                class="fa fa-refresh"></i>Reload
+        </button>
+        <button class="btn btn-light btn-sm" onclick="window.location.href='adminPage.html'" style="margin: 5px"
+                type="button">Dashboard
+        </button>
+        <table class="table table-light table-borderless"
                data-editable-url="http://localhost:8080/order/addorder"
                data-editable-url="http://localhost:8080/order/deleteorder"
                data-toggle="table"
@@ -24,31 +30,25 @@
                 <th data-align="center" data-editable="true" data-field="amount">Amount</th>
                 <th data-align="center" data-editable="true" data-field="shipping_address">Shipping Address</th>
                 <th data-align="center" data-editable="true" data-field="order_date">Order Date</th>
-                <!-- <th data-field="Options" data-events="window.operateEvents" data-align="center" data-formatter="optionFormat">Options</th> -->
+
                 <th data-align="center" data-events="window.operateEvents" data-formatter="optionFormat">
-                    <button class="btn btn-light" data-bs-target="#add" data-bs-toggle="modal"
-                            id="addModal" style="margin: 2.5px;" type="button">Add
+                    <button class="btn btn-outline-dark" data-bs-target="#update" data-bs-toggle="modal"
+                            id="editModal" style="margin: 2.5px;" type="button">Edit
                     </button>
-                    <button class="btn btn-light" data-bs-target="#update" data-bs-toggle="modal"
-                            id="updateModal" style="margin: 2.5px;" type="button">Edit
-                    </button>
-                    <button class="btn btn-outline-light" data-bs-target="#delete" data-bs-toggle="modal"
+                    <button class="btn btn-outline-dark" data-bs-target="#delete" data-bs-toggle="modal"
                             id="deleteModal" style="margin: 2.5px;" type="button">Delete
                     </button>
                 </th>
             </tr>
             </thead>
         </table>
-        <button class="btn btn-light btn-sm" onclick="refreshFunction()" style="margin: 2.5px" type="button"><i
-                class="fa fa-refresh"></i>Reload
-        </button>
-        <button class="btn btn-light btn-sm" onclick="window.location.href='adminPage.html'" style="margin: 2.5px"
-                type="button">Dashboard
+        <button class="btn btn-light" data-bs-target="#add" data-bs-toggle="modal"
+                id="addModal" style="margin: 5px;" type="button">Add
         </button>
     </div>
 </div>
-<!-- Add Modal -->
-<div aria-hidden="true" aria-labelledby="add_ModalLabel" class="modal fade" id="add_order" tabindex="-1">
+
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="add_order" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -83,15 +83,15 @@
         </div>
     </div>
 </div>
-<!-- Edit Modal -->
-<div aria-hidden="true" aria-labelledby="update_ModalLabel" class="modal fade" id="update" tabindex="-1">
+
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="update" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="update_ModalLabel">Edit Order</h5>
                 <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
             </div>
-            <form action="/order/updateorder" method="PUT">
+            <form action="/order/updateorder/{idorder}" method="PUT">
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label" for="update_amount">Amount: </label>
@@ -132,12 +132,169 @@
     function optionFormat(value, row) {
         return [
             '<a class="remove" href="javascript:void(0)" title="Remove">',
-            '<i class="fa fa-trash"></i>',
+            '<i class="btn btn-outline-dark"></i>',
             '</a>',
-            '<button type="button" id="editModal" onclick="editFunction('+row.idorder+')" data-toggle="modal" class="btn btn-primary"   data-target="#modal" title="Edit" style="text-align: center;width:35px; height: 35px; margin-left:7px;">',
-            '<i class="far fa-edit" ></i> ',
+            '<button type="button" id="editModal" onclick="editFunction('+row.idorder+')" data-toggle="modal" class="btn btn-primary"  data-target="#modal" title="Edit" style="text-align: center;width:35px; height: 35px; margin-left:7px;">',
+            '<i class="btn btn-outline-dark" ></i> ',
             '</button>'
         ].join('');
+    }
+
+    window.operateEvents = {
+        'click .remove': function (e, value, row) {
+            if (confirm('Are you sure you want to delete this?')) {
+                $.ajax({
+                    type: "delete",
+                    url: "http://localhost:8080/order/deleteorder/{idorder}" + row.idorder,
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    success: function (content) {
+                        $('#alert').html(content);
+                        $('#order').bootstrapTable('refresh');
+                    },
+                    error: function (error) {
+                        console.log(error + " " + JSON.stringify(row));
+                    }
+                });
+            }
+        }
+    }
+
+function editFunction(idorder) {
+  document.getElementById("editForm").action = "/order/updateorder/{idorder}"+idorder;
+}
+
+function refreshFunction() {
+  $('#order').bootstrapTable('refresh');
+}
+
+</script>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+    <title>Order</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+</head>
+<body style="background-color:#4835d4;">
+<h3 class="text-center" style="padding-top: 25px; color:white">Orders</h3>
+<div layout:fragment="content">
+    <div class="container">
+        <table class="table table-light table-borderless"
+               data-toggle="table"
+               data-url="http://localhost:8080/order/getallorders"
+               id="order">
+            <thead>
+            <tr>
+                <th data-align="center" data-field="idorder">ID</th>
+                <th data-align="center" data-field="amount">Amount</th>
+                <th data-align="center" data-field="shippingAddress">Shipping Address</th>
+                <th data-align="center" data-field="orderDate">Order Date</th>
+                <th data-field="custom" data-events="window.operateEvents" data-align="center"
+                    data-formatter="optionFormat">
+                    Options
+                </th>
+            </tr>
+            </thead>
+        </table>
+        <button class="btn btn-light btn-sm" onclick="refreshFunction()" style="margin: 2.5px" type="button"><i
+                class="fa fa-refresh"></i>Reload
+        </button>
+        <button class="btn btn-light btn-sm" onclick="window.location.href='adminPage.html'" style="margin: 2.5px"
+                type="button">Dashboard
+        </button>
+    </div>
+</div>
+<!-- Add Modal -->
+<div aria-hidden="true" aria-labelledby="add_ModalLabel" class="modal fade" id="add_order" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="add_ModalLabel">New Order</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <form action="/order/addorder" method="POST">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label" for="add_amount">Amount: </label>
+                        <input class="form-control" id="add_amount" name="add_amount" placeholder="Enter amount"
+                               type="text">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="add_shipping_address">Shipping Address: </label>
+                        <input class="form-control" id="add_shipping_address" name="add_shipping_address"
+                               placeholder="Enter shipping address"
+                               type="text">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label" for="add_order_date">Order Date: </label>
+                        <input class="form-control" id="add_order_date" name="add_order_date"
+                               placeholder="Enter order date"
+                               type="text">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                    <button class="btn btn-primary" id="add_save_button" name="add_save_button" type="submit"
+                            value="Save">Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Edit Modal -->
+<div aria-hidden="true" aria-labelledby="update_ModalLabel" class="modal fade" id="update" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="update_ModalLabel">Edit Order</h5>
+                <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
+            </div>
+            <div class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Close</button>
+                <button class="btn btn-primary" id="update_save_button" name="save_button" type="submit"
+                        value="Save">Save
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.js"></script>
+<script>
+
+    function optionFormat(value, row) {
+        return [
+
+            '<a id="addEditModal"  class="btn btn-success edit" data-bs-id="' + row.idorder + '" data-bs-toggle="modal" data-bs-target="#update" title="Edit">',
+            '<i class="far fa-eye" ></i> ',
+            '</a>',
+
+            '<a class="btn btn-danger remove" href="javascript:void(0)" title="Remove">',
+            '<i class="fa fa-trash"></i>',
+            '</a>'
+
+        ].join('')
     }
 
     window.operateEvents = {
@@ -156,16 +313,29 @@
                     }
                 });
             }
+        },
+        'click .edit': function (e, value, row) {
+            $.ajax({
+                type: "GET",
+                url: "/order/get/" + row.idorder,
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                success: function (content) {
+                    $('#update .modal-body').html(content)
+                },
+                error: function (error) {
+                    console.log(error + " " + JSON.stringify(row));
+                }
+            });
         }
     }
 
-function editFunction(idorder) {
-  document.getElementById("editForm").action = "/order/updateorder/"+idorder;
-}
+    $('#update_save_button').click(function (){
+        $('#editForm').submit();
+    });
 
-function refreshFunction() {
-  $('#order').bootstrapTable('refresh');
-}
+    function refreshFunction() {
+        $('#order').bootstrapTable('refresh');
+    }
 
 </script>
 </html>

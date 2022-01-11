@@ -5,11 +5,11 @@
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Login</title>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" id="bootstrap-css" rel="stylesheet">
-    <link href="/css/loginPage.css" rel="stylesheet" type="text/css"/>
+    <link href="css/loginPage.css" rel="stylesheet" type="text/css"/>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
-<body style="background-color:#212121">
+<body style="background-color: white">
 <div th:if="${param.error}">
     Invalid username and password.
 </div>
@@ -34,8 +34,8 @@
                     <label>Password</label>
                     <input name="password" class="form-control" placeholder="Password" type="password">
                 </div>
-                <button class="btn btn-light" type="submit">Login</button>
-                <button class="btn btn-outline-light" type="submit">Sign up</button>
+                <button class="btn btn-outline-dark" type="submit">Login</button>
+                <button  class="btn btn-light" onclick="window.location.href='registration.html'">Sign up</button>
             </form>
         </div>
     </div>

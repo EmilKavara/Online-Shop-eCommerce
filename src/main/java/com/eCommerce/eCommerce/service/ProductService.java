@@ -9,6 +9,7 @@ import com.eCommerce.eCommerce.dao.ProductRepository;
 import com.eCommerce.eCommerce.model.Product;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,7 +17,8 @@ public class ProductService {
     
     @Autowired
     private ProductRepository productRepository;
-    
+
+    @Cacheable
     public List<Product> getAllProducts(){
      return productRepository.findAll();
     }

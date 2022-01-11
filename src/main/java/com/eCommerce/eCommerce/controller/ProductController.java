@@ -12,11 +12,12 @@ import com.eCommerce.eCommerce.model.ProductCategory;
 import com.eCommerce.eCommerce.service.ProductService;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -189,4 +190,28 @@ public class ProductController {
         productService.saveOrUpdate(pr);
         return pr;
     }*/
+
+    @GetMapping("/getproduct/{categoryId}")
+    private List<Product> getProductsByCategory(@PathVariable("categoryId") int categoryId) {
+        return productService.getAllProducts().stream()
+                .filter(product -> Objects.equals(product.getCategoryId().getIdproductCategory(), categoryId)
+                        .collect(Collectors.toList()));
+    }
+
+    /*@GetMapping("/getproduct/{categoryId}")
+    private List<Product> getProductsByCategory(@PathVariable("categoryId") int categoryId) {
+        List<Product> allProducts = productService.getAllProducts();
+        List<Product> productsByCategory=new ArrayList<>();
+
+        for (Product product: allProducts) {
+
+            if (product.getCategoryId().equals(categoryId)) {
+
+                productsByCategory.add(product);
+            }
+        }
+
+        return productsByCategory;
+    }*/
+
 }

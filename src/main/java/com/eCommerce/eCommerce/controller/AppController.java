@@ -23,8 +23,8 @@ public class AppController {
         return new ModelAndView ("adminPage");
     }
 
-    @RequestMapping("/loginPage")
-    public ModelAndView login(){
+    @RequestMapping(value = "/loginPage")
+    public ModelAndView loginPage(){
         return new ModelAndView("loginPage");
     }
 
@@ -74,7 +74,7 @@ public class AppController {
         return new ModelAndView("aboutUs");
     }
 
-    @RequestMapping("/productCategory")
+    @RequestMapping("/productCategory/getproductCategory")
     public ModelAndView productCategory(){
         return new ModelAndView("productCategory");
     }
