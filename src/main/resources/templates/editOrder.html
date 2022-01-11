@@ -1,25 +1,24 @@
-<form id="editForm" method="POST" action="/order/update" name="editForm" class="needs-validation" novalidate
-      xmlns:th="http://www.w3.org/1999/xhtml">
+<form id="editForm" method="POST" action="/order/update" name="editForm" class="needs-validation" novalidate>
     <input type="hidden" name="idorder" th:value="${order.idorder}"/>
     <div class="row">
         <div class="col-lg-6">
             <div class="mb-3">
-                <label for="editName" class="form-label">Edit Order Name: </label>
+                <label for="editName" class="form-label">Edit User Name: </label>
                 <input th:field="*{order.userId.iduser}" name="userId" class="form-control" id="editName"
                        th:value="*{order.userId.iduser}">
             </div>
             <div class="mb-3">
-                <label for="editAmount" class="form-label">Edit Order Amount: </label>
+                <label for="editAmount" class="form-label">Edit product Amount: </label>
                 <input type="text" name="amount" class="form-control" id="editAmount"
                        placeholder="Edit description" th:value="${order.amount}">
             </div>
             <div class="mb-3">
-                <label for="editAddress" class="form-label">Edit Shipping Address: </label>
+                <label for="editAddress" class="form-label">Edit Shipping address: </label>
                 <input type="text" name="shippingAddress" class="form-control"
                        id="editAddress" th:value="${order.shippingAddress}">
             </div>
             <div class="mb-3">
-                <label for="editDate" class="form-label">Edit Order Date: </label>
+                <label for="editDate" class="form-label">Edit Order date: </label>
                 <input type="date" name="orderDate" class="form-control"
                        id="editDate" th:field="${order.orderDate}" th:value="${order.orderDate}">
             </div>
