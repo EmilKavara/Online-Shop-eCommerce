@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,11 @@ public class ProductCategoryController {
     
     @Autowired
     ProductCategoryService productCategoryService;
+
+    public Model addModelAttribute(Model model){
+        model.addAttribute("categories", productCategoryService.getAllProductCategory());
+        return model;
+    }
 
     @GetMapping("/getproductCategory")
     private List<ProductCategory> getAllProductCategory(){

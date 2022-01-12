@@ -18,6 +18,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -28,7 +29,12 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    /*    @GetMapping("/products")
+    public Model addModelAttribute(Model model){
+        model.addAttribute("products", productService.getAllProducts());
+        return model;
+    }
+
+    /*@GetMapping("/products")
     public String getAllProducts(Model model) {
         List<Product> products = productService.getAllProducts();
         model.addAttribute("products", products);
@@ -191,14 +197,14 @@ public class ProductController {
         return pr;
     }*/
 
-    @GetMapping("/getproduct/{categoryId}")
+    /*@GetMapping("/getproduct/{categoryId}")
     private List<Product> getProductsByCategory(@PathVariable("categoryId") int categoryId) {
         return productService.getAllProducts().stream()
                 .filter(product -> Objects.equals(product.getCategoryId().getIdproductCategory(), categoryId)
                         .collect(Collectors.toList()));
-    }
+    }*/
 
-    /*@GetMapping("/getproduct/{categoryId}")
+    @GetMapping("/getproduct/{categoryId}")
     private List<Product> getProductsByCategory(@PathVariable("categoryId") int categoryId) {
         List<Product> allProducts = productService.getAllProducts();
         List<Product> productsByCategory=new ArrayList<>();
@@ -210,8 +216,7 @@ public class ProductController {
                 productsByCategory.add(product);
             }
         }
-
         return productsByCategory;
-    }*/
+    }
 
 }

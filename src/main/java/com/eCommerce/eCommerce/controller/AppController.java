@@ -79,4 +79,9 @@ public class AppController {
         return new ModelAndView("productCategory");
     }
 
+    @RequestMapping("/product/getproduct")
+    public ModelAndView productsByCategory(){
+        return new ModelAndView("productsByCategory");
+    }
+
 }

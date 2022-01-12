@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:layout="http://www.w3.org/1999/xhtml">
+      xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -16,28 +16,7 @@
 <body style="background-color:#4835d4;">
 <h3 class="text-center" style="padding-top: 25px; color:white">Products by category</h3>
 
-<div>
-    <!-- <ul class="nav nav-tabs" id="myTab" role="tablist"
-        data-url="http://localhost:8080/product/getproduct/{categoryId}">
-
-        <li class="nav-item" role="presentation">
-            <button class="nav-link active" id="1-tab" data-bs-toggle="tab" data-bs-target="#one" type="button" role="tab" aria-controls="one" aria-selected="true">Category 1</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="2-tab" data-bs-toggle="tab" data-bs-target="#two" type="button" role="tab" aria-controls="two" aria-selected="false">Category 2</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="3-tab" data-bs-toggle="tab" data-bs-target="#three" type="button" role="tab" aria-controls="three" aria-selected="false">Category 3</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="4-tab" data-bs-toggle="tab" data-bs-target="#four" type="button" role="tab" aria-controls="four" aria-selected="false">Category 4</button>
-        </li>
-        <li class="nav-item" role="presentation">
-            <button class="nav-link" id="5-tab" data-bs-toggle="tab" data-bs-target="#five" type="button" role="tab" aria-controls="five" aria-selected="false">Category 5</button>
-        </li>
-
-    </ul> -->
-
+<!--<div>
     <nav style="padding-left: 10px" class="nav nav-tabs" id="myTab" role="tablist">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <button style="color: #212121 !important;" class="nav-link active" id="nav-1st-tab" data-bs-toggle="tab" data-bs-target="#nav-1st" type="button" role="tab" aria-controls="nav-1st" aria-selected="true">One</button>
@@ -58,7 +37,33 @@
 <br>
 <div>
     <button class="btn btn-light btn-sm" onclick="window.location.href='UserPage.html'" style="margin: 10px" type="button">Dashboard</button>
+</div> -->
+
+
+<div>
+    <nav style="padding-left: 10px" class="nav nav-tabs" id="myTab" role="tablist">
+        <div
+                class="nav nav-tabs" id="nav-tab" role="tablist">
+            <button th:each="category:${categories}"
+                    th:value="${category.idproduct_category}"
+                    th:text="${category.name}"
+                    style="color: #212121 !important;" class="nav-link active" id="nav-1st-tab" data-bs-toggle="tab" data-bs-target="#nav-1st" type="button" role="tab" aria-controls="nav-1st" aria-selected="true"></button>
+        </div>
+    </nav>
+    <div
+            class="tab-content" id="nav-tabContent">
+        <div
+                th:each="product:${products}"
+                th:value="${product.category_id}"
+                th:text="${product.name}"class="tab-pane fade show active" id="nav-1st" role="tabpanel" aria-labelledby="nav-1st-tab" data-url="http://localhost:8080/product/getproduct/1"></div>
+    </div>
 </div>
+<br>
+<div>
+    <button class="btn btn-light btn-sm" onclick="window.location.href='UserPage.html'" style="margin: 10px" type="button">Dashboard</button>
+</div>
+
+
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
