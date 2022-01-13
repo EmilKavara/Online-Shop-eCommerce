@@ -8,19 +8,16 @@ package com.eCommerce.eCommerce.controller;
 import com.eCommerce.eCommerce.model.Discount;
 import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.model.ProductCategory;
-
 import com.eCommerce.eCommerce.service.ProductService;
-
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/product")
@@ -29,7 +26,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    public Model addModelAttribute(Model model){
+    public Model addModelAttribute(Model model) {
         model.addAttribute("products", productService.getAllProducts());
         return model;
     }
@@ -60,6 +57,13 @@ public class ProductController {
         return productService.getProductById(idproduct);
     }
 
+    @GetMapping("/getproducts/{categoryId}")
+    public List<Product> getProductsByCategory(@PathVariable("categoryId") int categoryId) {
+        return productService.getAllProducts().stream()
+                .filter(product -> Objects.equals(product.getCategoryId().getIdproductCategory(), categoryId))
+                .collect(Collectors.toList());
+    }
+
     @RequestMapping(value = "/products/delete/{idproduct}", method = {RequestMethod.DELETE})
     public String delete(@PathVariable int idproduct) {
         productService.delete(idproduct);
@@ -88,49 +92,6 @@ public class ProductController {
         productService.saveOrUpdate(product);
         return "Saved";
     }
-    
-    /*public @ResponseBody
-    String addNewProduct(
-            @RequestParam String name, @RequestParam String description,
-            @RequestParam BigDecimal price, @RequestParam int quantity) {
-
-        Product product = new Product();
-        product.setName(name);
-        product.setDescription(description);
-        product.setPrice(price);
-        product.setQuantity(quantity);
-
-        Short num = (short) 1;
-        product.setActive(num);
-
-        Discount discount = new Discount();
-        discount.setIddiscount(1);
-        
-        product.setDiscountId(discount);
-
-        ProductCategory category = new ProductCategory();
-        category.setIdproductCategory(1);
-        product.setCategoryId(category);
-
-        productService.saveOrUpdate(product);
-        return product;
-    }*/
-
-    /*@PutMapping("/update")
-    public Product update(Product product) {
-
-        Discount discount = new Discount();
-        discount.setIddiscount(1);
-
-        product.setDiscountId(discount);
-
-        ProductCategory category = new ProductCategory();
-        category.setIdproductCategory(1);
-        product.setCategoryId(category);
-
-        productService.saveOrUpdate(product);
-        return product;
-    }*/
 
 
     @PostMapping(path = "/product", consumes = "application/x-www-form-urlencoded")
@@ -170,53 +131,4 @@ public class ProductController {
         return modelAndView;
 
     }
-    
-    /*private Product update(@RequestParam String name, @RequestParam String description,
-            @RequestParam BigDecimal price, @RequestParam int quantity, @RequestParam short active) {
-        
-        Product pr = new Product();
-        
-        pr.setName(name);
-        pr.setDescription(description);
-        pr.setPrice(price);
-        pr.setQuantity(quantity);
-
-        //Short num = (short) 1;
-        pr.setActive(active);
-
-        Discount discount = new Discount();
-        discount.setIddiscount(1);
-        pr.setDiscountId(discount);
-
-        ProductCategory category = new ProductCategory();
-        category.setIdproductCategory(1);
-        pr.setCategoryId(category);
-        
-        
-        productService.saveOrUpdate(pr);
-        return pr;
-    }*/
-
-    /*@GetMapping("/getproduct/{categoryId}")
-    private List<Product> getProductsByCategory(@PathVariable("categoryId") int categoryId) {
-        return productService.getAllProducts().stream()
-                .filter(product -> Objects.equals(product.getCategoryId().getIdproductCategory(), categoryId)
-                        .collect(Collectors.toList()));
-    }*/
-
-    @GetMapping("/getproduct/{categoryId}")
-    private List<Product> getProductsByCategory(@PathVariable("categoryId") int categoryId) {
-        List<Product> allProducts = productService.getAllProducts();
-        List<Product> productsByCategory=new ArrayList<>();
-
-        for (Product product: allProducts) {
-
-            if (product.getCategoryId().equals(categoryId)) {
-
-                productsByCategory.add(product);
-            }
-        }
-        return productsByCategory;
-    }
-
 }
