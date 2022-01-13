@@ -10,7 +10,6 @@ import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.model.ProductCategory;
 import com.eCommerce.eCommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,17 +25,6 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    public Model addModelAttribute(Model model) {
-        model.addAttribute("products", productService.getAllProducts());
-        return model;
-    }
-
-    /*@GetMapping("/products")
-    public String getAllProducts(Model model) {
-        List<Product> products = productService.getAllProducts();
-        model.addAttribute("products", products);
-        return "testTable";
-    }*/
     @GetMapping("/getproduct")
     private List<Product> getAllProducts() {
         List<Product> products = productService.getAllProducts();
