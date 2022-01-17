@@ -32,7 +32,7 @@ public class ProductOrderController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/cart")
+    /*@GetMapping("/cart")
     public String showShoppingCart(Model model, @AuthenticationPrincipal User userSession) {
         User userFromDB = userService.getUserById(userSession.getIduser());
         List<Orders> order = productOrderService.getOrder(userFromDB);
