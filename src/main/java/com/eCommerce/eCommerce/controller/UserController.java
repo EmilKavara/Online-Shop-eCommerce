@@ -54,9 +54,16 @@ public class UserController {
         userService.delete(iduser);
     }
 
+    /*@PostMapping(path = "/product", consumes = "application/x-www-form-urlencoded")
+    public @ResponseBody
+    ModelAndView update(Product product) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("testTable");
+        return modelAndView;
+    }*/
     @PostMapping(path = "/add")
     public @ResponseBody
-    String addNewUser(@RequestParam String firstName, @RequestParam String lastName,
+    ModelAndView addNewUser(@RequestParam String firstName, @RequestParam String lastName,
                       @RequestParam String gender, @RequestParam String username, @RequestParam String password, @RequestParam Date dateOfBirth,
                       @RequestParam String street, @RequestParam int number, @RequestParam String cityname,
                       @RequestParam String phone, @RequestParam String email) {
@@ -91,7 +98,10 @@ public class UserController {
         addressService.saveOrUpdate(address);
         n.setAddressId(address);
         userService.saveOrUpdate(n);
-        return "Saved";
+        
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("loginPage");
+        return modelAndView;
     }
 
     @PutMapping("/user/update")

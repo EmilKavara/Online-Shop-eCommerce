@@ -33,10 +33,10 @@ public class AppController {
         return new ModelAndView("registration");
     }
 
-    @RequestMapping("/product")
+    /*@RequestMapping("/product")
     public ModelAndView product(){
         return new ModelAndView("product");
-    }
+    }*/
 
     @RequestMapping("/product/add")
     public ModelAndView addProduct(){
@@ -59,9 +59,9 @@ public class AppController {
     }
 
 
-    @RequestMapping("/testTable")
-    public ModelAndView testTable(){
-        return new ModelAndView("testTable");
+    @RequestMapping("/products")
+    public ModelAndView products(){
+        return new ModelAndView("products");
     }
 
     @RequestMapping("product/update")
@@ -77,6 +77,16 @@ public class AppController {
     @RequestMapping("/productCategory")
     public ModelAndView productCategory(){
         return new ModelAndView("productCategory");
+    }
+    
+    @RequestMapping("/cart")
+    public ModelAndView cart(){
+        return new ModelAndView("cart");
+    }
+    
+    @RequestMapping("/shopingCart")
+    public ModelAndView shopingCart(){
+        return new ModelAndView("shopingCart");
     }
 
     @RequestMapping("/cart")

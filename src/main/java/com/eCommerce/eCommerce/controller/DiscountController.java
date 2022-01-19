@@ -24,10 +24,10 @@ public class DiscountController {
         return model;
     }
 
-    @GetMapping("/testTable")
+    @GetMapping("/editProduct")
     public String getAllDiscounts(Model model) {
         List<Discount> discounts = discountService.getAllDiscounts();
         model.addAttribute("discounts", discounts);
-        return "testTable";
+        return "editProduct";
     }
 }
