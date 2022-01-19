@@ -8,6 +8,8 @@ package com.eCommerce.eCommerce.service;
 import com.eCommerce.eCommerce.dao.ProductRepository;
 import com.eCommerce.eCommerce.model.Product;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,8 +33,10 @@ return product;
 public Product getProductById(int id)   
 {  
 return productRepository.findById(id).get();  
-}  
-  
+}
+
+public Optional<Product> getProductById2(int id){return productRepository.findById(id);}
+
 public void saveOrUpdate(Product product)   
 {  
 productRepository.save(product);  

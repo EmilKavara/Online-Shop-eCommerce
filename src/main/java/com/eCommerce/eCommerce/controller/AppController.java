@@ -79,4 +79,9 @@ public class AppController {
         return new ModelAndView("productCategory");
     }
 
+    @RequestMapping("/cart")
+    public ModelAndView cart(){
+        return new ModelAndView("shoppingCart");
+    }
+
 }
