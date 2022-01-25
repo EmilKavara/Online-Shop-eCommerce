@@ -5,6 +5,8 @@
  */
 package com.eCommerce.eCommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -57,6 +59,7 @@ public class Orders implements Serializable {
     @Column(name = "order_date")
     @Temporal(TemporalType.DATE)
     private Date orderDate;
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
     private List<ProductOrder> productOrderList;
     @JoinColumn(name = "user_id", referencedColumnName = "iduser")
@@ -68,6 +71,13 @@ public class Orders implements Serializable {
 
     public Orders(Integer idorder) {
         this.idorder = idorder;
+    }
+
+    public Orders( int amount, String shippingAddress, Date orderDate,User iduser) {
+        this.amount = amount;
+        this.shippingAddress = shippingAddress;
+        this.orderDate = orderDate;
+        this.userId = iduser;
     }
 
     public Orders(Integer idorder, int amount, String shippingAddress, Date orderDate) {

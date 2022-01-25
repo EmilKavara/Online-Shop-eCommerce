@@ -5,14 +5,14 @@
  */
 package com.eCommerce.eCommerce.controller;
 
+import com.eCommerce.eCommerce.model.*;
 import com.eCommerce.eCommerce.service.ProductOrderService;
 import com.eCommerce.eCommerce.service.ProductService;
 import com.eCommerce.eCommerce.service.UserService;
-import com.eCommerce.eCommerce.model.User;
-import com.eCommerce.eCommerce.model.Orders;
-import com.eCommerce.eCommerce.model.ProductOrder;
 
-import java.util.List;
+import java.math.BigDecimal;
+import java.util.*;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -32,64 +32,83 @@ public class ProductOrderController {
     @Autowired
     private UserService userService;
 
-    /*@GetMapping("/cart")
-    public String showShoppingCart(Model model, @AuthenticationPrincipal User userSession) {
-        User userFromDB = userService.getUserById(userSession.getIduser());
-        List<Orders> order = productOrderService.getOrder(userFromDB);
-        
-        model.addAttribute("order", order);
-        
-        return "shopingCart";
-    }
 
-    /*@GetMapping("/cart")
-    public ModelAndView shoppingCart() {
-        ModelAndView modelAndView = new ModelAndView("/shoppingCart");
-        modelAndView.addObject("products", productOrderService.getAllOrders());
-
-        return modelAndView;
-    }*/
     /**
      * Returns customer shopping cart. URL request {"/cart"}, method GET.
      *
      * @param userSession requested Authenticated customer.
-     * @param model class object {@link Model}.
+     * @param model       class object {@link Model}.
      * @return cart page with model attributes.
      */
-    @GetMapping("/cart1")
+    @GetMapping("/cart")
     public String getCart(@AuthenticationPrincipal User userSession, Model model) {
         User userFromDB = userService.getUserById(userSession.getIduser());
-        model.addAttribute("products", userFromDB.getOrderList());
+        model.addAttribute("productList", userFromDB.getOrderList());
 
         return "cart";
     }
 
-    /**
-     * Adds a product to the customer shopping cart and redirects it to
-     * "/cart".URL request {"/cart/add"}, method POST.
-     *
-     * @param order
-     * @param product the product to add to the cart.
-     * @param userSession request Authenticated customer.
-     * @return redirect to cart page.
-     */
-    @PostMapping("/cart/add")
-    public String addToCart(
-            @RequestParam("add") Orders order,
+
+    @PostMapping("/cart/buy")
+    public String buy(
+            @RequestParam String shippingAddress,
+            @RequestParam int amount,
+            @RequestParam int idproduct,
             @AuthenticationPrincipal User userSession
     ) {
-        User user = userService.getUserById(userSession.getIduser());
+        Orders order = new Orders();
+        long millis = System.currentTimeMillis();
+        java.sql.Date date1 = new java.sql.Date(millis);
+        order.setOrderDate(date1);
+        //User user1 = userService.getUserById(userSession.getIduser());
+        User user = userService.getUserById(1);
+        order.setUserId(user);
+        Product product=productService.getProductById(idproduct);
+        order.setAmount(amount);
+        order.setShippingAddress(shippingAddress);
         user.getOrderList().add(order);
         userService.saveOrUpdate(user);
-
-        return "redirect:/cart";
+        ProductOrder po = new ProductOrder();
+        po.setOrderId(new Orders(amount, shippingAddress, date1,user));
+        po.setProductId(product);
+        po.setQuantity(amount);
+        BigDecimal amountB=new BigDecimal(amount);
+        BigDecimal total=amountB.multiply(product.getPrice());
+        po.setTotal(total);
+        productOrderService.saveOrUpdate(po);
+        return "redirect:/home";
     }
+
+    @PostMapping("/cart/add")
+    public ModelAndView addToCart2(
+            @RequestParam("idproduct") int idproduct, @RequestParam("quantity") int quantity,
+            @AuthenticationPrincipal User userSession
+    ) {
+        //HashMap<Product,Integer> productMap=new HashMap<>();
+        //HashMap<String, Integer> productMap = new HashMap<>();
+        Product product = productService.getProductById(idproduct);
+        //productMap.put("string", quantity);
+        // List<HashMap<Product,Integer>> list=new ArrayList<>();
+        List<Product> list = new ArrayList<>();
+        //list.add(productMap);
+        list.add(product);
+        User user=userService.getUserById(userSession.getIduser());
+        ModelAndView modelAndView = new ModelAndView();
+        Date date=new Date();
+        user.getOrderList().add(new Orders(quantity,"",date,user));
+        modelAndView.setViewName("shoppingCart");
+        modelAndView.addObject("productList", list);
+        modelAndView.addObject("quantity", quantity);
+        modelAndView.addObject("productId", idproduct);
+        return modelAndView;
+    }
+
 
     /**
      * Remove product from customer shopping cart and redirects it to "/cart".
      * URL request {"/cart/remove"}, method POST.
      *
-     * @param order the product to be removed from the customer shopping cart.
+     * @param order       the product to be removed from the customer shopping cart.
      * @param userSession request Authenticated customer.
      * @return redirect to cart page.
      */
@@ -110,16 +129,14 @@ public class ProductOrderController {
         return "redirect:/cart";
     }
 
-
-    /*@GetMapping("/cart/addProduct/{idproduct}")
-    public ModelAndView addProductToCart(@PathVariable("idproduct") int idproduct) {
-        productService.getProductById(idproduct).ifPresent(productOrderService.saveOrUpdate(productOrder));
-        return shoppingCart();
+    @PostMapping("/cart/get")
+    public ModelAndView getOrders(
+            @AuthenticationPrincipal User userSession
+    ) {
+        User user = userService.getUserById(userSession.getIduser());
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("shoppingCart");
+        modelAndView.addObject("orderList", user.getOrderList());
+        return modelAndView;
     }
-
-    @GetMapping("/cart/removeProduct/{idproduct}")
-    public ModelAndView removeProductFromCart(@PathVariable("idproduct") int idproduct) {
-        productService.getProductById(idproduct).ifPresent(productOrderService.delete(productService));
-        return shoppingCart();
-}*/
 }
