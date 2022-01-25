@@ -1,19 +1,19 @@
 package com.eCommerce.eCommerce.service;
 
-import com.eCommerce.eCommerce.model.Order;
+import com.eCommerce.eCommerce.model.Orders;
 
 import java.util.List;
 
 public interface OrderService {
-    int save(Order order);
+    int save(Orders order);
 
-    int update(Order order);
+    int update(Orders order);
 
-    Order findById(Long id);
+    Orders findById(Long id);
 
     int deleteById(Long id);
 
-    List<Order> findAll();
+    List<Orders> findAll();
 
     int deleteAll();
 }

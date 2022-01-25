@@ -1,6 +1,7 @@
 package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.model.Order;
+import com.eCommerce.eCommerce.model.Orders;
 import com.eCommerce.eCommerce.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,9 @@ public class OrderController {
     OrderService orderService;
 
     @GetMapping("/getallorders")
-    public ResponseEntity<List<Order>> getAllOrders(@RequestParam(required = false) String order) {
+    public ResponseEntity<List<Orders>> getAllOrders(@RequestParam(required = false) String order) {
         try {
-            List<Order> orders = new ArrayList<Order>();
+            List<Orders> orders = new ArrayList<Orders>();
 
             if (order == null)
                 orderService.findAll().forEach(orders::add);
@@ -37,8 +38,8 @@ public class OrderController {
     }
 
     @GetMapping("/getorder/{idorder}")
-    public ResponseEntity<Order> getOrderById(@PathVariable("idorder") long idorder) {
-        Order order = orderService.findById(idorder);
+    public ResponseEntity<Orders> getOrderById(@PathVariable("idorder") long idorder) {
+        Orders order = orderService.findById(idorder);
 
         if (order != null) {
             return new ResponseEntity<>(order, HttpStatus.OK);
@@ -48,9 +49,9 @@ public class OrderController {
     }
 
     @PostMapping("/addorder")
-    public ResponseEntity<String> createOrder(@RequestBody Order order) {
+    public ResponseEntity<String> createOrder(@RequestBody Orders order) {
         try {
-            orderService.save(new Order(order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate()));
+            orderService.save(new Orders(order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate()));
             return new ResponseEntity<>("New order created.", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -58,8 +59,8 @@ public class OrderController {
     }
 
     @PutMapping("/updateorder/{idorder}")
-    public ResponseEntity<String> updateOrder(@PathVariable("idorder") long idorder, @RequestBody Order order) {
-        Order _order = orderService.findById(idorder);
+    public ResponseEntity<String> updateOrder(@PathVariable("idorder") long idorder, @RequestBody Orders order) {
+        Orders _order = orderService.findById(idorder);
 
         if (_order != null) {
             _order.setIdorder((int) idorder);

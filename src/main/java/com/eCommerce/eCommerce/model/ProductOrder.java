@@ -36,8 +36,8 @@ public class ProductOrder implements Serializable {
     @Basic(optional = false)
     @Column(name = "total")
     private BigDecimal total;
-    @JoinColumn(name = "order_id", referencedColumnName = "idorder")
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "order_id", referencedColumnName = "idorder",nullable=false)
+    @ManyToOne(optional = false,cascade=CascadeType.ALL)
     private Orders orderId;
     @JoinColumn(name = "product_id", referencedColumnName = "idproduct")
     @ManyToOne(optional = false)

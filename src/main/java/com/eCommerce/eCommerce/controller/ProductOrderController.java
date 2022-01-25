@@ -6,6 +6,7 @@
 package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.model.*;
+import com.eCommerce.eCommerce.service.OrderService;
 import com.eCommerce.eCommerce.service.ProductOrderService;
 import com.eCommerce.eCommerce.service.ProductService;
 import com.eCommerce.eCommerce.service.UserService;
@@ -31,6 +32,8 @@ public class ProductOrderController {
     private ProductService productService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private OrderService orderService;
 
 
     /**
@@ -42,10 +45,19 @@ public class ProductOrderController {
      */
     @GetMapping("/cart")
     public String getCart(@AuthenticationPrincipal User userSession, Model model) {
-        User userFromDB = userService.getUserById(userSession.getIduser());
-        model.addAttribute("productList", userFromDB.getOrderList());
-
-        return "cart";
+        //User userFromDB = userService.getUserById(userSession.getIduser());
+        User userFromDB = userService.getUserById(1);
+        Orders orders = userFromDB.getOrderList().get(0);
+        List<ProductOrder> po = orders.getProductOrderList();
+        List<Product> productList = new ArrayList<>();
+        for (int i = 0; i < po.size(); i++) {
+            Product product = po.get(i).getProductId();
+            productList.add(product);
+        }
+        model.addAttribute("productList", productList);
+        model.addAttribute("amount", 0);
+        model.addAttribute("quantity", 0);
+        return "shoppingCart";
     }
 
 
@@ -63,20 +75,28 @@ public class ProductOrderController {
         //User user1 = userService.getUserById(userSession.getIduser());
         User user = userService.getUserById(1);
         order.setUserId(user);
-        Product product=productService.getProductById(idproduct);
+        Product product = productService.getProductById(idproduct);
         order.setAmount(amount);
         order.setShippingAddress(shippingAddress);
         user.getOrderList().add(order);
-        userService.saveOrUpdate(user);
         ProductOrder po = new ProductOrder();
-        po.setOrderId(new Orders(amount, shippingAddress, date1,user));
+        po.setOrderId(new Orders(amount, shippingAddress, date1, user));
         po.setProductId(product);
         po.setQuantity(amount);
-        BigDecimal amountB=new BigDecimal(amount);
-        BigDecimal total=amountB.multiply(product.getPrice());
+        BigDecimal amountB = new BigDecimal(amount);
+        BigDecimal total = amountB.multiply(product.getPrice());
         po.setTotal(total);
-        productOrderService.saveOrUpdate(po);
-        return "redirect:/home";
+        if (product.getQuantity() >= amount) {
+            productOrderService.saveOrUpdate(po);
+            userService.saveOrUpdate(user);
+            int available = product.getQuantity();
+            product.setQuantity(available - amount);
+            productService.saveOrUpdate(product);
+            return "redirect:/cart/remove";
+        } else {
+            return "error";
+        }
+
     }
 
     @PostMapping("/cart/add")
@@ -92,11 +112,13 @@ public class ProductOrderController {
         List<Product> list = new ArrayList<>();
         //list.add(productMap);
         list.add(product);
-        User user=userService.getUserById(userSession.getIduser());
+        //User user=userService.getUserById(userSession.getIduser());
+        User user = userService.getUserById(1);
         ModelAndView modelAndView = new ModelAndView();
-        Date date=new Date();
-        user.getOrderList().add(new Orders(quantity,"",date,user));
+        Date date = new Date();
+        user.getOrderList().add(new Orders(quantity, "", date, user));
         modelAndView.setViewName("shoppingCart");
+        userService.saveOrUpdate(user);
         modelAndView.addObject("productList", list);
         modelAndView.addObject("quantity", quantity);
         modelAndView.addObject("productId", idproduct);
@@ -117,7 +139,8 @@ public class ProductOrderController {
             @RequestParam(value = "idorder") Orders order,
             @AuthenticationPrincipal User userSession
     ) {
-        User user = userService.getUserById(userSession.getIduser());
+        //User user = userService.getUserById(userSession.getIduser());
+        User user = userService.getUserById(1);
 
         if (order != null) {
             user.getOrderList().remove(order);

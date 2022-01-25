@@ -1,47 +1,44 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<title>Shopping Cart</title>
-  <style>
+    <title>Shopping Cart</title>
+    <style>
     #table{
     border:2px;
     }
-  </style>
+
+    </style>
 </head>
 
 <body>
+<div th:if="${!productList.empty}">
+    <table>
+        <thead>
+        <tr>
+            <th> Title</th>
+            <th> Author</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${productList.empty}">
+            <td colspan="2"> No Orders</td>
+        </tr>
+        <tr th:each="product : ${productList}">
+            <td><span th:text="${product.name}"> Product name </span></td>
 
-<table>
-  <thead>
-  <tr>
-    <th> Title </th>
-    <th> Author </th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:if="${productList.empty}">
-    <td colspan="2"> No Orders </td>
-  </tr>
-  <tr th:each="order : ${productList}">
-    <td><span th:text="${order.name}"> Title </span></td>
+        </tr>
+        </tbody>
+    </table>
 
-  </tr>
-  <tr th:each="order2 : ${productList2}">
-    <td><span th:text="${order2.name}"> Title </span></td>
-
-  </tr>
-  </tbody>
-</table>
-
-  <form action="/cart/buy" method="post">
-    <input type="text" name="shippingAddress">
-    <input type="text" th:text="${quantity}" th:value="${quantity}" name="amount">
-    <input type="text" th:text="${productId}" th:value="${productId}" name="idproduct">
-    <input type="submit" value="Submit"/>
-  </form>
-
+    <form action="/cart/buy" method="post">
+        <input name="shippingAddress" type="text">
+        <input name="amount" th:text="${quantity}" th:value="${quantity}" type="text">
+        <input name="idproduct" th:text="${productId}" th:value="${productId}" type="text">
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
 
 </body>
 </html>

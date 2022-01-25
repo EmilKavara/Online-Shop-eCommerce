@@ -62,7 +62,7 @@ public class Orders implements Serializable {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")
     private List<ProductOrder> productOrderList;
-    @JoinColumn(name = "user_id", referencedColumnName = "iduser")
+    @JoinColumn(name = "user_id", referencedColumnName = "iduser",nullable=false)
     @ManyToOne(optional = false)
     private User userId;
 
