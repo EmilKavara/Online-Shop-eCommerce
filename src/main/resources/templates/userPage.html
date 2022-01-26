@@ -27,32 +27,78 @@
                                     User Dashboard
                                 </div>
                         </nav>
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist"  >
+                        
+                        <div class="col">
+                            <ul class="nav nav-tabs" id="myCategories" role="tablist">
+                                <li class="nav-item" th:each="category:${categories}"role="presentation">
+                                    <button class="nav-link" th:id="${category.name}+'-tab'" data-bs-toggle="tab"
+                                            th:data-bs-target=" '#' + ${category.name}" type="button"
+                                            role="tab" th:aria-controls="${category.name}" aria-selected="false"
+                                        th:text="${category.name}" th:data-bs-id="${category.idproductCategory}">
+                                                
+                                    </button>
+                                </li>
+                            </ul>
+                          <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active"
+                                     th:id="${category.name}" role="tabpanel"
+                                     th:aria-labelledby="${category.name}+'-tab'"
+                                     th:each='category:${categories}'>
+                            
+                                    <div class="container mb-5 mt-5">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="card h-100" th:fragment="productCard">
+                                                <a href="#" th:href="@{'/product/'+${product.id}}"></a>
+                                                <div class="card-body">
+                                                    <h4 class="card-title">
+                                                        <a href="#" th:text="${product.name}"></a>
+                                                    </h4>
+                                                    <h5 th:text="${product.price}"></h5>
+                                                    <p class="card-text" th:text="{product.description}">
+                                                        
+                                                    </p>
+                                                </div>
+                                                
+                                  <!--  <div th:each="product:${category.productList}">
+                                        <p th:text="${product.name}"></p>-->
+                                    </div>
+                                            </div></div>
+                                </div>
                                 
+                            </div> 
+                        </div>
+                          
+                            
+                        
+                           <!-- <nav style="padding-left: 10px" class="nav nav-tabs" id="myTab" role="tablist">
+                               <!-- <button class="nav-link" id="nav-drinks-tab" data-bs-toggle="tab" data-bs-target="#nav-drinks" type="button" role="tab" aria-controls="nav-drinks" aria-selected="false" 
+                                        th:each='productCategory:${productCategory.name}' th:text='${productCategory.name}'></button>-->
+
                                 <!---<li class="nav-link active" id="nav-food-tab" data-bs-toggle="tab" data-bs-target="#nav-food" role="tab" aria-controls="nav-food" aria-selected="true">  <li>
                                 <button class="nav-link" id="nav-drinks-tab" data-bs-toggle="tab" data-bs-target="#nav-drinks" type="button" role="tab" aria-controls="nav-drinks" aria-selected="false">Drinks</button>
                                 <button class="nav-link" id="nav-clothing-tab" data-bs-toggle="tab" data-bs-target="#nav-clothing" type="button" role="tab" aria-controls="nav-clothing" aria-selected="false">Clothing</button>-->
-                            </div>
-                        </nav>
+                           
+                        
+                        <!--
                         <div class="tab-content" id="nav-tabContent">
                             <div class="tab-pane fade show active" id="nav-food" role="tabpanel" aria-labelledby="nav-food-tab">
                                 <div class="container mb-5 mt-5">
                                     <div class="row">
-                                        
-                                        <!--card1 -->
+
+                                       
                                         <div class="col-md-4">
                                             <div class="card mt-3">
                                                 <div class="product-1 align-items-center p-2 text-center">
                                                     <img src="images/pizza.jpg" alt="" class="rounded" width="160">
                                                         <h5>Pizza</h5>
-                                                        <!--card info-->
+                                                        
                                                         <div class="mt-3 info">
                                                             <span class="text1 d-block">Lorem ipsum dolor sit amet.</span>
                                                             <span class="text1">Lorem, ipsum dolor.</span>
                                                         </div>
-                                                        
-                                                      <div class="cost mt-3 text-dark">
+
+                                                        <div class="cost mt-3 text-dark">
                                                             <span>$8</span>
                                                             <div class="star mt-3 align-items-center" style="color: #f0ad4e">
                                                                 <i class="fa fa-star"></i>
@@ -62,29 +108,29 @@
                                                                 <i class="fa fa-star"></i>
                                                             </div>
                                                         </div>
-                                                        <!--card info ends-->
-                                               </div>
-                                                
-                                                <!--button for cards-->
+                                                        
+                                                </div>
+
+                                            
                                                 <div class="p-3 pizza text-center cursor" style="color:#4527A0">
                                                     <span class="text-uppercase">Add to cart</span>
                                                 </div>
                                             </div>
                                         </div>
-                                        
-                                         <!--card 2 -->
-                                       <div class="col-md-4">
+
+                                      
+                                        <div class="col-md-4">
                                             <div class="card mt-3">
                                                 <div class="product-1 align-items-center p-2 text-center">
                                                     <img src="images/pasta.jpg" alt="" class="rounded" width="160">
                                                         <h5>Pasta</h5>
-                                                        
+
                                                         <div class="mt-3 info">
                                                             <span class="text1 d-block">Lorem ipsum dolor sit amet.</span>
                                                             <span class="text1">Lorem, ipsum dolor.</span>
                                                         </div>
-                                                        
-                                                       <div class="cost mt-3 text-dark">
+
+                                                        <div class="cost mt-3 text-dark">
                                                             <span>$9,5</span>
                                                             <div class="star mt-3 align-items-center"style="color: #f0ad4e">
                                                                 <i class="fa fa-star"></i>
@@ -94,32 +140,31 @@
                                                                 <i class="fa fa-star"></i>
                                                             </div>
                                                         </div>
-                                                       
+
                                                 </div>
-                                                
-                                                
+
+
                                                 <div class="p-3 pasta text-center cursor" style="color:#4527A0">
                                                     <span class="text">Add to cart</span>
                                                 </div>
                                             </div>
                                         </div>
-                                         <!--card 2 end -->
-                                        
-                                         <!--card 3 -->
-                                       <div class="col-md-4">
+                                       
+
+                                        <div class="col-md-4">
                                             <div class="card mt-3">
                                                 <div class="product-1 align-items-center p-2 text-center">
                                                     <img src="images/pancake.jpg" alt="" class="rounded" width="160">
                                                         <h5>Pancake</h5>
-                                                        
+
                                                         <div class="mt-3 info">
                                                             <span class="text1 d-block">Lorem ipsum dolor sit amet.</span>
                                                             <span class="text1">Lorem, ipsum dolor.</span>
                                                         </div>
-                                                        
+
                                                         <div class="cost mt-3 text-dark">
                                                             <span>$7,5</span>
-                                                           <div class="star mt-3 align-items-center"style="color:#f0ad4e">
+                                                            <div class="star mt-3 align-items-center"style="color:#f0ad4e">
                                                                 <i class="fa fa-star"></i>
                                                                 <i class="fa fa-star"></i>
                                                                 <i class="fa fa-star"></i>
@@ -127,26 +172,24 @@
                                                                 <i class="fa fa-star"></i>
                                                             </div>
                                                         </div>
-                                                       
+
                                                 </div>
-                                                
-                                            
+
+
                                                 <div class="p-3 pancake text-center cursor" style="color:#4527A0">
                                                     <span class="text-uppercase">Add to cart</span>
                                                 </div>
                                             </div>
                                         </div>
-                                         <!--card 3 end -->
-                                         
+                                       
+
                                     </div>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="nav-drinks" role="tabpanel" aria-labelledby="nav-drinks-tab">...</div>
                             <div class="tab-pane fade" id="nav-clothing" role="tabpanel" aria-labelledby="nav-clothing-tab">...</div>
                         </div>
-
-
-
+                        -->
                         <!-- Optional JavaScript; choose one of the two! -->
 
                         <!-- Option 1: Bootstrap Bundle with Popper -->

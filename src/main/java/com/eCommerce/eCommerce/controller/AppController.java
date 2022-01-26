@@ -5,6 +5,10 @@
  */
 package com.eCommerce.eCommerce.controller;
 
+import com.eCommerce.eCommerce.model.ProductCategory;
+import com.eCommerce.eCommerce.service.ProductCategoryImpl;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,9 +17,16 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping
 public class AppController {
     
+    @Autowired
+    private ProductCategoryImpl productCategory;
+    
     @RequestMapping("/userPage")
     public ModelAndView userPage(){
-        return new ModelAndView("userPage");
+        List<ProductCategory> categoryList=productCategory.getAllProductCategory();
+        ModelAndView modelAndView= new ModelAndView();
+        modelAndView.setViewName("userPage");
+        modelAndView.addObject("categories", categoryList);
+        return modelAndView;
     }
     
     @RequestMapping("/adminPage")
