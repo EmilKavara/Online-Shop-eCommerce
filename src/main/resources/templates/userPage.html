@@ -1,106 +1,207 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+>
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <!-- Bootstrap CSS -->
-    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
-    <link href="/css/eCommerce.css" rel="stylesheet" type="text/css"/>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/eCommerce.css" type="text/css"/>
+    <link href="css/cards.css" rel="stylesheet" type="text/css"/>
     <title>User dashboard</title>
+
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-    <script src="/js/eCommerce.js" type="text/javascript"></script>
+    <script src="eCommerce.js" type="text/javascript"></script>
 </head>
-<body style="background-color:#FFFFFF;">
-<div>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#4835d4;">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                <img alt="" height="30" src="/images/logoo.png" width="30">
-            </a>
-            <a class="navbar-brand" href="/">e<span class="text-white">Commerce</span> </a>
-            <div class="collapse navbar-collapse" id="navmenu" style="color:#ffffff;">User Dashboard</div>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#4527A0;">
+
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/resources/static/css/logoo.png" alt="" width="30" height="30">
+        </a>
+        <a href="/" class="navbar-brand"> click<span class="text-warning">SHOP</span> </a>
+        <div class="collapse navbar-collapse" id="navmenu" style="color:#f0ad4e;">
+            User Dashboard
         </div>
-    </nav>
-</div>
-<div class="row">
-    <!--Sidebar-->
-    <div class="col-1" style="background-color:#4835d4; width: 260px; height: 560px">
-        <nav class="col sidebar" id="sidebar" style="text-align: center">
-            <ul class="nav flex-column vertical-nav">
-                <li class="nav-item">
-                    <a aria-current="page" class="nav-link active" href="/home" style="color:white">
-                        <i class="fas fa-home" style="color:white; padding-right: 5px"></i>Home</a>
-                </li>
-                <li class="nav-item" style="color:white">
-                    <a class="nav-link" href="#" style="color:white"><i class="fas fa-user"
-                                                                        style="padding-right: 5px"></i>Profile</a>
-                </li>
-                <li class="nav-item" style="color:white">
-                    <a class="nav-link" href="#" onclick="window.location.href='product.html'" style="color:white"><i class="fab fa-product-hunt"
-                                                                        style="padding-right: 5px"></i>Products</a>
-                </li>
-                <li class="nav-item" style="color:white">
-                    <a class="nav-link" href="#" onclick="window.location.href='productCategory.html'" style="color:white"><i class="fas fa-columns"
-                                                                                       style="padding-right: 5px"></i>Categories</a>
-                </li>
-                <li class="nav-item" style="color:white" >
-                    <a class="nav-link" href="#" onclick="window.location.href='order.html'"
-                       style="color:white"><i class="far fa-list-alt" style="padding-right: 5px"></i>My Orders</a>
-                </li>
-            </ul>
-            <hr style="margin-top:30px; color:#ffffff">
-            <div class="contacts-list">
-                <div class="contacts-list-container">
-                    <div class="title" style="color:#ffffff; font-size: 12px; text-align: center;">
-                        Contact and Location
+    </div>
+</nav>
+
+<div class="col">
+    <ul class="nav nav-tabs" id="myCategories" role="tablist">
+        <li class="nav-item" th:each="category:${categories}" role="presentation">
+            <button class="nav-link" th:id="${category.name}+'-tab'" data-bs-toggle="tab"
+                    th:data-bs-target=" '#' + ${category.name}" type="button"
+                    role="tab" th:aria-controls="${category.name}" aria-selected="false"
+                    th:text="${category.name}" th:data-bs-id="${category.idproductCategory}">
+
+            </button>
+        </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+        <div class="tab-pane fade show active"
+             th:id="${category.name}" role="tabpanel"
+             th:aria-labelledby="${category.name}+'-tab'"
+             th:each='category:${categories}'>
+
+            <div class="container mb-5 mt-5">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div th:each="product:${category.productList}">
+                            <div class="card h-100" th:fragment="productCard">
+                                <a href="#" th:href="@{'/product/'+${product.idproduct}}"></a>
+                                <div class="card-body">
+                                    <h4 class="card-title">
+                                        <a href="#" th:text="${product.name}"></a>
+                                    </h4>
+                                    <h5 th:text="${product.price}"></h5>
+                                    <p class="card-text" th:text="${product.description}"></p>
+
+                                    <button class="add-to-cart-button">
+                                        <svg class="add-to-cart-box box-1" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="2" fill="#ffffff"/></svg>
+                                        <svg class="add-to-cart-box box-2" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="2" fill="#ffffff"/></svg>
+                                        <svg class="cart-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                                        <svg class="tick" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0V0z"/><path fill="#ffffff" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM9.29 16.29L5.7 12.7c-.39-.39-.39-1.02 0-1.41.39-.39 1.02-.39 1.41 0L10 14.17l6.88-6.88c.39-.39 1.02-.39 1.41 0 .39.39.39 1.02 0 1.41l-7.59 7.59c-.38.39-1.02.39-1.41 0z"/></svg>
+                                        <span class="add-to-cart">Add to cart</span>
+                                        <span class="added-to-cart">Added to cart</span>
+                                    </button>
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <p class="cont-location-container" style=" font-size: 10px; color:#ccccff;">
-                        Address: Zmaja od Bosne 16<br>
-                        Sarajevo 71000<br>
-                        Bosnia and Herzegovina<br>
-                        <a href="mailto: eCommerce@mail.com" style="color:#ccccff;">E-mail: eCommerce@mail.com;</a> <br>
-                        Contact: +38761666444
-                    </p>
                 </div>
             </div>
-            <hr class="d-md-none text-warning" style="margin-top:30px; color:#f0ad4e"/>
-            <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
-                <li class="nav-item col-6 col-md-auto nav-item-dark">
-                    <a class="nav-link p-2" href="https://facebook.com" rel="noopener" style="color:#FFFFFF;"
-                       target="_blank">
-                        <svg class="bi bi-facebook" fill="currentColor" height="16" viewBox="0 0 16 16"
-                             width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
-                        </svg>
-                        <small class="d-md-none ms-2">Facebook</small>
-                    </a>
-                </li>
-                <li class="nav-item col-6 col-md-auto nav-item-dark">
-                    <a class="nav-link p-2" href="https://instagram.com" rel="noopener" style="color:#FFFFFF"
-                       target="_blank">
-                        <svg class="bi bi-instagram" fill="currentColor" height="16" viewBox="0 0 16 16"
-                             width="16" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                        </svg>
-                        <small class="d-md-none ms-2">Instagram</small>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+
+        </div>
     </div>
+
+
+    <!-- <nav style="padding-left: 10px" class="nav nav-tabs" id="myTab" role="tablist">
+       <button class="nav-link" id="nav-drinks-tab" data-bs-toggle="tab" data-bs-target="#nav-drinks" type="button" role="tab" aria-controls="nav-drinks" aria-selected="false"
+                 th:each='productCategory:${productCategory.name}' th:text='${productCategory.name}'></button>-->
+
+    <!---<li class="nav-link active" id="nav-food-tab" data-bs-toggle="tab" data-bs-target="#nav-food" role="tab" aria-controls="nav-food" aria-selected="true">  <li>
+    <button class="nav-link" id="nav-drinks-tab" data-bs-toggle="tab" data-bs-target="#nav-drinks" type="button" role="tab" aria-controls="nav-drinks" aria-selected="false">Drinks</button>
+    <button class="nav-link" id="nav-clothing-tab" data-bs-toggle="tab" data-bs-target="#nav-clothing" type="button" role="tab" aria-controls="nav-clothing" aria-selected="false">Clothing</button>-->
+
+
+    <!--
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-food" role="tabpanel" aria-labelledby="nav-food-tab">
+            <div class="container mb-5 mt-5">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mt-3">
+                            <div class="product-1 align-items-center p-2 text-center">
+                                <img src="images/pizza.jpg" alt="" class="rounded" width="160">
+                                    <h5>Pizza</h5>
+                                    <div class="mt-3 info">
+                                        <span class="text1 d-block">Lorem ipsum dolor sit amet.</span>
+                                        <span class="text1">Lorem, ipsum dolor.</span>
+                                    </div>
+                                    <div class="cost mt-3 text-dark">
+                                        <span>$8</span>
+                                        <div class="star mt-3 align-items-center" style="color: #f0ad4e">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="p-3 pizza text-center cursor" style="color:#4527A0">
+                                <span class="text-uppercase">Add to cart</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mt-3">
+                            <div class="product-1 align-items-center p-2 text-center">
+                                <img src="images/pasta.jpg" alt="" class="rounded" width="160">
+                                    <h5>Pasta</h5>
+                                    <div class="mt-3 info">
+                                        <span class="text1 d-block">Lorem ipsum dolor sit amet.</span>
+                                        <span class="text1">Lorem, ipsum dolor.</span>
+                                    </div>
+                                    <div class="cost mt-3 text-dark">
+                                        <span>$9,5</span>
+                                        <div class="star mt-3 align-items-center"style="color: #f0ad4e">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="p-3 pasta text-center cursor" style="color:#4527A0">
+                                <span class="text">Add to cart</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mt-3">
+                            <div class="product-1 align-items-center p-2 text-center">
+                                <img src="images/pancake.jpg" alt="" class="rounded" width="160">
+                                    <h5>Pancake</h5>
+                                    <div class="mt-3 info">
+                                        <span class="text1 d-block">Lorem ipsum dolor sit amet.</span>
+                                        <span class="text1">Lorem, ipsum dolor.</span>
+                                    </div>
+                                    <div class="cost mt-3 text-dark">
+                                        <span>$7,5</span>
+                                        <div class="star mt-3 align-items-center"style="color:#f0ad4e">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                    </div>
+                            </div>
+                            <div class="p-3 pancake text-center cursor" style="color:#4527A0">
+                                <span class="text-uppercase">Add to cart</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="nav-drinks" role="tabpanel" aria-labelledby="nav-drinks-tab">...</div>
+        <div class="tab-pane fade" id="nav-clothing" role="tabpanel" aria-labelledby="nav-clothing-tab">...</div>
+    </div>
+    -->
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+
+    <script>
+        addToCartButton = document.querySelectorAll(".add-to-cart-button");
+        document.querySelectorAll('.add-to-cart-button').forEach(function(addToCartButton) {
+        addToCartButton.addEventListener('click', function() {
+        addToCartButton.classList.add('added');
+        setTimeout(function(){
+        addToCartButton.classList.remove('added');
+     }, 2000);
+   });
+ });
+    </script>
 </div>
-<!--Sidebar End-->
-<script crossorigin="anonymous"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
-        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-<script crossorigin="anonymous"
-        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
-
