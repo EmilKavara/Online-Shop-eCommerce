@@ -119,30 +119,4 @@ public class ProductController {
         return modelAndView;
 
     }
-    
-    /*private Product update(@RequestParam String name, @RequestParam String description,
-            @RequestParam BigDecimal price, @RequestParam int quantity, @RequestParam short active) {
-        
-        Product pr = new Product();
-        
-        pr.setName(name);
-        pr.setDescription(description);
-        pr.setPrice(price);
-        pr.setQuantity(quantity);
-
-        //Short num = (short) 1;
-        pr.setActive(active);
-
-        Discount discount = new Discount();
-        discount.setIddiscount(1);
-        pr.setDiscountId(discount);
-
-        ProductCategory category = new ProductCategory();
-        category.setIdproductCategory(1);
-        pr.setCategoryId(category);
-        
-        
-        productService.saveOrUpdate(pr);
-        return pr;
-    }*/
 }
