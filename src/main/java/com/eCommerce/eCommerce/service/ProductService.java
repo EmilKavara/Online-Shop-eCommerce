@@ -12,6 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -38,6 +39,10 @@ public class ProductService {
 
     public void update(Product product, int idproduct) {
         productRepository.save(product);
+    }
+
+    public Optional<Product> findById(Integer idproduct) {
+        return productRepository.findById(idproduct);
     }
 
 }
