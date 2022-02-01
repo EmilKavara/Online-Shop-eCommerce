@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Shopping Cart</title>
+    <style>
+    #table{
+    border:2px;
+    }
+
+    </style>
+</head>
+
+<body>
+<div th:if="${!productList.empty}">
+    <table>
+        <thead>
+        <tr>
+            <th> Title</th>
+            <th> Author</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${productList.empty}">
+            <td colspan="2"> No Orders</td>
+        </tr>
+        <tr th:each="product : ${productList}">
+            <td><span th:text="${product.name}"> Product name </span></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+    <form action="/cart/buy" method="post">
+        <input name="shippingAddress" type="text">
+        <input name="amount" th:text="${quantity}" th:value="${quantity}" type="text">
+        <input name="idproduct" th:text="${productId}" th:value="${productId}" type="text">
+        <input type="submit" value="Submit"/>
+    </form>
+</div>
+
+</body>
+</html>
