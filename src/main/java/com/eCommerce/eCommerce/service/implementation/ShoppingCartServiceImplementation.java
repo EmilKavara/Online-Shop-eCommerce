@@ -1,6 +1,7 @@
 package com.eCommerce.eCommerce.service.implementation;
 
 import com.eCommerce.eCommerce.dao.ProductRepository;
+import com.eCommerce.eCommerce.exception.NotEnoughProductsInStockException;
 import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.repository.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,20 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
     public Map<Product, Integer> getProductsInCart() {
         return Collections.unmodifiableMap(products);
     }
+
+    /*@Override
+    public void checkout() throws NotEnoughProductsInStockException {
+        Product product;
+        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
+            product = productRepository.findOne(entry.getKey().getIdproduct());
+            if (product.getQuantity() < entry.getValue())
+                throw new NotEnoughProductsInStockException(product);
+            entry.getKey().setQuantity(product.getQuantity() - entry.getValue());
+        }
+        productRepository.save(products.keySet());
+        productRepository.flush();
+        products.clear();
+    }*/
 
     @Override
     public BigDecimal getTotal() {
