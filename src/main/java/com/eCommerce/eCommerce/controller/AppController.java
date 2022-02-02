@@ -34,7 +34,7 @@ public class AppController {
         return new ModelAndView ("adminPage");
     }
     
-    @RequestMapping("/loginPage")
+    @RequestMapping("/login")
     public ModelAndView loginPage(){
         return new ModelAndView("loginPage");
     }
