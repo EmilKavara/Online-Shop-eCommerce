@@ -8,19 +8,15 @@ package com.eCommerce.eCommerce.controller;
 import com.eCommerce.eCommerce.model.Discount;
 import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.model.ProductCategory;
-
 import com.eCommerce.eCommerce.service.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 @RestController
 @RequestMapping(path = "/product")
@@ -47,6 +43,13 @@ public class ProductController {
     @GetMapping("/getproduct/{idproduct}")
     private Product getProduct(@PathVariable("idproduct") int idproduct) {
         return productService.getProductById(idproduct);
+    }
+
+    @GetMapping("/getproducts/{categoryId}")
+    public List<Product> getProductsByCategory(@PathVariable("categoryId") int categoryId) {
+        return productService.getAllProducts().stream()
+                .filter(product -> Objects.equals(product.getCategoryId().getIdproductCategory(), categoryId))
+                .collect(Collectors.toList());
     }
 
     @RequestMapping(value = "/products/delete/{idproduct}", method = {RequestMethod.DELETE})
@@ -77,40 +80,6 @@ public class ProductController {
         productService.saveOrUpdate(product);
         return "Saved";
     }
-    
-    /*public @ResponseBody
-    String addNewProduct(
-            @RequestParam String name, @RequestParam String description,
-            @RequestParam BigDecimal price, @RequestParam int quantity) {
-        Product product = new Product();
-        product.setName(name);
-        product.setDescription(description);
-        product.setPrice(price);
-        product.setQuantity(quantity);
-        Short num = (short) 1;
-        product.setActive(num);
-        Discount discount = new Discount();
-        discount.setIddiscount(1);
-        
-        product.setDiscountId(discount);
-        ProductCategory category = new ProductCategory();
-        category.setIdproductCategory(1);
-        product.setCategoryId(category);
-        productService.saveOrUpdate(product);
-        return product;
-    }*/
-
-    /*@PutMapping("/update")
-    public Product update(Product product) {
-        Discount discount = new Discount();
-        discount.setIddiscount(1);
-        product.setDiscountId(discount);
-        ProductCategory category = new ProductCategory();
-        category.setIdproductCategory(1);
-        product.setCategoryId(category);
-        productService.saveOrUpdate(product);
-        return product;
-    }*/
 
 
     @PostMapping(path = "/product", consumes = "application/x-www-form-urlencoded")
@@ -120,13 +89,6 @@ public class ProductController {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("testTable");
         return modelAndView;
-    }
-    
-    @GetMapping("/getproducts/{categoryId}")
-    public List<Product> getProductsByCategory(@PathVariable("categoryId") int categoryId){
-        return productService.getAllProducts().stream()
-                .filter(product->Objects.equals(product.getCategoryId().getIdproductCategory(), categoryId))
-                .collect(Collectors.toList());
     }
 
     @PostMapping("/products/edit/{idproduct}")
@@ -167,11 +129,14 @@ public class ProductController {
         pr.setDescription(description);
         pr.setPrice(price);
         pr.setQuantity(quantity);
+
         //Short num = (short) 1;
         pr.setActive(active);
+
         Discount discount = new Discount();
         discount.setIddiscount(1);
         pr.setDiscountId(discount);
+
         ProductCategory category = new ProductCategory();
         category.setIdproductCategory(1);
         pr.setCategoryId(category);
