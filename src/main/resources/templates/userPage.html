@@ -54,7 +54,7 @@
                     <div class="col-md-4">
                         <div th:each="product:${category.productList}">
                             <div class="card h-100" th:fragment="productCard">
-                                <a href="#" th:href="@{'/product/'+${product.idproduct}}"></a>
+                                <a href="#" th:href="@{'/shoppingCart/addProduct/'+${product.idproduct}}"></a>
                                 <div class="card-body">
                                     <h4 class="card-title">
                                         <a href="#" th:text="${product.name}"></a>
