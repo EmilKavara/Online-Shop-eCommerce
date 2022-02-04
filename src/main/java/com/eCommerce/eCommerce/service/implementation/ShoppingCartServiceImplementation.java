@@ -3,7 +3,7 @@ package com.eCommerce.eCommerce.service.implementation;
 import com.eCommerce.eCommerce.dao.ProductRepository;
 import com.eCommerce.eCommerce.exception.NotEnoughProductsInStockException;
 import com.eCommerce.eCommerce.model.Product;
-import com.eCommerce.eCommerce.repository.ShoppingCartService;
+import com.eCommerce.eCommerce.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -55,7 +55,7 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
         return Collections.unmodifiableMap(products);
     }
 
-    /*@Override
+    @Override
     public void checkout() throws NotEnoughProductsInStockException {
         Product product;
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
@@ -67,7 +67,7 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
         productRepository.save(products.keySet());
         productRepository.flush();
         products.clear();
-    }*/
+    }
 
     @Override
     public BigDecimal getTotal() {

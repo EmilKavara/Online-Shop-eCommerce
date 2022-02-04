@@ -2,7 +2,6 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
       xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
-
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
@@ -31,7 +30,7 @@
         <div class="row panel-body">
             <div th:inline="text" class="col-md-2">Price: [[${product.getKey().price}]] $</div>
             <div th:inline="text" class="col-md-9">Quantity: [[${product.getValue()}]]</div>
-            <a th:href="@{'/shoppingCart/removeProduct/{idproduct}'(idproduct=${product.getKey().id})}" class="col-md-1">
+            <a th:href="@{'/shoppingCart/removeProduct/{idproduct}'(idproduct=${product.getKey().idproduct})}" class="col-md-1">
                 <button type="button" class="btn btn-primary" th:text="Remove">Remove</button>
             </a>
         </div>
