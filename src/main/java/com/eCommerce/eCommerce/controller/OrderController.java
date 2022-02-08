@@ -1,12 +1,13 @@
 package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.model.Order;
-import com.eCommerce.eCommerce.model.Orders;
+import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,12 +21,12 @@ public class OrderController {
     OrderService orderService;
 
     @GetMapping("/getallorders")
-    public ResponseEntity<List<Orders>> getAllOrders(@RequestParam(required = false) String order) {
+    public ResponseEntity<List<Order>> getAllOrders(@RequestParam(required = false) String order) {
         try {
-            List<Orders> orders = new ArrayList<Orders>();
+            List<Order> orders = new ArrayList<Order>();
 
             if (order == null)
-                orderService.findAll().forEach(orders::add);
+                orders.addAll(orderService.findAll());
 
             if (orders.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -38,8 +39,8 @@ public class OrderController {
     }
 
     @GetMapping("/getorder/{idorder}")
-    public ResponseEntity<Orders> getOrderById(@PathVariable("idorder") long idorder) {
-        Orders order = orderService.findById(idorder);
+    public ResponseEntity<Order> getOrderById(@PathVariable("idorder") long idorder) {
+        Order order = orderService.findById(idorder);
 
         if (order != null) {
             return new ResponseEntity<>(order, HttpStatus.OK);
@@ -48,10 +49,19 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/get/{idorder}")
+    private ModelAndView getProductById(@PathVariable("idorder") int idorder) {
+        Order order = getOrderById(idorder).getBody();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("editOrder");
+        modelAndView.addObject("order", order);
+        return modelAndView;
+    }
+
     @PostMapping("/addorder")
-    public ResponseEntity<String> createOrder(@RequestBody Orders order) {
+    public ResponseEntity<String> createOrder(@RequestBody Order order) {
         try {
-            orderService.save(new Orders(order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate()));
+            orderService.save(new Order(order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate()));
             return new ResponseEntity<>("New order created.", HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -59,8 +69,8 @@ public class OrderController {
     }
 
     @PutMapping("/updateorder/{idorder}")
-    public ResponseEntity<String> updateOrder(@PathVariable("idorder") long idorder, @RequestBody Orders order) {
-        Orders _order = orderService.findById(idorder);
+    public ResponseEntity<String> updateOrder(@PathVariable("idorder") long idorder, @RequestBody Order order) {
+        Order _order = orderService.findById(idorder);
 
         if (_order != null) {
             _order.setIdorder((int) idorder);
@@ -73,6 +83,15 @@ public class OrderController {
         } else {
             return new ResponseEntity<>("Cannot find order with id=" + idorder, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PostMapping(path = "/update", consumes = "application/x-www-form-urlencoded")
+    public @ResponseBody
+    ModelAndView update(Order order) {
+        orderService.update(order);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("order");
+        return modelAndView;
     }
 
     @DeleteMapping("/deleteorder/{idorder}")
@@ -98,7 +117,5 @@ public class OrderController {
         }
 
     }
-
-
 
 }

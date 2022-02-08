@@ -71,11 +71,11 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "active")
     private short active;
-    @JsonIgnore
+    //@JsonIgnore
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Address addressId;
-    @JsonIgnore
+    //@JsonIgnore
     @JoinColumn(name = "privilege", referencedColumnName = "idprivilege")
     @ManyToOne(optional = false)
     private Privilege privilege;

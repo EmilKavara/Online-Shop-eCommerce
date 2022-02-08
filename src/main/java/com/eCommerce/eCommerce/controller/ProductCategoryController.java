@@ -4,12 +4,15 @@ import com.eCommerce.eCommerce.model.ProductCategory;
 import com.eCommerce.eCommerce.service.ProductCategoryService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,6 +24,11 @@ public class ProductCategoryController {
     
     @Autowired
     ProductCategoryService productCategoryService;
+
+    public Model addModelAttribute(Model model){
+        model.addAttribute("categories", productCategoryService.getAllProductCategory());
+        return model;
+    }
 
     @GetMapping("/getproductCategory")
     private List<ProductCategory> getAllProductCategory(){
@@ -53,19 +61,6 @@ public class ProductCategoryController {
         pc.setDescription(description);
         productCategoryService.addOrUpdateProductCategory(pc);
         return pc;
-    }
-    
-    public Model addModelAttribute(Model model){
-        ProductCategory category = new ProductCategory();
-        model.addAttribute("categories", productCategoryService.getAllProductCategory());
-        return model;
-    }
-    
-    @GetMapping("/testTable")
-    public String getAllcategories(Model model) {
-        List<ProductCategory> categories = productCategoryService.getAllProductCategory();
-        model.addAttribute("categories", categories);
-        return "testTable";
     }
 }
     
