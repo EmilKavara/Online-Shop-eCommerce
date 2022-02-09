@@ -11,10 +11,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
@@ -59,14 +58,20 @@ public class ShoppingCartServiceImplementation implements ShoppingCartService {
     public void checkout() throws NotEnoughProductsInStockException {
         Product product;
         for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-            product = productRepository.findOne(entry.getKey().getIdproduct());
+            product = productRepository.getById(entry.getKey().getIdproduct());
             if (product.getQuantity() < entry.getValue())
                 throw new NotEnoughProductsInStockException(product);
             entry.getKey().setQuantity(product.getQuantity() - entry.getValue());
         }
-        productRepository.save(products.keySet());
-        productRepository.flush();
-        products.clear();
+        Set<Product> product1=products.keySet();
+        ArrayList<Product> productArrayList=new ArrayList<>(product1);
+        for(Product product2:productArrayList){
+            productRepository.save(product2);
+            productRepository.flush();
+            products.clear();
+        }
+
+
     }
 
     @Override

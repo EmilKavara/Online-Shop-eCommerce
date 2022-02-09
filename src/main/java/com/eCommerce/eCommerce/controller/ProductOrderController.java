@@ -6,10 +6,7 @@
 package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.model.*;
-import com.eCommerce.eCommerce.service.OrderService;
-import com.eCommerce.eCommerce.service.ProductOrderService;
-import com.eCommerce.eCommerce.service.ProductService;
-import com.eCommerce.eCommerce.service.UserService;
+import com.eCommerce.eCommerce.service.*;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -33,16 +30,11 @@ public class ProductOrderController {
     @Autowired
     private UserService userService;
     @Autowired
-    private OrderService orderService;
+    private JdbcOrderService orderService;
 
 
-    /**
-     * Returns customer shopping cart. URL request {"/cart"}, method GET.
-     *
-     * @param userSession requested Authenticated customer.
-     * @param model       class object {@link Model}.
-     * @return cart page with model attributes.
-     */
+
+
     @GetMapping("/cart")
     public String getCart(@AuthenticationPrincipal User userSession, Model model) {
         //User userFromDB = userService.getUserById(userSession.getIduser());
@@ -126,14 +118,7 @@ public class ProductOrderController {
     }
 
 
-    /**
-     * Remove product from customer shopping cart and redirects it to "/cart".
-     * URL request {"/cart/remove"}, method POST.
-     *
-     * @param order       the product to be removed from the customer shopping cart.
-     * @param userSession request Authenticated customer.
-     * @return redirect to cart page.
-     */
+
     @PostMapping("/cart/remove")
     public String removeFromCart(
             @RequestParam(value = "idorder") Orders order,

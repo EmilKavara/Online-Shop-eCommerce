@@ -5,6 +5,7 @@ import com.eCommerce.eCommerce.model.Orders;
 import java.util.List;
 
 public interface OrderService {
+
     int save(Orders order);
 
     int update(Orders order);
@@ -17,3 +18,4 @@ public interface OrderService {
 
     int deleteAll();
 }
+

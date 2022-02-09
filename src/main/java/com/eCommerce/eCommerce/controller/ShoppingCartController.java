@@ -1,6 +1,7 @@
 package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.exception.NotEnoughProductsInStockException;
+import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.service.ProductService;
 import com.eCommerce.eCommerce.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RestController
 @RequestMapping(path = "/shoppingCart")
 public class ShoppingCartController {
+
     private final ShoppingCartService shoppingCartService;
 
     private final ProductService productService;
