@@ -6,6 +6,7 @@
 package com.eCommerce.eCommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,6 +44,7 @@ public class Order implements Serializable {
     @Basic(optional = false)
     @Column(name = "order_date")
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date orderDate;
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderId")

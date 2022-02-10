@@ -17,8 +17,27 @@
                 <input th:field="*{product.categoryId.idproductCategory}" name="categoryId" class="form-control"
                        id="editCategory" placeholder="Edit category" th:value="${product.categoryId.idproductCategory}">
             </div>
+            <div class="mb-3">
+                <label for="editDiscount" class="form-label">Edit Product discount: </label>
+                <input th:field="*{product.discountId.iddiscount}" name="discountId" class="form-control"
+                       id="editDiscount" placeholder="Edit discount" th:value="${product.discountId.iddiscount}">
+            </div>
         </div>
         <div class="col-lg-6">
+
+            <!--Drop-down is not working
+            <div class="mb-3">
+                <label for="editDiscount" class="form-label">Select discount:</label>
+                <select id="editDiscount" class="form-control form-control-lg" name="discountId">
+                    <option selected disabled value="">Select discount</option>
+                    <option th:each="discount:${discounts}"  
+                            th:value="${product.discountId.iddiscount}"
+                            th:text="${discount.discountPercent}">
+                    </option>
+                </select>
+                <div class="invalid-feedback">Please select product category</div>
+            </div>-->
+
             <div class="mb-3">
                 <label for="editPrice" class="form-label">Edit Product Price: </label>
                 <input type="number" name="price" class="form-control" id="editPrice" placeholder="Edit price"

@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Shopping cart</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+              integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
+    </head>
+    <body>
+
+        <h2>Shopping cart</h2>
+
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#4527A0;">
+
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="/resources/static/css/logoo.png" alt="" width="30" height="30">
+                </a>
+                <a href="/" class="navbar-brand"> click<span class="text-warning">SHOP</span> </a>
+                <div class="collapse navbar-collapse" id="navmenu" style="color:#f0ad4e;">
+                    Shopping cart
+                </div>
+            </div>
+        </nav>
+        <table id="orders"
+               class="table table-striped"
+               data-toggle="table"
+               data-id-field="orders"
+               data-url="http://localhost:8080/cart/getproduct"
+               data-pagination="true"
+               data-search="true"
+               data-search-align="left"
+               data-response-handler=""
+               >
+            <thead>
+                <tr>
+                    <th data-sortable="true" data-field="idproduct.name" data-editable="true" data-align="center">Product</th>
+                    <th data-sortable="true" data-field="quantity" data-align="center">Quantity</th>
+                    <th data-sortable="true" data-field="price" data-editable="true" data-align="center">Price</th>
+                    <th data-sortable="true" data-field="total" data-editable="true" data-align="center">Total</th>
+
+                    <th data-field="custom" data-editable="true" data-events="window.operateEvents" data-align="center"
+                        data-formatter="optionFormat">
+                        Options
+                    </th>
+                </tr>
+            </thead>
+        </table>
+        
+        <!--Pokusaj aktvne stranice sa 2 colone-->
+        <div class="row">
+            <div class="col">
+                <th:block th:each="item, status : ${order}">
+                    <div class="row border rounded" th:with="product=${item.product}">
+                        <div class="col">
+                            <div>[[${status.count}]]</div>
+                            <div><a class="fas fa-trash" th:href="@{/}"></a>
+                                    </div>
+                        </div>
+                        <div>
+                            <a>
+                                <b>[[{product.name}]]</b>
+                            </a>
+                        </div>
+                        <div><input type="number" th:value="${item.quantity}" class=form-control/></div>
+                        <div>
+                            <span>x</span>
+                            <span>[[${product.price}]]</span>
+                            
+                        </div>
+                        <div>
+                            <span>= </span>
+                            <span class="h4">[Subtotal]</span>
+                        </div>
+                    </div>       
+                </th:block>
+            </div>
+            <div class="col">
+                
+            </div>
+        </div>
+    </body>
+</html>

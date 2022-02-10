@@ -20,4 +20,5 @@ public class PassGenerator {
         
         System.out.println("Your encoded password is " + encodedPassword);
     }
+    
 }

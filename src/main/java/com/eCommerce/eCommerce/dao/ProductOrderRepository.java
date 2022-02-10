@@ -5,13 +5,16 @@
  */
 package com.eCommerce.eCommerce.dao;
 
-import com.eCommerce.eCommerce.model.Product;
+import com.eCommerce.eCommerce.model.ProductOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
+/**
+ *
+ * @author bnc
+ */
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer>{
-    Optional<Product> findById(Integer idproduct);
+public interface ProductOrderRepository extends JpaRepository<ProductOrder, Integer>{
+   
+    
 }
