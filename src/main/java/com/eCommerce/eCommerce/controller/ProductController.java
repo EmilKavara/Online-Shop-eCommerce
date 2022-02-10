@@ -8,7 +8,6 @@ package com.eCommerce.eCommerce.controller;
 import com.eCommerce.eCommerce.model.Discount;
 import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.model.ProductCategory;
-
 import com.eCommerce.eCommerce.service.ProductService;
 import com.eCommerce.eCommerce.service.DiscountService;
 import com.eCommerce.eCommerce.service.ProductCategoryService;
@@ -19,21 +18,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping(path = "/product")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
-    private DiscountService discountService;
-    private ProductCategoryService productCategoryService;
 
-    /*    @GetMapping("/products")
-    public String getAllProducts(Model model) {
-        List<Product> products = productService.getAllProducts();
-        model.addAttribute("products", products);
-        return "testTable";
-    }*/
     @GetMapping("/getproduct")
     private List<Product> getAllProducts() {
         List<Product> products = productService.getAllProducts();
@@ -52,6 +48,13 @@ public class ProductController {
     @GetMapping("/getproduct/{idproduct}")
     private Product getProduct(@PathVariable("idproduct") int idproduct) {
         return productService.getProductById(idproduct);
+    }
+
+    @GetMapping("/getproducts/{categoryId}")
+    public List<Product> getProductsByCategory(@PathVariable("categoryId") int categoryId) {
+        return productService.getAllProducts().stream()
+                .filter(product -> Objects.equals(product.getCategoryId().getIdproductCategory(), categoryId))
+                .collect(Collectors.toList());
     }
 
     @RequestMapping(value = "/products/delete/{idproduct}", method = {RequestMethod.DELETE})
@@ -81,21 +84,50 @@ public class ProductController {
         product.setCategoryId(category);
 
         productService.saveOrUpdate(product);
-        
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("products");
         return modelAndView;
     }
-    
+
     @PostMapping(path = "/product", consumes = "application/x-www-form-urlencoded")
     public @ResponseBody
     ModelAndView update(Product product) {
-        
-        
+
+
         productService.saveOrUpdate(product);
-        
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("products");
         return modelAndView;
+    }
+
+    @PostMapping("/products/edit/{idproduct}")
+    public @ResponseBody
+    ModelAndView update(@PathVariable("idproduct") int idproduct, @RequestParam String name, @RequestParam String description,
+                        @RequestParam BigDecimal price, @RequestParam Integer quantity, @RequestParam Integer active) {
+
+        Product product = productService.getProductById(idproduct);
+
+        if (!name.isEmpty()) {
+            product.setName(name);
+        }
+        if (!description.isEmpty()) {
+            product.setDescription(description);
+        }
+        if (price != null) {
+            product.setPrice(price);
+        }
+        if (quantity != null) {
+            product.setQuantity(quantity);
+        }
+        if (active != null) {
+            product.setActive(active);
+        }
+        productService.saveOrUpdate(product);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("product");
+        return modelAndView;
+
     }
 }

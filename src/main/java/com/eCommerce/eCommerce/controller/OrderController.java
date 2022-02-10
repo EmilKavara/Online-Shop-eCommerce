@@ -1,11 +1,13 @@
 package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.model.Order;
+import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ public class OrderController {
             List<Order> orders = new ArrayList<Order>();
 
             if (order == null)
-                orderService.findAll().forEach(orders::add);
+                orders.addAll(orderService.findAll());
 
             if (orders.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -45,6 +47,15 @@ public class OrderController {
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
+    }
+
+    @GetMapping("/get/{idorder}")
+    private ModelAndView getProductById(@PathVariable("idorder") int idorder) {
+        Order order = getOrderById(idorder).getBody();
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("editOrder");
+        modelAndView.addObject("order", order);
+        return modelAndView;
     }
 
     @PostMapping("/addorder")
@@ -72,6 +83,15 @@ public class OrderController {
         } else {
             return new ResponseEntity<>("Cannot find order with id=" + idorder, HttpStatus.NOT_FOUND);
         }
+    }
+
+    @PostMapping(path = "/update", consumes = "application/x-www-form-urlencoded")
+    public @ResponseBody
+    ModelAndView update(Order order) {
+        orderService.update(order);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("order");
+        return modelAndView;
     }
 
     @DeleteMapping("/deleteorder/{idorder}")
