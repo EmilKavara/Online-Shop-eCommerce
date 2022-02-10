@@ -96,4 +96,9 @@ public class AppController {
         return new ModelAndView("productsByCategory");
     }
 
+    @RequestMapping("/shoppingCart")
+    public ModelAndView shoppingCart() {
+        return new ModelAndView("shopingCart");
+    }
+
 }

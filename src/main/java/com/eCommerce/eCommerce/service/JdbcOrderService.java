@@ -1,13 +1,10 @@
 package com.eCommerce.eCommerce.service;
 
-import com.eCommerce.eCommerce.model.Order;
 import com.eCommerce.eCommerce.model.Orders;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
