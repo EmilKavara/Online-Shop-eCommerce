@@ -5,25 +5,37 @@
  */
 package com.eCommerce.eCommerce.model;
 
+import com.eCommerce.eCommerce.model.Product;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
+ *
  * @author bnc
  */
 @Entity
 @Table(name = "product_category")
 @XmlRootElement
 @NamedQueries({
-        @NamedQuery(name = "ProductCategory.findAll", query = "SELECT p FROM ProductCategory p"),
-        @NamedQuery(name = "ProductCategory.findByIdproductCategory", query = "SELECT p FROM ProductCategory p WHERE p.idproductCategory = :idproductCategory"),
-        @NamedQuery(name = "ProductCategory.findByName", query = "SELECT p FROM ProductCategory p WHERE p.name = :name"),
-        @NamedQuery(name = "ProductCategory.findByDescription", query = "SELECT p FROM ProductCategory p WHERE p.description = :description"),
-        @NamedQuery(name = "ProductCategory.deleteById", query = "DELETE FROM ProductCategory p WHERE p.idproductCategory = :idproductCategory")})
+    @NamedQuery(name = "ProductCategory.findAll", query = "SELECT p FROM ProductCategory p"),
+    @NamedQuery(name = "ProductCategory.findByIdproductCategory", query = "SELECT p FROM ProductCategory p WHERE p.idproductCategory = :idproductCategory"),
+    @NamedQuery(name = "ProductCategory.findByName", query = "SELECT p FROM ProductCategory p WHERE p.name = :name"),
+    @NamedQuery(name = "ProductCategory.findByDescription", query = "SELECT p FROM ProductCategory p WHERE p.description = :description")})
+    
 public class ProductCategory implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -108,7 +120,7 @@ public class ProductCategory implements Serializable {
 
     @Override
     public String toString() {
-        return "com.eCommerce.eCommerce.model.ProductCategory[ idproductCategory=" + idproductCategory + " ]";
+        return "Id product:" + idproductCategory + ", name product:" + name + ", description: " + description + " ]";
     }
-
+    
 }
