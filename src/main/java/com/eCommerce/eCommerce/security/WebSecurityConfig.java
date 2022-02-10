@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eCommerce.eCommerce.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,11 +46,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/loginPage", "/registration").permitAll()
-                .antMatchers("/userPage", "/shopingCart").hasAuthority("user")
-                .antMatchers("/adminPage", "/order", "/products").hasAuthority("admin")
+                .antMatchers("/", "/home", "/login").permitAll()
+                .antMatchers("/userPage").hasAuthority("user")
+                .antMatchers("/adminPage").hasAuthority("admin")
                 .and()
-                .formLogin().loginPage("/loginPage")
+                .formLogin().loginPage("/login")
                 .successHandler(successHandler).permitAll()
                 .and()
                 .logout().permitAll()

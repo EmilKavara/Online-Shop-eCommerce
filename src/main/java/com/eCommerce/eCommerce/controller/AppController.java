@@ -40,8 +40,13 @@ public class AppController {
         return new ModelAndView("loginPage");
     }
 
-    @RequestMapping("/registration")
-    public ModelAndView registration() {
+    @RequestMapping("/productCategory/update")
+    public ModelAndView update(){
+        return new ModelAndView("productCategory");
+    }
+
+     @RequestMapping("/registration")
+    public ModelAndView registration(){
         return new ModelAndView("registration");
     }
 
@@ -55,8 +60,8 @@ public class AppController {
         return new ModelAndView("product");
     }
 
-    @RequestMapping("/user/getusers")
-    public ModelAndView user() {
+    @RequestMapping("/user")
+    public ModelAndView user(){
         return new ModelAndView("user");
     }
 
@@ -71,15 +76,11 @@ public class AppController {
     }
 
 
-    @RequestMapping("/testTable")
-    public ModelAndView testTable() {
-        return new ModelAndView("testTable");
+    @RequestMapping("/products")
+    public ModelAndView products(){
+        return new ModelAndView("products");
     }
 
-    @RequestMapping("product/update")
-    public ModelAndView update() {
-        return new ModelAndView("product");
-    }
 
     @RequestMapping("/aboutUs")
     public ModelAndView aboutUs() {
@@ -89,6 +90,21 @@ public class AppController {
     @RequestMapping("/productCategory/getproductCategory")
     public ModelAndView productCategory() {
         return new ModelAndView("productCategory");
+    }
+
+     @RequestMapping("/productCategory/add")
+    public ModelAndView addProductCategory(){
+        return new ModelAndView("productCategory");
+    }
+
+    @RequestMapping("/cart")
+    public ModelAndView cart(){
+        return new ModelAndView("cart");
+    }
+
+    @RequestMapping("/shopingCart")
+    public ModelAndView shopingCart(){
+        return new ModelAndView("shopingCart");
     }
 
     @RequestMapping("/product/getproduct")

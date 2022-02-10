@@ -64,7 +64,8 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public String addNewProduct(Product product) {
+    public @ResponseBody
+    ModelAndView addNewProduct(Product product) {
         Short num = (short) 1;
         product.setActive(num);
 
@@ -78,20 +79,22 @@ public class ProductController {
         product.setCategoryId(category);
 
         productService.saveOrUpdate(product);
-        return "Saved";
-    }
 
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("products");
+        return modelAndView;
+    }
 
     @PostMapping(path = "/product", consumes = "application/x-www-form-urlencoded")
     public @ResponseBody
     ModelAndView update(Product product) {
         productService.saveOrUpdate(product);
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("testTable");
+        modelAndView.setViewName("products");
         return modelAndView;
     }
 
-    @PostMapping("/products/edit/{idproduct}")
+    @PostMapping(path = "/product", consumes = "application/x-www-form-urlencoded")
     public @ResponseBody
     ModelAndView update(@PathVariable("idproduct") int idproduct, @RequestParam String name, @RequestParam String description,
                         @RequestParam BigDecimal price, @RequestParam Integer quantity, @RequestParam Integer active) {
