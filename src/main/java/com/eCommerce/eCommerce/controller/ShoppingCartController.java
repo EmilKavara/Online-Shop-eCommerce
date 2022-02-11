@@ -15,11 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping(path = "/shoppingCart")
 public class ShoppingCartController {
 
+    @Autowired
     private final ShoppingCartService shoppingCartService;
 
+    @Autowired
     private final ProductService productService;
 
-    @Autowired
     public ShoppingCartController(ShoppingCartService shoppingCartService, ProductService productService) {
         this.shoppingCartService = shoppingCartService;
         this.productService = productService;
@@ -45,7 +46,7 @@ public class ShoppingCartController {
         return shoppingCart();
     }
 
-    @GetMapping("/shoppingCart/checkout")
+    @GetMapping("/checkout")
     public ModelAndView checkout() {
         try {
             shoppingCartService.checkout();
