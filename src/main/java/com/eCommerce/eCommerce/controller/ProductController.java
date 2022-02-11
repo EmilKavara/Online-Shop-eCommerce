@@ -94,7 +94,7 @@ public class ProductController {
         return modelAndView;
     }
 
-    @PostMapping(path = "/product", consumes = "application/x-www-form-urlencoded")
+    /*@PostMapping(path = "/product", consumes = "application/x-www-form-urlencoded")
     public @ResponseBody
     ModelAndView update(@PathVariable("idproduct") int idproduct, @RequestParam String name, @RequestParam String description,
                         @RequestParam BigDecimal price, @RequestParam Integer quantity, @RequestParam Integer active) {
@@ -121,5 +121,5 @@ public class ProductController {
         modelAndView.setViewName("product");
         return modelAndView;
 
-    }
+    }*/
 }
