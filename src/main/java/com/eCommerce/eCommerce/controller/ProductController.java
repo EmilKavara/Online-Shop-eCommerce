@@ -8,6 +8,7 @@ package com.eCommerce.eCommerce.controller;
 import com.eCommerce.eCommerce.model.Discount;
 import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.model.ProductCategory;
+import com.eCommerce.eCommerce.service.ProductCategoryService;
 import com.eCommerce.eCommerce.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,9 @@ public class ProductController {
 
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ProductCategoryService productCategoryService;
 
     @GetMapping("/getproduct")
     private List<Product> getAllProducts() {
@@ -65,7 +69,7 @@ public class ProductController {
 
     @PostMapping("/add")
     public @ResponseBody
-    ModelAndView addNewProduct(Product product) {
+    ModelAndView addNewProduct(Product product, @RequestParam(required = false) Integer productCategory) {
         Short num = (short) 1;
         product.setActive(num);
 
@@ -75,12 +79,18 @@ public class ProductController {
         product.setDiscountId(discount);
 
         ProductCategory category = new ProductCategory();
-        category.setIdproductCategory(1);
+        if(productCategory!=null){
+            category.setIdproductCategory(productCategory);
+        }else{
+            category.setIdproductCategory(1);
+        }
         product.setCategoryId(category);
 
         productService.saveOrUpdate(product);
 
+        List<ProductCategory> categories=productCategoryService.getAllProductCategory();
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("categories",categories);
         modelAndView.setViewName("products");
         return modelAndView;
     }

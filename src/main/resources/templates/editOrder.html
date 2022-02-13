@@ -1,11 +1,11 @@
-<form id="editForm" method="POST" action="/order/update" name="editForm" class="needs-validation" novalidate>
+<form id="editForm" method="POST" action="/order/update" name="editForm"  novalidate>
     <input type="hidden" name="idorder" th:value="${order.idorder}"/>
     <div class="row">
         <div class="col-lg-6">
             <div class="mb-3">
                 <label for="editName" class="form-label">Edit User Name: </label>
-                <input th:field="*{order.userId.iduser}" name="userId" class="form-control" id="editName"
-                       th:value="*{order.userId.iduser}">
+                <input th:field="${order.userId.iduser}" name="userId" class="form-control" id="editName"
+                       th:value="${order.userId.iduser}">
             </div>
             <div class="mb-3">
                 <label for="editAmount" class="form-label">Edit product Amount: </label>
@@ -19,7 +19,7 @@
             </div>
             <div class="mb-3">
                 <label for="editDate" class="form-label">Edit Order date: </label>
-                <input type="date" name="orderDate" class="form-control"
+                <input required type="date" name="orderDate" class="form-control"
                        id="editDate" th:field="${order.orderDate}" th:value="${order.orderDate}">
             </div>
         </div>

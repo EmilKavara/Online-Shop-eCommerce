@@ -14,8 +14,8 @@
         <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
                 th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
 
-        <link rel="stylesheet" th:href="@{/static/css/eCommerce.css}"
-              href="../static/css/eCommerce.css"/>
+        <link rel="stylesheet" th:href="@{/css/eCommerce.css}"
+              href="../css/eCommerce.css"/>
     </div>
 
 </head>
@@ -40,7 +40,7 @@
                 </ul>
                 <!-- show login only if user is not yet authenticated -->
                 <ul class="nav navbar-nav" sec:authorize="!isAuthenticated()">
-                    <li class="active"><a th:href="@{/login}">Login</a></li>
+                    <li class="active"><a th:href="@{/loginPage}">Login</a></li>
                 </ul>
                 <!-- show sign out only if user is authenticated -->
                 <ul class="nav navbar-nav" sec:authorize="isAuthenticated()">

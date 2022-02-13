@@ -11,14 +11,11 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.19.1/dist/bootstrap-table.min.css">
 </head>
 <body>
-
-<h2>Products</h2>
-
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#4527A0;">
 
     <div class="container">
         <a class="navbar-brand" href="/">
-            <img src="/resources/static/css/logoo.png" alt="" width="30" height="30">
+            <img src="/images/logoo.png" alt="" width="30" height="30">
         </a>
         <a href="/" class="navbar-brand"> click<span class="text-warning">SHOP</span> </a>
         <div class="collapse navbar-collapse" id="navmenu" style="color:#f0ad4e;">
@@ -70,6 +67,7 @@
                                 data-live-search="true">
                             <option th:each="productCategory:${categories}"
                                     th:value="${productCategory.idproductCategory}"
+                                    value="${productCategory.idProductCategory}"
                                     th:text="${productCategory.name}">
                             </option>
                         </select>
