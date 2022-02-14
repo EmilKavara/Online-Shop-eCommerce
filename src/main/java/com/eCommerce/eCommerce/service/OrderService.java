@@ -12,6 +12,8 @@ public interface OrderService {
 
     Orders findById(Long id);
 
+    Orders findLast();
+
     int deleteById(Long id);
 
     List<Orders> findAll();

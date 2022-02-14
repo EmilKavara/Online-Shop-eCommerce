@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eCommerce.eCommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -13,9 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-/**
- * @author bnc
- */
+
 @Entity
 @Table(name = "users")
 @XmlRootElement
@@ -71,11 +65,9 @@ public class User implements Serializable {
     @Basic(optional = false)
     @Column(name = "active")
     private short active;
-    //@JsonIgnore
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Address addressId;
-    //@JsonIgnore
     @JoinColumn(name = "privilege", referencedColumnName = "idprivilege")
     @ManyToOne(optional = false)
     private Privilege privilege;

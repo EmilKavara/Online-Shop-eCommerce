@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eCommerce.eCommerce.model;
 
 import javax.persistence.*;
@@ -10,9 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-/**
- * @author bnc
- */
+
 @Entity
 @Table(name = "product_order")
 @XmlRootElement
@@ -32,12 +25,11 @@ public class ProductOrder implements Serializable {
     @Basic(optional = false)
     @Column(name = "quantity")
     private int quantity;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "total")
     private BigDecimal total;
-    @JoinColumn(name = "order_id", referencedColumnName = "idorder",nullable=false)
-    @ManyToOne(optional = false,cascade=CascadeType.ALL)
+    @JoinColumn(name = "order_id", referencedColumnName = "idorder", nullable = false)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
     private Orders orderId;
     @JoinColumn(name = "product_id", referencedColumnName = "idproduct")
     @ManyToOne(optional = false)

@@ -2,9 +2,7 @@ package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.model.Order;
 import com.eCommerce.eCommerce.model.Orders;
-import com.eCommerce.eCommerce.model.Product;
 import com.eCommerce.eCommerce.service.JdbcOrderService;
-import com.eCommerce.eCommerce.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +14,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(path="/order")
+@RequestMapping(path = "/order")
 public class OrderController {
 
     @Autowired

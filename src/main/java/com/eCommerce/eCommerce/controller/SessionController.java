@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eCommerce.eCommerce.controller;
 
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -22,24 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 public class SessionController {
 
     @GetMapping("/")
-    public @ResponseBody ResponseEntity<List> getMessage(Model model, HttpSession session) {
+    public @ResponseBody
+    ResponseEntity<List> getMessage(Model model, HttpSession session) {
         List greetings = (List) session.getAttribute("GREETING_MESSAGES");
-        if(greetings == null) {
+        if (greetings == null) {
             greetings = new ArrayList<>();
         }
 
-        return new ResponseEntity<List>(greetings,HttpStatus.OK);
+        return new ResponseEntity<List>(greetings, HttpStatus.OK);
     }
 
     @PostMapping("/messages")
-    public @ResponseBody ResponseEntity<List> saveMessage(@RequestParam("message") String greeting, HttpServletRequest request)
-    {
+    public @ResponseBody
+    ResponseEntity<List> saveMessage(@RequestParam("message") String greeting, HttpServletRequest request) {
         List greetings = (List) request.getSession().getAttribute("GREETING_MESSAGES");
-        if(greetings == null) {
+        if (greetings == null) {
             greetings = new ArrayList<>();
             request.getSession().setAttribute("GREETING_MESSAGES", greetings);
         }
         greetings.add(greeting);
-        return new ResponseEntity<List>(greetings,HttpStatus.OK);
+        return new ResponseEntity<List>(greetings, HttpStatus.OK);
     }
 }

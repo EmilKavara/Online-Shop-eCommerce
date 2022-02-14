@@ -15,7 +15,7 @@
                 th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
 
         <link rel="stylesheet" th:href="@{/css/eCommerce.css}"
-              href="../css/eCommerce.css"/>
+              href="/css/eCommerce.css"/>
     </div>
 
 </head>
@@ -32,7 +32,7 @@
             <div id="navbar" class="collapse navbar-collapse navbar-right">
                 <!-- show shoppingCart only if user is not yet authenticated -->
                 <ul class="nav navbar-nav" sec:authorize="isAuthenticated()">
-                    <li class="active"><a th:href="@{/shoppingCart}">Shopping Cart</a></li>
+                    <li class="active"><a th:href="@{/userPage}">User Page</a></li>
                 </ul>
                 <!-- show registration only if user is not yet authenticated -->
                 <ul class="nav navbar-nav" sec:authorize="!isAuthenticated()">

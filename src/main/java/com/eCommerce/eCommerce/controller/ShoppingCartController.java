@@ -1,10 +1,12 @@
 package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.exception.NotEnoughProductsInStockException;
-import com.eCommerce.eCommerce.model.Product;
+import com.eCommerce.eCommerce.model.User;
 import com.eCommerce.eCommerce.service.ProductService;
 import com.eCommerce.eCommerce.service.ShoppingCartService;
+import com.eCommerce.eCommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,9 @@ public class ShoppingCartController {
 
     @Autowired
     private final ProductService productService;
+
+    @Autowired
+    private UserService userService;
 
     public ShoppingCartController(ShoppingCartService shoppingCartService, ProductService productService) {
         this.shoppingCartService = shoppingCartService;
@@ -47,9 +52,10 @@ public class ShoppingCartController {
     }
 
     @GetMapping("/checkout")
-    public ModelAndView checkout() {
+    public ModelAndView checkout(@AuthenticationPrincipal User userSession) {
         try {
-            shoppingCartService.checkout();
+            User user = userService.getUserById(2);
+            shoppingCartService.checkout(user);
         } catch (NotEnoughProductsInStockException e) {
             return shoppingCart().addObject("outOfStockMessage", e.getMessage());
         }

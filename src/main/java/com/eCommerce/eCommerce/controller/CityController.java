@@ -7,7 +7,9 @@ package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.model.City;
 import com.eCommerce.eCommerce.service.CityService;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +22,14 @@ public class CityController {
 
     @Autowired
     private CityService cityService;
-    
-    public Model addModelAttribute(Model model){
+
+    public Model addModelAttribute(Model model) {
         model.addAttribute("cities", cityService.getAllCities());
         return model;
     }
-    
+
     @GetMapping("/cities")
-    public String GetAllCities(Model model){
+    public String GetAllCities(Model model) {
         addModelAttribute(model);
         return "testTable";
     }
@@ -38,7 +40,7 @@ public class CityController {
         model.addAttribute("cities", cities);
         return "registration";
     }
-    
+
     @GetMapping("/getcity/{idcity}")
     private City getCity(@PathVariable("idcity") int idcity) {
         return cityService.getCityById(idcity);

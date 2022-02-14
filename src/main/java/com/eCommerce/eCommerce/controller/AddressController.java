@@ -2,7 +2,9 @@ package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.model.Address;
 import com.eCommerce.eCommerce.service.AddressService;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +29,7 @@ public class AddressController {
         model.addAttribute("addresses", addresses);
         return "testTable";
     }
-    
+
     @GetMapping("/getaddress")
     private List<Address> getAllAddresses() {
         return addressService.getAllAddresses();
@@ -44,7 +46,8 @@ public class AddressController {
     }
 
     @PostMapping(path = "/add")
-    public @ResponseBody String addNewProduct(Address address) {
+    public @ResponseBody
+    String addNewProduct(Address address) {
 
         addressService.saveOrUpdate(address);
         return "Saved";

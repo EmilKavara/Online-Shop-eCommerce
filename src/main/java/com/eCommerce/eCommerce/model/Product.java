@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eCommerce.eCommerce.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -13,11 +8,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
-import javax.persistence.metamodel.SingularAttribute;
 
-/**
- * @author bnc
- */
 @Entity
 @Table(name = "product")
 @XmlRootElement
@@ -42,7 +33,6 @@ public class Product implements Serializable {
     private String name;
     @Column(name = "description")
     private String description;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Basic(optional = false)
     @Column(name = "price")
     private BigDecimal price;
@@ -52,11 +42,9 @@ public class Product implements Serializable {
     @Basic(optional = false)
     @Column(name = "active")
     private short active;
-    //@JsonIgnore
     @JoinColumn(name = "category_id", referencedColumnName = "idproduct_category")
     @ManyToOne(optional = false)
     private ProductCategory categoryId;
-    //@JsonIgnore
     @JoinColumn(name = "discount_id", referencedColumnName = "iddiscount")
     @ManyToOne
     private Discount discountId;
@@ -74,7 +62,7 @@ public class Product implements Serializable {
     public Product(Integer idproduct, String name, String description, BigDecimal price, int quantity, short active) {
         this.idproduct = idproduct;
         this.name = name;
-        this.description=description;
+        this.description = description;
         this.price = price;
         this.quantity = quantity;
         this.active = active;
@@ -128,6 +116,10 @@ public class Product implements Serializable {
         this.active = active;
     }
 
+    public void setActive(int i) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
     public ProductCategory getCategoryId() {
         return categoryId;
     }
@@ -176,10 +168,6 @@ public class Product implements Serializable {
     @Override
     public String toString() {
         return "com.eCommerce.eCommerce.model.Product[ idproduct=" + idproduct + " ]";
-    }
-
-    public void setActive(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

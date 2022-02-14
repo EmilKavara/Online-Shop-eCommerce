@@ -18,17 +18,15 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     private final PasswordEncoder passwordEncoder;
+    @Autowired
+    UserService userService;
+    @Autowired
+    AddressService addressService;
 
     @Autowired
     public UserController(PasswordEncoder passwordEncoder) {
         this.passwordEncoder = passwordEncoder;
     }
-
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    AddressService addressService;
 
     @GetMapping("/getuser")
     private List<User> getAllUsers() {
@@ -54,19 +52,12 @@ public class UserController {
         userService.delete(iduser);
     }
 
-    /*@PostMapping(path = "/product", consumes = "application/x-www-form-urlencoded")
-    public @ResponseBody
-    ModelAndView update(Product product) {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("testTable");
-        return modelAndView;
-    }*/
     @PostMapping(path = "/add")
     public @ResponseBody
     ModelAndView addNewUser(@RequestParam String firstName, @RequestParam String lastName,
-                      @RequestParam String gender, @RequestParam String username, @RequestParam String password, @RequestParam Date dateOfBirth,
-                      @RequestParam String street, @RequestParam int number, @RequestParam String cityname,
-                      @RequestParam String phone, @RequestParam String email) {
+                            @RequestParam String gender, @RequestParam String username, @RequestParam String password, @RequestParam Date dateOfBirth,
+                            @RequestParam String street, @RequestParam int number, @RequestParam String cityname,
+                            @RequestParam String phone, @RequestParam String email) {
         User n = new User();
         n.setFirstName(firstName);
         n.setLastName(lastName);
@@ -98,7 +89,7 @@ public class UserController {
         addressService.saveOrUpdate(address);
         n.setAddressId(address);
         userService.saveOrUpdate(n);
-        
+
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("loginPage");
         return modelAndView;
@@ -136,6 +127,7 @@ public class UserController {
         return modelAndView;
 
     }
+
     @PostMapping(path = "/user", consumes = "application/x-www-form-urlencoded")
     public @ResponseBody
     ModelAndView update(User user) {

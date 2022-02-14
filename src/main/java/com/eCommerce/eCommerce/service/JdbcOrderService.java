@@ -10,21 +10,21 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public  class JdbcOrderService implements OrderService {
+public class JdbcOrderService implements OrderService {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
     @Override
     public int save(Orders order) {
-        return jdbcTemplate.update("INSERT INTO orders (idorder, amount, shipping_address, order_date) VALUES(?,?,?,?)",
-                new Object[]{order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate()});
+        return jdbcTemplate.update("INSERT INTO orders (amount, shipping_address, order_date,user_id) VALUES(?,?,?,?)",
+                new Object[]{order.getAmount(), order.getShippingAddress(), order.getOrderDate(), order.getUserId().getIduser()});
     }
 
     @Override
     public int update(Orders order) {
         return jdbcTemplate.update("UPDATE orders SET idorder=?, amount=?, shipping_address=?, order_date=? WHERE idorder=?",
-                new Object[]{order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate(),order.getIdorder()});
+                new Object[]{order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate(), order.getIdorder()});
     }
 
     @Override
@@ -33,6 +33,17 @@ public  class JdbcOrderService implements OrderService {
             return jdbcTemplate.queryForObject(
                     "SELECT * FROM orders JOIN users ON users.iduser = orders.user_id WHERE idorder=?",
                     BeanPropertyRowMapper.newInstance(Orders.class), id);
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public Orders findLast() {
+        try {
+            return jdbcTemplate.queryForObject(
+                    "SELECT * FROM orders JOIN users ON users.iduser = orders.user_id ORDER BY idorder DESC LIMIT 1",
+                    BeanPropertyRowMapper.newInstance(Orders.class));
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;
         }

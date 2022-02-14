@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.model.Discount;
@@ -14,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -79,18 +73,18 @@ public class ProductController {
         product.setDiscountId(discount);
 
         ProductCategory category = new ProductCategory();
-        if(productCategory!=null){
+        if (productCategory != null) {
             category.setIdproductCategory(productCategory);
-        }else{
+        } else {
             category.setIdproductCategory(1);
         }
         product.setCategoryId(category);
 
         productService.saveOrUpdate(product);
 
-        List<ProductCategory> categories=productCategoryService.getAllProductCategory();
+        List<ProductCategory> categories = productCategoryService.getAllProductCategory();
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.addObject("categories",categories);
+        modelAndView.addObject("categories", categories);
         modelAndView.setViewName("products");
         return modelAndView;
     }
@@ -104,32 +98,4 @@ public class ProductController {
         return modelAndView;
     }
 
-    /*@PostMapping(path = "/product", consumes = "application/x-www-form-urlencoded")
-    public @ResponseBody
-    ModelAndView update(@PathVariable("idproduct") int idproduct, @RequestParam String name, @RequestParam String description,
-                        @RequestParam BigDecimal price, @RequestParam Integer quantity, @RequestParam Integer active) {
-
-        Product product = productService.getProductById(idproduct);
-
-        if (!name.isEmpty()) {
-            product.setName(name);
-        }
-        if (!description.isEmpty()) {
-            product.setDescription(description);
-        }
-        if (price != null) {
-            product.setPrice(price);
-        }
-        if (quantity != null) {
-            product.setQuantity(quantity);
-        }
-        if (active != null) {
-            product.setActive(active);
-        }
-        productService.saveOrUpdate(product);
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("product");
-        return modelAndView;
-
-    }*/
 }

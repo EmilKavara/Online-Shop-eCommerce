@@ -39,6 +39,6 @@ public class UserService {
     public int update(User user) {
 
         return jdbcTemplate.update("UPDATE users SET iduser=?, first_name=?, last_name=?, username=?, email=?,phone=? WHERE iduser=?",
-                new Object[]{user.getIduser(), user.getFirstName(), user.getLastName(), user.getUsername(),user.getEmail(),user.getPhone(),user.getIduser()});
+                new Object[]{user.getIduser(), user.getFirstName(), user.getLastName(), user.getUsername(), user.getEmail(), user.getPhone(), user.getIduser()});
     }
 }  

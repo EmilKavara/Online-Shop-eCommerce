@@ -1,20 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eCommerce.eCommerce.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
-import java.util.List;
 
-/**
- * @author bnc
- */
 @Entity
 @Table(name = "city")
 @XmlRootElement
@@ -37,9 +26,6 @@ public class City implements Serializable {
     @Basic(optional = false)
     @Column(name = "postal_number")
     private int postalNumber;
-    //@JsonIgnore
-    //@OneToMany(cascade = CascadeType.ALL, mappedBy = "idCity")
-    //private List<Address> addressList;
 
     public City() {
     }
@@ -77,15 +63,6 @@ public class City implements Serializable {
     public void setPostalNumber(int postalNumber) {
         this.postalNumber = postalNumber;
     }
-
-    //@XmlTransient
-    //public List<Address> getAddressList() {
-      //  return addressList;
-    //}
-
-    //public void setAddressList(List<Address> addressList) {
-        //this.addressList = addressList;
-    //}
 
     @Override
     public int hashCode() {

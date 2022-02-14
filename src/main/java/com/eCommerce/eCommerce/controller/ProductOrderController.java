@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.eCommerce.eCommerce.controller;
 
 import com.eCommerce.eCommerce.model.*;
@@ -33,11 +28,8 @@ public class ProductOrderController {
     private JdbcOrderService orderService;
 
 
-
-
     @GetMapping("/cart")
     public String getCart(@AuthenticationPrincipal User userSession, Model model) {
-        //User userFromDB = userService.getUserById(userSession.getIduser());
         User userFromDB = userService.getUserById(1);
         Orders orders = userFromDB.getOrderList().get(0);
         List<ProductOrder> po = orders.getProductOrderList();
@@ -64,7 +56,6 @@ public class ProductOrderController {
         long millis = System.currentTimeMillis();
         java.sql.Date date1 = new java.sql.Date(millis);
         order.setOrderDate(date1);
-        //User user1 = userService.getUserById(userSession.getIduser());
         User user = userService.getUserById(1);
         order.setUserId(user);
         Product product = productService.getProductById(idproduct);
@@ -96,15 +87,9 @@ public class ProductOrderController {
             @RequestParam("idproduct") int idproduct, @RequestParam("quantity") int quantity,
             @AuthenticationPrincipal User userSession
     ) {
-        //HashMap<Product,Integer> productMap=new HashMap<>();
-        //HashMap<String, Integer> productMap = new HashMap<>();
         Product product = productService.getProductById(idproduct);
-        //productMap.put("string", quantity);
-        // List<HashMap<Product,Integer>> list=new ArrayList<>();
         List<Product> list = new ArrayList<>();
-        //list.add(productMap);
         list.add(product);
-        //User user=userService.getUserById(userSession.getIduser());
         User user = userService.getUserById(1);
         ModelAndView modelAndView = new ModelAndView();
         Date date = new Date();
@@ -118,13 +103,11 @@ public class ProductOrderController {
     }
 
 
-
     @PostMapping("/cart/remove")
     public String removeFromCart(
             @RequestParam(value = "idorder") Orders order,
             @AuthenticationPrincipal User userSession
     ) {
-        //User user = userService.getUserById(userSession.getIduser());
         User user = userService.getUserById(1);
 
         if (order != null) {
