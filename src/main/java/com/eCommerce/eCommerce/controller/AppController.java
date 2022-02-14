@@ -35,6 +35,11 @@ public class AppController {
         return new ModelAndView("adminPage");
     }
 
+    @RequestMapping("/")
+    public ModelAndView home() {
+        return new ModelAndView("home");
+    }
+
     @RequestMapping(value = "/loginPage")
     public ModelAndView loginPage() {
         return new ModelAndView("loginPage");
@@ -76,17 +81,6 @@ public class AppController {
     }
 
 
-    @RequestMapping("/products")
-    public ModelAndView products() {
-        return new ModelAndView("products");
-    }
-
-
-    @RequestMapping("/aboutUs")
-    public ModelAndView aboutUs() {
-        return new ModelAndView("aboutUs");
-    }
-
     @RequestMapping("/productCategory/getproductCategory")
     public ModelAndView productCategory() {
         return new ModelAndView("productCategory");
@@ -114,7 +108,7 @@ public class AppController {
 
     @RequestMapping("/shoppingCart")
     public ModelAndView shoppingCart() {
-        return new ModelAndView("shopingCart");
+        return new ModelAndView("shoppingCart");
     }
 
 }

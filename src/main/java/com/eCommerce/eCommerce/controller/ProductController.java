@@ -29,6 +29,15 @@ public class ProductController {
         return products;
     }
 
+    @GetMapping("/products")
+    private ModelAndView getAllProducts2() {
+        List<ProductCategory> categories = productCategoryService.getAllProductCategory();
+        ModelAndView modelAndView=new ModelAndView();
+        modelAndView.setViewName("products");
+        modelAndView.addObject("categories",categories);
+        return modelAndView;
+    }
+
     @GetMapping("/get/{idproduct}")
     private ModelAndView getProductById(@PathVariable("idproduct") int idproduct) {
         Product product = getProduct(idproduct);
