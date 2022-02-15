@@ -1,0 +1,17 @@
+<form id="editForm" method="POST" action="/productCategory/productCategory/edit" name="editForm"  novalidate>
+    <input type="hidden" name="idproductCategory" th:value="${productCategory.idproductCategory}"/>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="mb-3">
+                <label for="editName" class="form-label">Edit Name: </label>
+                <input th:field="${productCategory.name}" name="name" class="form-control" id="editName"
+                       th:value="${productCategory.name}">
+            </div>
+            <div class="mb-3">
+                <label for="editDesc" class="form-label">Edit Description: </label>
+                <input type="text" name="description" class="form-control" id="editDesc"
+                       placeholder="Edit description" th:value="${productCategory.description}">
+            </div>
+        </div>
+    </div>
+</form>

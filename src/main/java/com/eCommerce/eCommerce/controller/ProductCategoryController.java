@@ -23,7 +23,7 @@ public class ProductCategoryController {
 
     @GetMapping("/get/{idproductCategory}")
     private ModelAndView getProductCategoryById(@PathVariable("idproductCategory") int idproductCategory) {
-        ProductCategory productCategory = getProductCategory(idproductCategory);
+        ProductCategory productCategory = productCategoryService.getProductCategoryById(idproductCategory);
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("editProductCategory");
         modelAndView.addObject("productCategory", productCategory);
@@ -59,9 +59,9 @@ public class ProductCategoryController {
         return modelAndView;
     }
 
-    @PostMapping("/productCategory/edit/{idproductCategory}")
+    @PostMapping("/productCategory/edit")
     public @ResponseBody
-    ModelAndView update(@PathVariable("idproductCategory") int idproductCategory, @RequestParam String name, @RequestParam String description) {
+    ModelAndView update(@RequestParam int idproductCategory, @RequestParam String name, @RequestParam String description) {
 
         ProductCategory productCategory = productCategoryService.getProductCategoryById(idproductCategory);
 

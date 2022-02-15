@@ -55,7 +55,7 @@ public class ShoppingCartController {
     @GetMapping("/checkout")
     public ModelAndView checkout(@AuthenticationPrincipal User userSession) {
         try {
-                User user = userService.getUserById(userSession.getIduser());
+                User user = userService.getUserById(2);
                 shoppingCartService.checkout(user);
         } catch (NotEnoughProductsInStockException e) {
             return shoppingCart().addObject("outOfStockMessage", e.getMessage());
