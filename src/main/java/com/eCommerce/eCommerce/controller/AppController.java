@@ -80,6 +80,10 @@ public class AppController {
         return new ModelAndView("order");
     }
 
+    @RequestMapping("/userDash")
+    public ModelAndView userDash() {
+        return new ModelAndView("userDash");
+    }
 
     @RequestMapping("/productCategory/getproductCategory")
     public ModelAndView productCategory() {

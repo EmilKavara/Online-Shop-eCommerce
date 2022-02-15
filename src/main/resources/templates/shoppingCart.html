@@ -10,32 +10,44 @@
     <link rel="stylesheet" href="/css/eCommerce.css" type="text/css"/>
     <div th:replace="/fragments/header :: header"/>
 </head>
-<body>
+<body style="background: linear-gradient(to bottom right, #e3f0ff,#fafcff);">
+
 <div th:replace="/fragments/header :: navbar"/>
-<div class="container">
-    <h1 class="jumbotron">
+
+<div class="container" style="width: 70%;height: 85%; background-color: #FFFFFF; border-radius: 20px; box-shadow: 0px 25px 40px;" >
+    <h1 class="jumbotron" style="font-size: 30px; padding: 15px; font-family: 'Arial';">
         <span sec:authentication="name"></span>Shopping Cart
     </h1>
-    <div class="alert alert-info" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>
-    <div class="panel-default well" th:each="product : ${products.entrySet()}">
-        <div class="panel-heading">
-            <h1><a th:text="${product.getKey().name}" th:href="@{'/product/' + ${product.getKey().idproduct}}">Product</a></h1>
-            <h3 th:text="${product.getKey().description}">Description</h3>
-        </div>
-        <div class="row panel-body">
-            <div th:inline="text" class="col-md-2">Price: [[${product.getKey().price}]] $</div>
-            <div th:inline="text" class="col-md-9">Quantity: [[${product.getValue()}]]</div>
-            <a th:href="@{'/shoppingCart/removeProduct/{idproduct}'(idproduct=${product.getKey().idproduct})}" class="col-md-1">
-                <button type="button" class="btn btn-primary" th:text="Remove">Remove</button>
-            </a>
+    <div class="cart-items" style="margin: auto; width: 90%; height: 30%; display: flex; justify-content: space-between; align-items: center;">
+        <div class="alert alert-info" th:if="${outOfStockMessage}" th:utext="${outOfStockMessage}"></div>
+        <div class="panel-default well" th:each="product : ${products.entrySet()}">
+            <div class="panel-heading" style="height: 100%">
+                <h1 style="padding-top: 5px; line-height: 10px; font-size: 20px; font-family: 'Arial'; font-weight: 800;"><a th:text="${product.getKey().name}" th:href="@{'/product/' + ${product.getKey().idproduct}}">Product</a></h1>
+                <h3 th:text="${product.getKey().description}" style="line-height: 10px; font-size: 18px; font-family: 'Arial'; font-weight: 600; color:#909090;">Description</h3>
+            </div>
+            <div class="prices">
+                <div th:inline="text" class="col-md-2" >Price: [[${product.getKey().price}]] $</div>
+                <div th:inline="text" class="col-md-9" >Quantity: [[${product.getValue()}]]</div>
+                <a th:href="@{'/shoppingCart/removeProduct/{idproduct}'(idproduct=${product.getKey().idproduct})}">
+                    <button type="button" class="btn btn-primary" th:text="Remove" style="padding-top: 5px; font-size: 14px; font-family: 'Arial'; font-weight: 600 ">Remove</button>
+                </a>
+
+            </div>
         </div>
         <br></br>
+        <br></br>
     </div>
-    <div class="row panel-body">
-        <h2 class="col-md-11" th:inline="text">Total: [[${total}]]</h2>
-        <a th:href="@{'/shoppingCart/checkout'}" class="col-md-1">
-            <button type="button" class="btn btn-danger" th:text="Checkout">Checkout</button>
-        </a>
+    <hr style="width: 66%; float: right; margin-right: 5%;">
+    <div class="checkout" style="float: right; margin-right: 5%; width: 28%;">
+        <div class="total" style="width: 100%; display: flex; justify-content: space-between;">
+            <h2 class="subtotal" th:inline="text" style="font-size: 22px; font-family: 'Arial'; font-weight: 700; margin-top:5px;">Total: [[${total}]]</h2>
+
+            <a th:href="@{'/shoppingCart/checkout'}">
+                <button type="button" class="btn btn-danger"  th:text="Checkout" style=" margin-top:5px; width: 100%; height: 40px; border: none; background-color: #ff6666; border-radius: 20px; font-size: 16px; font-family: 'Arial'; font-weight: 600; color:#202020;">Checkout</button>
+
+            </a>
+
+        </div>
     </div>
 </div>
 </body>

@@ -7,6 +7,7 @@ import com.eCommerce.eCommerce.service.ShoppingCartService;
 import com.eCommerce.eCommerce.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,8 +55,8 @@ public class ShoppingCartController {
     @GetMapping("/checkout")
     public ModelAndView checkout(@AuthenticationPrincipal User userSession) {
         try {
-            User user = userService.getUserById(2);
-            shoppingCartService.checkout(user);
+                User user = userService.getUserById(userSession.getIduser());
+                shoppingCartService.checkout(user);
         } catch (NotEnoughProductsInStockException e) {
             return shoppingCart().addObject("outOfStockMessage", e.getMessage());
         }

@@ -102,7 +102,9 @@ public class ProductController {
     public @ResponseBody
     ModelAndView update(Product product) {
         productService.saveOrUpdate(product);
+        List<ProductCategory> categories = productCategoryService.getAllProductCategory();
         ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("categories", categories);
         modelAndView.setViewName("products");
         return modelAndView;
     }

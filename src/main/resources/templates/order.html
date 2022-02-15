@@ -129,7 +129,7 @@
         'click .remove': function (e, value, row) {
             if (confirm('Are you sure you want to delete this?')) {
                 $.ajax({
-                    type: "delete",
+                    type: "DELETE",
                     url: "http://localhost:8080/order/deleteorder/" + row.idorder,
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     success: function (content) {

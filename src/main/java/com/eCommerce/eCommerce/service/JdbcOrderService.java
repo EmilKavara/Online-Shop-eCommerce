@@ -23,8 +23,8 @@ public class JdbcOrderService implements OrderService {
 
     @Override
     public int update(Orders order) {
-        return jdbcTemplate.update("UPDATE orders SET idorder=?, amount=?, shipping_address=?, order_date=? WHERE idorder=?",
-                new Object[]{order.getIdorder(), order.getAmount(), order.getShippingAddress(), order.getOrderDate(), order.getIdorder()});
+        return jdbcTemplate.update("UPDATE orders SET user_id=?, amount=?, shipping_address=?, order_date=? WHERE idorder=?",
+                new Object[]{order.getUserId().getIduser(), order.getAmount(), order.getShippingAddress(), order.getOrderDate(), order.getIdorder()});
     }
 
     @Override
