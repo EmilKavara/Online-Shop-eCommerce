@@ -51,6 +51,7 @@ public class JdbcOrderService implements OrderService {
 
     @Override
     public int deleteById(Long id) {
+        jdbcTemplate.update("DELETE FROM product_order WHERE order_id=?", id);
         return jdbcTemplate.update("DELETE FROM orders WHERE idorder=?", id);
     }
 

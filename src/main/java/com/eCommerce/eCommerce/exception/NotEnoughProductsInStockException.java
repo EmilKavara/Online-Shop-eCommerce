@@ -1,5 +1,4 @@
 package com.eCommerce.eCommerce.exception;
-
 import com.eCommerce.eCommerce.model.Product;
 
 public class NotEnoughProductsInStockException extends Exception {

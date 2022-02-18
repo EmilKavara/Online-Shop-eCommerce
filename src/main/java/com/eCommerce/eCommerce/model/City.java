@@ -3,7 +3,6 @@ package com.eCommerce.eCommerce.model;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-
 @Entity
 @Table(name = "city")
 @XmlRootElement

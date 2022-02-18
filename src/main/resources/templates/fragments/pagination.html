@@ -9,7 +9,6 @@
             Page is out of bounds. Go back to <a class="pageLink"
                                                  th:href="@{${baseUrl}(page=1)}">Home</a>.
         </span>
-
         <span th:unless="${pager.indexOutOfBounds()}">
 
             <span th:if="${pager.hasPrevious()}">

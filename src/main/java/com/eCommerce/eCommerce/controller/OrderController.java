@@ -1,5 +1,4 @@
 package com.eCommerce.eCommerce.controller;
-
 import com.eCommerce.eCommerce.model.Order;
 import com.eCommerce.eCommerce.model.Orders;
 import com.eCommerce.eCommerce.service.JdbcOrderService;
@@ -106,6 +105,7 @@ public class OrderController {
             return new ResponseEntity<>("Cannot delete order.", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @DeleteMapping("/deleteallorders")
     public ResponseEntity<String> deleteAllOrders() {
