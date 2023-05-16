@@ -58,5 +58,5 @@ Maven
 
 ## App Demonstration 
 
-[![App Demo]](video/video.mp4)
+[![App Demo]](https://vimeo.com/827428057?share=copy)
 
