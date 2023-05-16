@@ -58,5 +58,5 @@ Maven
 
 ## App Demonstration 
 
-[![App Demo]](video/video.webm)
+[![App Demo]](video/video.mp4)
 
