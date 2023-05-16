@@ -57,9 +57,8 @@ jQuery 3.4.1
 Maven
 
 ## App Demonstration 
-<iframe src="https://player.vimeo.com/video/827428057" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
-[![App Demo](https://player.vimeo.com/video/827428057)](https://vimeo.com/827428057)
+[Link to Vimeo Video](https://vimeo.com/827428057)
 
 
 
