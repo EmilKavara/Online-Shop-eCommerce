@@ -58,7 +58,7 @@ Maven
 
 ## App Demonstration 
 
-[![Link to Vimeo Video]](https://vimeo.com/827428057)
+[Link to Vimeo Video](https://vimeo.com/827428057)
 
 
 
