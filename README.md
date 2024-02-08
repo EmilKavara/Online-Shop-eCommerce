@@ -8,7 +8,7 @@ Installation
 Usage
 License
 Introduction
-The Online Shop eCommerce project is built using [insert technologies/frameworks used]. It offers a flexible and scalable platform for setting up an online store with various features and functionalities.
+The Online Shop eCommerce project is built using Java Spring. It offers a flexible and scalable platform for setting up an online store with various features and functionalities.
 
 ## Features
 User-friendly interface for browsing and purchasing products
@@ -18,27 +18,23 @@ Secure payment processing integration
 Order tracking and management system
 User authentication and account management
 Admin dashboard for managing products, orders, and users
-Customizable design and layout
 
 ## Installation
 To get started with the Online Shop eCommerce project, follow these steps:
 
 Clone the repository:
-bash
 Copy code
 git clone https://github.com/EmilKavara/Online-Shop-eCommerce.git
-Install the dependencies: cd Online-Shop-eCommerce
-npm install
 
 ## Usage
 To run the project locally, execute the following command:
 
-npm start
-This will start the development server, and you can access the application by visiting http://localhost:3000 in your web browser.
+Start server and you can access the application by visiting http://localhost:3000 in your web browser.
 
 ## Technologies Used
 
 Java
+Spring
 HTML
 CSS
 JavaScript
